@@ -26,7 +26,16 @@ class Login extends CI_Controller {
 
 	public function index()
 	{
-		$this->load->view("login");
+        //Check if logged in. If not logged in, proceed; Else redirect back to previous page.
+        if(!$this->session->userdata('username'))
+        {
+            $this->load->view("login");
+        }
+        else
+        {
+            $this->load->library('user_agent');
+            redirect($this->agent->referrer());
+        }
 	}
 
     function login2()
@@ -49,7 +58,10 @@ class Login extends CI_Controller {
             $this->load->model('login_model');
             if($this->login_model->can_login($username, $password))
             {
-                $session_data = array('username' => $username);
+                //Check if login user is Admin or Student
+                $role = $this->login_model->check_role($this->input->post('username'));
+                //Stored Session. Username and role.
+                $session_data = array('username' => $username, 'role' => $role);
                 $this->session->set_userdata($session_data);
                 redirect(base_url() . 'index.php');
             }

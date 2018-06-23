@@ -89,13 +89,13 @@
         <?php if($this->session->userdata('username') != '') : ?>            
               <a class="nav-link" href="<?php echo base_url('index.php/login/logout'); ?>">Logout</a>
         <?php else : ?>            
-              <a class="nav-link" href="<?php echo base_url('index.php/login'); ?>">Login</a>             
+              <a class="nav-link" href="<?php echo base_url('index.php/login'); ?>">Login</a>
         <?php endif; ?>        
       </li>
       <!-- Display adminNumber if logged in -->
-      <li class="nav-item">
+      <li class="nav-item active">
         <?php if($this->session->userdata('username') != '') : ?>            
-              <a class="nav-link">Hello, <?php echo $this->session->userdata('username'); ?></a>          
+              <a class="nav-link">Hello, <?php echo $this->session->userdata('username'); ?></a>
         <?php endif; ?>        
       </li>
 

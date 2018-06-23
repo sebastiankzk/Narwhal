@@ -4,11 +4,11 @@
  {  
       function can_login($username, $password)  
       {  
-           $this->db->where('adminNumber', $username);  
+           //SELECT * FROM user WHERE adminNumber = '$username' AND password = '$password'
+           $this->db->where('adminNumber', $username);
            $this->db->where('password', $password);  
            $query = $this->db->get('user');  
 
-           //SELECT * FROM user WHERE adminNumber = '$username' AND password = '$password'
            if($query->num_rows() > 0)  
            {  
                 return true;  
@@ -17,5 +17,16 @@
            {  
                 return false;       
            }  
+      }  
+
+      public function check_role($username)  
+      {  
+           //SELECT role FROM user WHERE adminNumber = '$username'
+           $this->db->select('role');
+           $this->db->from('user');
+           $this->db->where('adminNumber', $username);
+           $query = $this->db->get();  
+           $row = $query->row();
+           return $row->role;
       }  
  }  

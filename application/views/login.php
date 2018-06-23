@@ -60,7 +60,7 @@
                 <a class="dropdown-item" href="blog-post.html">Blog Post</a>
               </div>
             </li>
-            <li class="nav-item active dropdown">
+            <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownBlog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Other Pages
               </a>
@@ -73,7 +73,7 @@
               </div>
             </li>
             <!-- Login Logout  -->
-            <li class="nav-item">
+            <li class="nav-item active">
               <?php if($this->session->userdata('username') != '') : ?>            
                     <a class="nav-link" href="<?php echo base_url('index.php/login/logout'); ?>">Logout</a>
               <?php else : ?>            
@@ -105,10 +105,10 @@
               <form method="post" action="<?php echo base_url(); ?>index.php/login/login_validation">
 
                 <ul class="list-group list-group-flush">
-                  <li class="list-group-item"><input type="text" name="username" class="form-control" placeholder="Name" required="" value="" />
+                  <li class="list-group-item"><input type="text" name="username" class="form-control" placeholder="Name" required="" value="154892A" />
                     <span class="text-danger"><?php echo form_error('username'); ?></span></li>                  
 
-                  <li class="list-group-item"><input type="password" name="password" class="form-control" placeholder="Password" required="" value="" />
+                  <li class="list-group-item"><input type="password" name="password" class="form-control" placeholder="Password" required="" value="1234" />
                     <span class="text-danger"><?php echo form_error('password'); ?></span></li>                  
 
                   <li class="list-group-item"><input type="submit" name="insert" value="Login" class="btn btn-primary" /></li>
