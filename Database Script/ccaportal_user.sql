@@ -32,7 +32,7 @@ CREATE TABLE `user` (
   `address` varchar(100) NOT NULL,
   `email` varchar(45) NOT NULL,
   `mobile` varchar(45) NOT NULL,
-  `role` varchar(45) NOT NULL,
+  `role` set('Admin','Student') NOT NULL DEFAULT 'Student',
   PRIMARY KEY (`userID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;

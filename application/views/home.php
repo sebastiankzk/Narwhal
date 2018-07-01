@@ -84,6 +84,12 @@
               </div>
       </li>
 
+      <?php if($this->session->userdata('role') == 'Admin') : ?>
+      <li class="nav-item">
+              <a class="nav-link" href="<?php echo base_url('index.php/admin'); ?>">Admin</a>
+      </li>
+      <?php endif; ?>
+
       <!-- Login Logout  -->
 			<li class="nav-item">
         <?php if($this->session->userdata('username') != '') : ?>            
@@ -242,7 +248,7 @@
             <a href="#"><img class="card-img-top" src="../narwhal/assets/images/taekwondo.jpg" alt=""></a>
             <div class="card-body">
               <h4 class="card-title">
-                <a href="#">Tawkwondo</a>
+                <a href="#">Taekwondo</a>
               </h4>
               <p class="card-text">NYP’s Taekwondo Club was formed to bring together students who are passionate about this form of martial arts. </p>
             </div>
