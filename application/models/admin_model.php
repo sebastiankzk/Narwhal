@@ -29,7 +29,7 @@
 
       public function get_specific_cca($ccaID)  
       {  
-           //SELECT * FROM cca WHERE adminNumber = '$username'
+           //SELECT * FROM cca WHERE ccaID = $ccaID
            $this->db->select('*');
            $this->db->from('cca');
            $this->db->where('ccaID', $ccaID);
@@ -52,9 +52,15 @@
            $this->db->where('ccaID', $id);
            $this->db->delete('cca');
       } 
+
       public function add_specific_cca($data)  
       {  
            //INSERT * INTO cca
           $this->db->insert('cca', $data);
       }  
+
+      public function count_all_cca()
+      {
+          return $this->db->count_all('cca');
+      }
  }  

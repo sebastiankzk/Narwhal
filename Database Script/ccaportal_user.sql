@@ -33,9 +33,10 @@ CREATE TABLE `user` (
   `email` varchar(45) NOT NULL,
   `mobile` varchar(45) NOT NULL,
   `role` set('Admin','Student') NOT NULL DEFAULT 'Student',
-  PRIMARY KEY (`userID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+  PRIMARY KEY (`userID`),
+  UNIQUE KEY `adminNumber_UNIQUE` (`adminNumber`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+
 
 --
 -- Dumping data for table `user`

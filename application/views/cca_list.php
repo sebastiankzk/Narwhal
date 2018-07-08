@@ -8,23 +8,23 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>NYP CCA Portal - Login</title>
+    <title>NYP CCA Portal - CCA</title>
 
     <!-- Bootstrap core CSS -->
     <link href="<?=base_url();?>assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="<?=base_url();?>assets/css/modern-business.css" rel="stylesheet">
+    <link href="<?=base_url();?>assets/css/modern-business.css" rel="stylesheet"> 
 
   </head>
 
   <body>
 
-    <!-- Navigation -->
+        <!-- Navigation -->
     <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
       <div class="container">
         <a class="navbar-brand" href="<?=base_url();?>index.php">NYP CCA Portal</a>
-        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="index.php#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
@@ -38,7 +38,7 @@
             <li class="nav-item">
               <a class="nav-link" href="contact.html">Contact</a>
             </li>
-            <li class="nav-item dropdown">
+      <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownBlog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 CCA
               </a>
@@ -48,8 +48,8 @@
                 <a class="dropdown-item" href="blog-home-2.html">Blog Home 2</a>
                 <a class="dropdown-item" href="blog-post.html">Blog Post</a>
               </div>
-            </li>            
-            <li class="nav-item dropdown">
+      </li>
+      <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPortfolio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Portfolio
               </a>
@@ -60,8 +60,8 @@
                 <a class="dropdown-item" href="portfolio-4-col.html">4 Column Portfolio</a>
                 <a class="dropdown-item" href="portfolio-item.html">Single Portfolio Item</a>
               </div>
-            </li>
-            <li class="nav-item dropdown">
+      </li>
+      <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownBlog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Blog
               </a>
@@ -70,8 +70,8 @@
                 <a class="dropdown-item" href="blog-home-2.html">Blog Home 2</a>
                 <a class="dropdown-item" href="blog-post.html">Blog Post</a>
               </div>
-            </li>
-            <li class="nav-item dropdown">
+      </li>
+      <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownBlog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Other Pages
               </a>
@@ -80,24 +80,31 @@
                 <a class="dropdown-item" href="sidebar.html">Sidebar Page</a>
                 <a class="dropdown-item" href="faq.html">FAQ</a>
                 <a class="dropdown-item" href="404.html">404</a>
-                <a class="dropdown-item active" href="pricing.html">Pricing Table</a>
+                <a class="dropdown-item" href="pricing.html">Pricing Table</a>
               </div>
-            </li>
-            <!-- Login Logout  -->
-            <li class="nav-item active">
-              <?php if($this->session->userdata('username') != '') : ?>            
-                    <a class="nav-link" href="<?php echo base_url('index.php/login/logout'); ?>">Logout</a>
-              <?php else : ?>            
-                    <a class="nav-link" href="<?php echo base_url('index.php/login'); ?>">Login</a>             
-              <?php endif; ?>        
-            </li>
-            <!-- Display adminNumber if logged in -->
-            <li class="nav-item">
-              <?php if($this->session->userdata('username') != '') : ?>            
-                    <a class="nav-link">Hello, <?php echo $this->session->userdata('username'); ?></a>          
-              <?php endif; ?>        
-            </li>
-            
+      </li>
+
+      <?php if($this->session->userdata('role') == 'Admin') : ?>
+      <li class="nav-item active">
+              <a class="nav-link" href="<?php echo base_url('index.php/admin'); ?>">Admin</a>
+      </li>
+      <?php endif; ?>
+
+      <!-- Login Logout  -->
+      <li class="nav-item">
+        <?php if($this->session->userdata('username') != '') : ?>            
+              <a class="nav-link" href="<?php echo base_url('index.php/login/logout'); ?>">Logout</a>
+        <?php else : ?>            
+              <a class="nav-link" href="<?php echo base_url('index.php/login'); ?>">Login</a>
+        <?php endif; ?>        
+      </li>
+      <!-- Display adminNumber if logged in -->
+      <li class="nav-item">
+        <?php if($this->session->userdata('username') != '') : ?>            
+              <a class="nav-link">Hello, <?php echo $this->session->userdata('username'); ?></a>
+        <?php endif; ?>        
+      </li>
+
           </ul>
         </div>
       </div>
@@ -106,31 +113,47 @@
     <!-- Page Content -->
     <div class="container">
 
-      </br>
-      <!-- Login form -->
-      <div class="row">  
-        <div class="col-lg-4 mb-4""></div>
-        <div class="col-lg-4 mb-4"">  
-          <div class="card card-outline-primary h-100">    
-            <h3 class="card-header bg-primary text-white">Login</h3>
-              <form method="post" action="<?php echo base_url(); ?>index.php/login/login_validation">
+      <!-- Page Heading/Breadcrumbs -->
+      <h1 class="mt-4 mb-3">CCA in NYP
+        <small></small>
+      </h1>
 
-                <ul class="list-group list-group-flush">
-                  <li class="list-group-item"><input type="text" name="username" class="form-control" placeholder="Name" required="" value="154892A" />
-                    <span class="text-danger"><?php echo form_error('username'); ?></span></li>                  
-
-                  <li class="list-group-item"><input type="password" name="password" class="form-control" placeholder="Password" required="" value="1234" />
-                    <span class="text-danger"><?php echo form_error('password'); ?></span></li>                  
-
-                  <li class="list-group-item"><input type="submit" name="insert" value="Login" class="btn btn-primary" /></li>
-                    <center><?php echo $this->session->flashdata("error"); ?></center>
-                </ul>
-
-              </form>
-          </div>
+      <div class="row">
+        <div class="col-auto mr-auto"></div>
+        <div class="col-auto">
+           <!-- <a href="<?php echo base_url('index.php/admin/add_cca'); ?>" class="btn btn-primary">Add new CCA &rarr;</a> -->
         </div>
       </div>
-  </div>
+      <div class="row">
+        <div class="col-auto mr-auto">
+            <?php echo $this->session->flashdata('msg');?>
+        </div>
+        <div class="col-auto">
+          <!-- Total CCA count: <b><?php echo $count ?></b> -->
+        </div>
+      </div>
+      </br>
+      <?php foreach($query as $row): ?>
+        <div class="card mb-4">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-lg-4">
+              <a href="<?php echo base_url('assets/images/'.$row->image); ?>"><img class="img-fluid rounded" src="<?php echo base_url('assets/images/'.$row->image); ?>" alt=""></a>
+            </div>
+            <div class="col-lg-8">
+              <h2 class="card-title"><a href="<?php echo base_url('index.php/home/cca/'.$row->ccaID); ?>"><?php echo $row->name; ?></a></h2>
+              <p class="card-text">Category: <?php echo $row->category; ?></p>
+              <p class="card-text">Venue: <?php echo $row->venue; ?></p>
+              <p class="card-text">Training Date: <?php echo $row->trgDate; ?></p>
+              <p class="card-text">Training Time: <?php echo $row->trgTime; ?></p>
+              <p class="card-text"><?php echo $row->information; ?></p>
+            </div>
+          </div>
+        </div>
+        </div>
+      <?php endforeach; ?>
+    </div>
+    <!-- /.container -->
 
     <!-- Footer -->
     <footer class="py-5 bg-dark">
@@ -147,3 +170,18 @@
   </body>
 
 </html>
+
+<script>
+  // assumes you're using jQuery
+  $(document).ready(function() {
+  $('.confirm-div').hide();
+  <?php if($this->session->flashdata('msg')){ ?>
+  $('.confirm-div').html('<?php echo $this->session->flashdata('msg'); ?>').show();
+  });
+  <?php } ?>
+
+  $(".myBox").click(function() {
+  window.location = $(this).find("a").attr("href"); 
+  return false;
+  });
+</script>

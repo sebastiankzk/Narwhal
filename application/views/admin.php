@@ -43,6 +43,7 @@
                 CCA
               </a>
               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownBlog">
+                <a class="dropdown-item" href="<?php echo base_url('index.php/home/cca_list'); ?>">View all CCA</a>
                 <a class="dropdown-item" href="blog-home-1.html">Blog Home 1</a>
                 <a class="dropdown-item" href="blog-home-2.html">Blog Home 2</a>
                 <a class="dropdown-item" href="blog-post.html">Blog Post</a>
@@ -117,18 +118,21 @@
         <small>(Admin Mode)</small>
       </h1>
 
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item">
-          <a href="index.html">Home</a>
-        </li>
-        <li class="breadcrumb-item active">Full Width</li>
-      </ol>
+
 
       <div class="row">
-        <div class="col-auto mr-auto"><?php echo $this->session->flashdata('msg'); ?></div>
+        <div class="col-auto mr-auto"></div>
         <div class="col-auto">
-      <!-- <a href="<?php echo base_url('index.php/admin/get_cca/'.$row->ccaID); ?>" class="btn btn-primary">Add &rarr;</a> -->
            <a href="<?php echo base_url('index.php/admin/add_cca'); ?>" class="btn btn-primary">Add new CCA &rarr;</a>
+        </div>
+      </div>
+      </br>
+      <div class="row">
+        <div class="col-auto mr-auto">
+            <?php echo $this->session->flashdata('msg');?>
+        </div>
+        <div class="col-auto">
+          Total CCA count: <b><?php echo $count ?></b>
         </div>
       </div>
       </br>
@@ -137,7 +141,7 @@
         <div class="card-body">
           <div class="row">
             <div class="col-lg-4">
-              <a href="#"><img class="img-fluid rounded" src="<?php echo $row->image; ?>" alt=""></a>
+              <a href="../assets/images/<?php echo $row->image; ?>"><img class="img-fluid rounded" src="../assets/images/<?php echo $row->image; ?>" alt=""></a>
             </div>
             <div class="col-lg-8">
               <h2 class="card-title"><?php echo $row->name; ?></h2>

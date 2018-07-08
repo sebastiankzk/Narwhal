@@ -43,6 +43,7 @@
                 CCA
               </a>
               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownBlog">
+                <a class="dropdown-item" href="<?php echo base_url('index.php/home/cca_list'); ?>">View all CCA</a>
                 <a class="dropdown-item" href="blog-home-1.html">Blog Home 1</a>
                 <a class="dropdown-item" href="blog-home-2.html">Blog Home 2</a>
                 <a class="dropdown-item" href="blog-post.html">Blog Post</a>
@@ -114,15 +115,7 @@
 
       <!-- Page Heading/Breadcrumbs -->
       <h1 class="mt-4 mb-3">Add new CCA
-        <small>Subheading</small>
       </h1>
-
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item">
-          <a href="index.html">Home</a>
-        </li>
-        <li class="breadcrumb-item active">Pricing</li>
-      </ol>
       <br/>
       
     <form method="post" action="<?php echo base_url('index.php/admin/add_specific_cca/'); ?>">

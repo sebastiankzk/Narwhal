@@ -26,13 +26,15 @@ CREATE TABLE `cca` (
   `ccaID` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) NOT NULL,
   `category` varchar(45) NOT NULL,
-  `information` varchar(45) NOT NULL,
+  `information` varchar(500) DEFAULT NULL,
   `venue` varchar(45) NOT NULL,
   `trgDate` date NOT NULL,
   `trgTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `image` varchar(100) NOT NULL,
+  `featured` varchar(1) DEFAULT '0',
   PRIMARY KEY (`ccaID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
+
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --

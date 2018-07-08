@@ -16,7 +16,6 @@
     <!-- Custom styles for this template -->
     <link href="<?=base_url();?>assets/css/modern-business.css" rel="stylesheet"> 
 
-	
   </head>
 
   <body>
@@ -44,6 +43,7 @@
                 CCA
               </a>
               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownBlog">
+                <a class="dropdown-item" href="<?php echo base_url('index.php/home/cca_list'); ?>">View all CCA</a>
                 <a class="dropdown-item" href="blog-home-1.html">Blog Home 1</a>
                 <a class="dropdown-item" href="blog-home-2.html">Blog Home 2</a>
                 <a class="dropdown-item" href="blog-post.html">Blog Post</a>
@@ -196,76 +196,18 @@
 
       <!-- Portfolio Section -->
       <h2>Featured CCA</h2>
-
       <div class="row">
-        <div class="col-lg-4 col-sm-6 portfolio-item">
-          <div class="card h-100">
-            <a href="#"><img class="card-img-top" src="../narwhal/assets/images/judo.jpg" alt=""></a>
-            <div class="card-body">
-              <h4 class="card-title">
-                <a href="#">Judo</a>
-              </h4>
-              <p class="card-text">NYP’s Judo Club has produced many national and international judo practitioners known as Judokas. It has a strong tradition and hence, the camaraderie that has been built up between past and present Judokas.</p>
+        <?php foreach($query as $row): ?>
+          <div class="col-lg-6 col-sm-6 portfolio-item">
+            <div class="card h-100">
+              <img class="card-img-top" src="../narwhal/assets/images/<?php echo $row->image; ?>" alt="">
+              <div class="card-body">
+                <h4 class="card-title"><a href="<?php echo base_url('index.php/home/cca/'.$row->ccaID); ?>"><?php echo $row->name; ?></a></h4>
+                <p class="card-text"><?php echo $row->information; ?></p>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="col-lg-4 col-sm-6 portfolio-item">
-          <div class="card h-100">
-            <a href="#"><img class="card-img-top" src="../narwhal/assets/images/basketball.jpg" alt=""></a>
-            <div class="card-body">
-              <h4 class="card-title">
-                <a href="#">Basketball</a>
-              </h4>
-              <p class="card-text">NYP’s Basketball team brings together all enthusiasts of the game from the student population in NYP, whether the students prefer to play competitively or for leisure.
-			</div>
-          </div>
-        </div>
-        <div class="col-lg-4 col-sm-6 portfolio-item">
-          <div class="card h-100">
-            <a href="#"><img class="card-img-top" src="../narwhal/assets/images/archery.jpg" alt=""></a>
-            <div class="card-body">
-              <h4 class="card-title">
-                <a href="#">Archery</a>
-              </h4>
-              <p class="card-text">NYP’s Archery Club focuses on bringing students who share a passion for the sport together.</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-4 col-sm-6 portfolio-item">
-          <div class="card h-100">
-            <a href="#"><img class="card-img-top" src="../narwhal/assets/images/football.jpeg" alt=""></a>
-            <div class="card-body">
-              <h4 class="card-title">
-                <a href="#">Football</a>
-              </h4>
-              <p class="card-text">The NYP Soccer Team is a recreational and competitive sports club open to all NYP students. Apart from training hard to become better soccer players, we join soccer competitions, 
-			  watch soccer matches together and talk about soccer. We also organise Futsal tournaments and an overseas camp that members can look forward to. In 2012, the inaugural Futbol Sala was held in NYP. It was a 5-sided competition and 20 teams participated in the competition. </p>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-4 col-sm-6 portfolio-item">
-          <div class="card h-100">
-            <a href="#"><img class="card-img-top" src="../narwhal/assets/images/taekwondo.jpg" alt=""></a>
-            <div class="card-body">
-              <h4 class="card-title">
-                <a href="#">Taekwondo</a>
-              </h4>
-              <p class="card-text">NYP’s Taekwondo Club was formed to bring together students who are passionate about this form of martial arts. </p>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-4 col-sm-6 portfolio-item">
-          <div class="card h-100">
-            <a href="#"><img class="card-img-top" src="../narwhal/assets/images/netball.jpg" alt=""></a>
-            <div class="card-body">
-              <h4 class="card-title">
-                <a href="#">Netball</a>
-              </h4>
-              <p class="card-text">
-NYP Netball Club is a competitive team CCA and is open to all females who have a passion for Netball. An individual must be willing to learn and grow together as a team. The netballers are very well-bonded and assist in organising sports events in NYP. The team also participates in external competitions organized by Netball Singapore in preparation for the POL-ITE and IVP Games. </p>
-            </div>
-          </div>
-        </div>
+        <?php endforeach; ?>
       </div>
       <!-- /.row -->
 

@@ -32,13 +32,15 @@ class Admin extends CI_Controller {
             //model function
             $this->load->model('admin_model');
             $data['query'] = $this->admin_model->get_cca_list();
+            $data['count'] = $this->admin_model->count_all_cca();
 
             $this->load->view('Admin', $data);
         }
         else
         {
-            $this->load->library('user_agent');
-            redirect($this->agent->referrer());
+            // $this->load->library('user_agent');
+            // redirect($this->agent->referrer());
+            redirect(base_url() . 'index.php');
         }
 	}
 
@@ -104,5 +106,12 @@ class Admin extends CI_Controller {
 
         $this->session->set_flashdata('msg', 'CCA Added!');
         redirect('admin','refresh');
+    }
+
+    function count_cca()
+    {
+        //model function
+        $this->load->model('admin_model');
+        $this->admin_model->count_all_cca();
     }
 }

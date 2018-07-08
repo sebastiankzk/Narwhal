@@ -20,6 +20,56 @@ class Home extends CI_Controller {
 	 */
 	public function index()
 	{		
-		$this->load->view('home');		
+        //model function
+        $this->load->model('home_model');
+        $data['query'] = $this->home_model->get_featured_cca_list();
+
+        $this->load->view('Home', $data);
 	}
+
+	public function cca($ccaID)
+	{		
+        //model function
+        $this->load->model('home_model');
+        $data['query'] = $this->home_model->get_specific_cca($ccaID);
+
+        $this->load->view('cca', $data);
+	}
+
+	public function cca_list()
+	{		
+        //model function
+        $this->load->model('home_model');
+        $data['query'] = $this->home_model->get_cca_list();
+
+        $this->load->view('cca_list', $data);
+	}
+
+	// public function check_registered($ccaID)
+	// {		
+ //        //model function
+ //        $this->load->model('home_model');
+ //        $userID = $this->home_model->get_user_id($this->session->userdata('username'));
+        
+ //        $this->home_model->check_registered($userID, $ccaID);
+ //        //$data['query'] = $this->home_model->get_cca_list();
+	// }
+
+	public function cca_register_interest($ccaID)
+	{
+		 //model function
+        $this->load->model('home_model');
+        
+		$data = array(        
+        'ccaID' => $ccaID,
+        'userID' => $this->home_model->get_user_id($this->session->userdata('username')));
+
+        $this->home_model->register_cca_interest($data);
+
+        $this->session->set_flashdata('msg', 'Interest registered!');
+
+        $this->load->library('user_agent');
+        redirect($this->agent->referrer());
+        //redirect('admin','refresh');
+	}	   
 }
