@@ -88,6 +88,10 @@
       <li class="nav-item">
               <a class="nav-link" href="<?php echo base_url('index.php/admin'); ?>">Admin</a>
       </li>
+      <?php elseif($this->session->userdata('role') == 'Leader') : ?>
+      <li class="nav-item">
+              <a class="nav-link" href="<?php echo base_url('index.php/leader'); ?>">CCA Leader</a>
+      </li>
       <?php endif; ?>
 
       <!-- Login Logout  -->
@@ -198,7 +202,7 @@
       <h2>Featured CCA</h2>
       <div class="row">
         <?php foreach($query as $row): ?>
-          <div class="col-lg-6 col-sm-6 portfolio-item">
+          <div class="col-lg-4 col-sm-4 portfolio-item">
             <div class="card h-100">
               <img class="card-img-top" src="../narwhal/assets/images/<?php echo $row->image; ?>" alt="">
               <div class="card-body">
@@ -241,7 +245,7 @@
           <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias, expedita, saepe, vero rerum deleniti beatae veniam harum neque nemo praesentium cum alias asperiores commodi.</p>
         </div>
         <div class="col-md-4">
-          <a class="btn btn-lg btn-secondary btn-block" href="#">Contact Us</a>
+          <a class="btn btn-lg btn-secondary btn-block" href="<?php echo base_url('index.php/home/contact_us'); ?>">Contact Us</a>
         </div>
       </div>
 
