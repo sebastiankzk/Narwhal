@@ -16,8 +16,13 @@
   <!-- Custom styles for this template -->
   <link href="<?=base_url();?>assets/css/modern-business.css" rel="stylesheet">
 
-</head>
+  <script type="text/javascript">
+ //load datepicker control onfocus
+ $(function() {$("#dob").datepicker();
+});
+</script>
 
+</head>
 <body>
 
  <!-- Navigation -->
@@ -114,8 +119,7 @@
   <div class="container">
 
     <!-- Page Heading/Breadcrumbs -->
-    <h1 class="mt-4 mb-3">Update Profile
-      <small><?php echo $query->name; ?></small>
+    <h1 class="mt-4 mb-3">Add Account
     </h1>
     <ol class="breadcrumb">
       <li class="breadcrumb-item">
@@ -124,25 +128,55 @@
       <li class="breadcrumb-item">
        <a href="<?php echo base_url('index.php/Profile/'); ?>">Accounts</a>
      </li>
-     <li class="breadcrumb-item active">Update</li>
+     <li class="breadcrumb-item active">Add account</li>
    </ol>
 
    <div class="row">
     <div class="offset-md-3 col-md-6 mb-4">
-      <form class="form-control" method="post" action="<?php echo base_url('index.php/Profile/update/'.$query->userID); ?>">
-       <legend>Update Account</legend>
-       <hr>
-       <fieldset>
+      <!-- <form class="form-control" method="post" action="<?php echo base_url('index.php/Profile/get_role/'.$role->userID); ?>"> -->
+        <?php
+        $attributes = array("class" => "form-control", "id" => "addprofile", "name" =>
+          "addprofile");
+          echo form_open("Profile/get_role", $attributes);?>
+        <legend>Add Account</legend>
+        <hr>
+          <fieldset>
+
+            <div class="form-group">
+             <div class="row colbox">
+               <div class="col-md-4">
+                 <label for="studentno" class="control-label">Student Number</label>
+               </div>
+               <div class="col-md-8">
+                <input id="adminno" name="adminno" placeholder="adminno" type="text"
+                class="form-control" required="" value="<?php echo set_value('adminno'); ?>" />
+                <span class="text-danger"><?php echo form_error('adminno'); ?></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+           <div class="row colbox">
+             <div class="col-md-4">
+               <label for="studentname" class="control-label">Student Name</label>
+             </div>
+             <div class="col-md-8">
+              <input id="name" name="name" placeholder="name"
+              type="text" class="form-control" required="" value="<?php echo set_value('name'); ?>" />
+              <span class="text-danger"><?php echo form_error('name'); ?></span>
+            </div>
+          </div>
+        </div>
 
         <div class="form-group">
          <div class="row colbox">
            <div class="col-md-4">
-             <label for="studentno" class="control-label">Student Number</label>
+             <label for="password" class="control-label">Password</label>
            </div>
            <div class="col-md-8">
-            <input id="adminno" name="adminno" placeholder="adminno" type="text"
-            class="form-control" required="" value="<?php echo $query->adminNumber; ?>" />
-            <span class="text-danger"><?php echo form_error('adminno'); ?></span>
+            <input id="password" name="password" placeholder="password" type="text"
+            class="form-control" required="" value="<?php echo set_value('password'); ?>" />
+            <span class="text-danger"><?php echo form_error('password'); ?></span>
           </div>
         </div>
       </div>
@@ -150,13 +184,12 @@
       <div class="form-group">
        <div class="row colbox">
          <div class="col-md-4">
-           <label for="studentname" class="control-label">Student Name</label>
-         </div>
-         <div class="col-md-8">
-          <input id="name" name="name" placeholder="name"
-          type="text" class="form-control" required="" value="<?php echo set_value('name',
-          $query->name); ?>" />
-          <span class="text-danger"><?php echo form_error('name'); ?></span>
+          <label for="gender" class="control-label">Gender</label>
+        </div>
+        <div class="col-md-8">
+          <input id="gender" name="gender" placeholder="gender" type="text"
+          class="form-control" required="" value="<?php echo set_value('gender'); ?>" />
+          <span class="text-danger"><?php echo form_error('gender'); ?></span>
         </div>
       </div>
     </div>
@@ -164,12 +197,12 @@
     <div class="form-group">
      <div class="row colbox">
        <div class="col-md-4">
-         <label for="password" class="control-label">Password</label>
-       </div>
-       <div class="col-md-8">
-        <input id="password" name="password" placeholder="password" type="text"
-        class="form-control" required="" value="<?php echo $query->password; ?>" />
-        <span class="text-danger"><?php echo form_error('password'); ?></span>
+        <label for="dob" class="control-label">Date of Birth</label>
+      </div>
+      <div class="col-md-8">
+        <input id="dob" name="dob" placeholder="dob" type="text"
+        class="form-control" required="" value="<?php echo set_value('dob'); ?>" />
+        <span class="text-danger"><?php echo form_error('dob'); ?></span>
       </div>
     </div>
   </div>
@@ -177,40 +210,14 @@
   <div class="form-group">
    <div class="row colbox">
      <div class="col-md-4">
-      <label for="gender" class="control-label">Gender</label>
+       <label for="address" class="control-label">Address</label>
+     </div>
+     <div class="col-md-8">
+      <input id="address" name="address" placeholder="address" type="text"
+      class="form-control" required="" value="<?php echo set_value('address'); ?>" />
+      <span class="text-danger"><?php echo form_error('address'); ?></span>
     </div>
-    <div class="col-md-8">
-      <input id="gender" name="gender" placeholder="gender" type="text"
-      class="form-control" required="" value="<?php echo $query->gender; ?>" />
-      <span class="text-danger"><?php echo form_error('gender'); ?></span>
-    </div>
   </div>
-</div>
-
-<div class="form-group">
- <div class="row colbox">
-   <div class="col-md-4">
-    <label for="dob" class="control-label">Date of Birth</label>
-  </div>
-  <div class="col-md-8">
-    <input id="dob" name="dob" placeholder="dob" type="text"
-    class="form-control" required="" value="<?php echo $query->dob; ?>" />
-    <span class="text-danger"><?php echo form_error('dob'); ?></span>
-  </div>
-</div>
-</div>
-
-<div class="form-group">
- <div class="row colbox">
-   <div class="col-md-4">
-     <label for="address" class="control-label">Address</label>
-   </div>
-   <div class="col-md-8">
-    <input id="address" name="address" placeholder="address" type="text"
-    class="form-control" required="" value="<?php echo $query->address; ?>" />
-    <span class="text-danger"><?php echo form_error('address'); ?></span>
-  </div>
-</div>
 </div>
 
 <div class="form-group">
@@ -220,7 +227,7 @@
    </div>
    <div class="col-md-8">
     <input id="email" name="email" placeholder="email" type="text"
-    class="form-control" required="" value="<?php echo $query->email; ?>" />
+    class="form-control" required="" value="<?php echo set_value('email'); ?>" />
     <span class="text-danger"><?php echo form_error('email'); ?></span>
   </div>
 </div>
@@ -233,7 +240,7 @@
    </div>
    <div class="col-md-8">
     <input id="mobile" name="mobile" placeholder="mobile" type="text"
-    class="form-control" required="" value="<?php echo $query->mobile; ?>" />
+    class="form-control" required="" value="<?php echo set_value('mobile'); ?>" />
     <span class="text-danger"><?php echo form_error('mobile'); ?></span>
   </div>
 </div>
@@ -246,12 +253,11 @@
    </div>
    <div class="col-md-8">
     <input id="role" name="role" placeholder="role" type="text"
-    class="form-control" required="" value="<?php echo $query->role; ?>" />
+    class="form-control" required="" value="<?php echo form_dropdown('role',$role,set_value('role'),$attributes); ?>" />
     <span class="text-danger"><?php echo form_error('role'); ?></span>
   </div>
 </div>
 </div>
-
 
 <div class="form-group">
  <div class="offset-sm-2 col-md-8 text-center">
@@ -261,6 +267,7 @@
   value="Cancel" />
 </div>
 </div>
+
 <?php echo $this->session->flashdata('msg'); ?>
 </fieldset>
 <?php echo form_close(); ?>

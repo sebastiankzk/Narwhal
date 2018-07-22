@@ -33,7 +33,7 @@
             <a class="nav-link" href="about.html">About</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="services.html">Services</a>
+            <a class="nav-link" href="<?php echo base_url('index.php/Profile/'); ?>">Accounts</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="contact.html">Contact</a>
@@ -83,41 +83,52 @@
               <a class="dropdown-item active" href="pricing.html">Pricing Table</a>
             </div>
           </li>
+
+          <?php if($this->session->userdata('role') == 'Admin') : ?>
+            <li class="nav-item">
+              <a class="nav-link" href="<?php echo base_url('index.php/admin'); ?>">Admin</a>
+            </li>
+          <?php endif; ?>
+
           <!-- Login Logout  -->
-          <li class="nav-item active">
-            <a class="nav-link" href="<?php echo base_url('index.php/Profile'); ?>">Profile</a>         
-          </li>
-          <!-- Display adminNumber if logged in -->
           <li class="nav-item">
             <?php if($this->session->userdata('username') != '') : ?>            
-              <a class="nav-link">Hello, <?php echo $this->session->userdata('username'); ?></a>          
-            <?php endif; ?>        
-          </li>
+              <a class="nav-link" href="<?php echo base_url('index.php/login/logout'); ?>">Logout</a>
+              <?php else : ?>            
+                <a class="nav-link" href="<?php echo base_url('index.php/login'); ?>">Login</a>
+              <?php endif; ?>        
+            </li>
+            <!-- Display adminNumber if logged in -->
+            <li class="nav-item active">
+              <?php if($this->session->userdata('username') != '') : ?>            
+                <a class="nav-link">Hello, <?php echo $this->session->userdata('username'); ?></a>
+              <?php endif; ?>        
+            </li>
 
-        </ul>
+          </ul>
+        </div>
       </div>
-    </div>
-  </nav>
+    </nav>
 
-  <!-- Page Content -->
-  <div class="container">
+    <!-- Page Content -->
+    <div class="container">
 
-    <!-- Page Heading/Breadcrumbs -->
-    <h1 class="mt-4 mb-3">Account
-      <small>Details</small>
-    </h1>
+      <!-- Page Heading/Breadcrumbs -->
+      <h1 class="mt-4 mb-3">Account
+        <small>Details</small>
+      </h1>
 
-    <ol class="breadcrumb">
-      <li class="breadcrumb-item">
-        <a href="index.html">Home</a>
-      </li>
-      <li class="breadcrumb-item active">Account</li>
-    </ol>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="index.html">Home</a>
+        </li>
+        <li class="breadcrumb-item active">
+         <a href="<?php echo base_url('index.php/Profile/'); ?>">Accounts</a>
+       </li>
+     </ol>
 
-    <?php echo $this->session->flashdata('msg'); ?>
-
-    <!-- Login form -->
-    <div class="row">  
+     <!-- Login form -->
+     <div class="row">  
         <!-- <div class="col-lg-2 mb-4">
           <div class="list-group">
             <a href="index.html" class="list-group-item">Accounts</a>
@@ -129,8 +140,10 @@
           </div>
         </div> -->
         <div class="col-lg-12 mb-4">  
-          <div class="table-responsive">    
-            <h3 class="card-header bg-primary text-white">Accounts</h3>
+          <div class="table-responsive">   
+            <?php echo $this->session->flashdata('msg'); ?> 
+            <!-- <h3 class="card-header bg-primary text-white">Accounts</h3> -->
+            <h3 class="card-header text-black">Accounts <a href="<?php echo base_url('index.php/Profile/get_role'); ?>" class="btn btn-primary offset-sm-9">Add user</a></h3>
             <table class="table table-striped table-hover">
              <thead>
                <tr>
@@ -139,7 +152,7 @@
                  <th>Password</th>
                  <th>Admin</th>
                  <th>Gender</th>
-                 <th>Date of Birth</th>
+                 <th>Birth date</th>
                  <th>Address</th>
                  <th>Mobile</th>
                  <th>Role</th>
@@ -159,8 +172,8 @@
                    <td><?php echo $user[$i]->address; ?></td>
                    <td><?php echo $user[$i]->mobile; ?></td>
                    <td><?php echo $user[$i]->role; ?></td>
-                   <td><a href="<?php echo base_url('index.php/Profile/get_user/'.$user[$i]->adminNumber); ?>" class="btn btn-primary">Edit &rarr;</a></td>
-                   <td><a href="" class="btn btn-danger">Delete &rarr;</a></td>
+                   <td><a href="<?php echo base_url('index.php/Profile/get_user/'.$user[$i]->userID); ?>" class="btn btn-primary">Edit &rarr;</a></td>
+                   <td><a href="<?php echo base_url('index.php/Profile/delete/'.$user[$i]->adminNumber); ?>" class="btn btn-danger" onclick="return confirm('Comfirm delete <?php echo($user[$i]->userID); ?>?')">Delete</a></td>
                  </tr>
                <?php } ?>
              </tbody>

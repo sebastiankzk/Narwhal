@@ -42,24 +42,17 @@ class Profile extends CI_Controller {
 		$this->load->view('profile',$data);
 	}
 
-	function get_user($studno)
+	function get_user($studid)
 	{
 		$this->load->model('Profile_model');
-		$data['query'] = $this->Profile_model->get_student_record($studno);
+		$data['query'] = $this->Profile_model->get_student_record($studid);
 		$this->load->view('update_profile', $data);
 	}
 
-	function update($studno)
+	function get_role()
 	{
-		$this->load->model('Profile_model');
-
-		$data['studno'] = $studno;
-
 		//fetch data from user table
-		$data['user'] = $this->Profile_model->get_user();
-
-		//fetch student record for the given student no.
-		$data['query'] = $this->Profile_model->get_student_record($studno);
+		$data['role'] = $this->Profile_model->get_role();
 
 		//set validation rules
 		$this->form_validation->set_rules('name', 'Name',
@@ -72,7 +65,60 @@ class Profile extends CI_Controller {
 		$this->form_validation->set_rules('email', 'Email', 'required');
 		$this->form_validation->set_rules('mobile', 'Mobile', 'required');
 		$this->form_validation->set_rules('role', 'Role', 'required');
-		//$this->form_validation->set_rules('registeredDate', 'Registered Date', 'required');
+		
+		if ($this->form_validation->run() == FALSE)
+		{
+			//fail validation
+			$this->load->view('add_profile', $data);
+		}
+		else
+		{
+			//pass validation
+			$data = array(
+				'name' => $this->input->post('name'),
+				'password' => $this->input->post('password'),
+				'adminNumber' => $this->input->post('adminno'),
+				'gender' => $this->input->post('gender'),
+				'dob' => @date('Y-m-d', @strtotime($this->input->post('dob'))),
+				// $this->input->post('dob'),
+				'address' => $this->input->post('address'),
+				'email' => $this->input->post('email'),
+				'mobile' => $this->input->post('mobile'),
+				'role' => $this->input->post('role'),
+			);
+
+			//insert the form data into database
+			$this->db->insert('user', $data);
+
+			//display success message
+			$this->session->set_flashdata('msg', '<div class="alert alert-success textcenter">New user has been added!</div>');
+			redirect('Profile','refresh');
+		}
+	}
+
+	function update($studid)
+	{
+		// $this->load->model('Profile_model');
+
+		$data['studid'] = $studid;
+
+		//fetch data from user table
+		$data['user'] = $this->Profile_model->get_user();
+
+		//fetch student record for the given student no.
+		$data['query'] = $this->Profile_model->get_student_record($studid);
+
+		//set validation rules
+		$this->form_validation->set_rules('name', 'Name',
+			'trim|required|callback_alpha_only_space');
+		$this->form_validation->set_rules('password', 'Password', 'required');
+		$this->form_validation->set_rules('adminno', 'AdminNo', 'required');
+		$this->form_validation->set_rules('gender', 'Gender', 'required');
+		$this->form_validation->set_rules('dob', 'Dob', 'required');
+		$this->form_validation->set_rules('address', 'Address', 'required');
+		$this->form_validation->set_rules('email', 'Email', 'required');
+		$this->form_validation->set_rules('mobile', 'Mobile', 'required');
+		$this->form_validation->set_rules('role', 'Role', 'callback_combo_check');
 
 		// if ($this->form_validation->run() == FALSE)
 		// {
@@ -83,31 +129,48 @@ class Profile extends CI_Controller {
 		// else
 		// {
 			//pass validation
-			$data = array(
-				'name' => $this->input->post('name'),
-				'password' => $this->input->post('password'),
-				'adminNumber' => $this->input->post('adminno'),
+		$data = array(
+			'name' => $this->input->post('name'),
+			'password' => $this->input->post('password'),
+			'adminNumber' => $this->input->post('adminno'),
+			'gender' => $this->input->post('gender'),
+			'dob' => $this->input->post('dob'),
+			'address' => $this->input->post('address'),
+			'email' => $this->input->post('email'),
+			'mobile' => $this->input->post('mobile'),
+			'role' => $this->input->post('role'),
 				//'dob' => @date('d-m-Y',@strtotime($this->input->post('dateofbirth'))),
-			);
+		);
 
 			//update the student record
-			$this->db->where('adminNumber',$studno);
-			$this->db->update('user',$data);
+		$this->db->where('userID',$studid);
+		$this->db->update('user',$data);
 
 			//display success message
-			$this->session->set_flashdata('msg', '<div class="alert alert-success textcenter">Student
-				details added to Database!!!</div>');
-			redirect('profile/get_user/' . $studno);
-				
+		$this->session->set_flashdata('msg','<div class="alert alert-success textcenter">Details has been updated successfully.</div>');
+		redirect('profile/get_user/' . $studid);
+
 	}
 
-	//custom validation function to accept only alpha and space input
-	function alpha_only_space($str)
+	function delete($studid)
 	{
-		if (!preg_match("/^([-a-z ])+$/i", $str))
+        //model function
+		// $this->load->model('Profile_model');
+		$this->Profile_model->get_user($studid);
+
+		$this->db->where('userID', $studid);
+		$this->db->delete('user');
+
+		$this->session->set_flashdata('msg', '<div class="alert alert-danger textcenter">User has been deleted.</div>');
+		redirect('Profile','refresh');
+	}
+
+	//custom validation function for dropdown input
+	function combo_check($str)
+	{
+		if ($str == "-SELECT-")
 		{
-			$this->form_validation->set_message('alpha_only_space', 'The %s field must
-				contain only alphabets or spaces');
+			$this->form_validation->set_message('combo_check', 'Valid %s Name is required');
 			return FALSE;
 		}
 		else
@@ -116,14 +179,18 @@ class Profile extends CI_Controller {
 		}
 	}
 
-	    function delete($studno)
-    {
-        //model function
-        $this->load->model('Profile_model');
-        $this->admin_model->delete_specific_cca($ccaID);
-
-        $this->session->set_flashdata('msg', 'CCA Deleted!');
-        redirect('admin','refresh');
-    }
+	//custom validation function to accept only alpha and space input
+	function alpha_only_space($str)
+	{
+		if (!preg_match("/^([-a-z ])+$/i", $str))
+		{
+			$this->form_validation->set_message('alpha_only_space', 'The %s field must contain only alphabets or spaces');
+			return FALSE;
+		}
+		else
+		{
+			return TRUE;
+		}
+	}
 }
 ?>

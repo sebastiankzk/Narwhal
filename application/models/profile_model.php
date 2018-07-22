@@ -17,30 +17,31 @@ class Profile_model extends CI_Model
   }  
 
       //fetch student record by student no
-  function get_student_record($studno)
+  function get_student_record($studid)
   {
-    $this->db->where('adminNumber', $studno);
+    $this->db->where('userID', $studid);
     $this->db->from('user');
     $query = $this->db->get();
     return $query->row();
   }
 
-  function get_school()
+  function get_role()
   {
-   $this->db->select('school_id');
-   $this->db->select('school_name');
-   $this->db->from('tbl_school');
+   $this->db->select('userID');
+   $this->db->select('role');
+   $this->db->from('user');
    $query = $this->db->get();
    $result = $query->result();
- //array to store department id & department name
-   $sch_id = array('-SELECT-');
-   $sch_name = array('-SELECT-');
+
+  //array to store userID id & role
+   $userid = array('-SELECT-');
+   $role = array('-SELECT-');
    for ($i = 0; $i < count($result); $i++)
    {
-     array_push($sch_id, $result[$i]->school_id);
-     array_push($sch_name, $result[$i]->school_name);
+     array_push($userid, $result[$i]->userID);
+     array_push($role, $result[$i]->role);
    }
-   return $school_result = array_combine($sch_id, $sch_name);
+   return $userid_result = array_combine($userid, $role);
  }
 
  
