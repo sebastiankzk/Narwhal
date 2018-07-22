@@ -119,7 +119,7 @@
       </h1>
       <br/>
 
-    <form method="post" action="<?php echo base_url('index.php/admin/update_cca/'.$query->ccaID); ?>">
+    <form method="post" action="<?php echo base_url('index.php/admin/update_cca/'.$query->ccaID); ?>" enctype='multipart/form-data'>
       <div class="row">
         <div class="col-lg-2"></div>
         <div class="col-lg-2">
@@ -166,7 +166,7 @@
           <label for="trgDate">Training Date</label>
         </div>
         <div class="row col-lg-6">
-          <input type="text" name="trgDate" class="form-control" placeholder="Training Date" required="" value="<?php echo $query->trgDate; ?>"</div>
+          <input type="date" name="trgDate" class="form-control" placeholder="Training Date" required="" value="<?php echo $query->trgDate; ?>"</div>
         </div>
       </div>
       <br/>
@@ -176,7 +176,7 @@
           <label for="trgTime">Training Time</label>
         </div>
         <div class="row col-lg-6">
-          <input type="text" name="trgTime" class="form-control" placeholder="Training Time" required="" value="<?php echo $query->trgTime; ?>"</div>
+          <input type="time" name="trgTime" class="form-control" placeholder="Training Time" required="" value="<?php echo $query->startTime; ?>"</div>
         </div>
       </div>
       <br/>
@@ -186,7 +186,8 @@
           <label for="image">Image</label>
         </div>
         <div class="row col-lg-6">
-          <input type="text" name="image" class="form-control" placeholder="Image Url" required="" value="<?php echo $query->image; ?>"</div>
+          <input type="file" name="image" class="form-control" placeholder="Image Url" value="<?php echo $query->image; ?>"</div>
+          only upload if the image needs to be updated
         </div>
       </div>
       <br/>

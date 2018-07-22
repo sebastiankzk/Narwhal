@@ -22,10 +22,11 @@ class Admin extends CI_Controller {
     function __construct()
     {
         parent::__construct();
+        $this->load->helper(array('form', 'url'));
     }
 
-	public function index()
-	{
+    public function index()
+    {
         //Check if logged in. If not logged in, proceed; Else redirect back to previous page.
         if($this->session->userdata('role') == 'Admin')
         {
@@ -42,7 +43,7 @@ class Admin extends CI_Controller {
             // redirect($this->agent->referrer());
             redirect(base_url() . 'index.php');
         }
-	}
+    }
 
     function get_cca($ccaID)
     {
@@ -55,16 +56,45 @@ class Admin extends CI_Controller {
     function update_cca($ccaID)
     {
         //store textbox from form into an array
-        $data = array(
-        'ccaID' => $ccaID,
-        'name' => $this->input->post('name'),
-        'category' => $this->input->post('category'),
-        'information' => $this->input->post('information'),
-        'venue' => $this->input->post('venue'),
-        'trgDate' => $this->input->post('trgDate'),
-        'trgTime' => $this->input->post('trgTime'),
-        'image' => $this->input->post('image'));
+        $config['upload_path']          = './assets/images/';
+        $config['allowed_types']        = 'jpg|png';
+        $config['max_size']             = 2000;
+        $config['max_width']            = 1024;
+        $config['max_height']           = 768;
 
+        $this->load->library('upload', $config);
+
+        $data = '';
+
+        if ( ! $this->upload->do_upload('image')){
+            $error = array('error' => $this->upload->display_errors());
+        } else {
+            $data = array('upload_data' => $this->upload->data());
+        }
+
+        if($data != ''){
+            $data = array(
+                'ccaID' => $ccaID,
+                'name' => $this->input->post('name'),
+                'category' => $this->input->post('category'),
+                'information' => $this->input->post('information'),
+                'venue' => $this->input->post('venue'),
+                'trgDate' => $this->input->post('trgDate'),
+                'startTime' => $this->input->post('trgTime'),
+                'image' => $data['upload_data']['file_name']
+            );
+        }else{
+            $data = array(
+                'ccaID' => $ccaID,
+                'name' => $this->input->post('name'),
+                'category' => $this->input->post('category'),
+                'information' => $this->input->post('information'),
+                'venue' => $this->input->post('venue'),
+                'trgDate' => $this->input->post('trgDate'),
+                'startTime' => $this->input->post('trgTime'),
+            );
+        }
+        
         //model function
         $this->load->model('admin_model');
         $this->admin_model->update_specific_cca($ccaID, $data);
@@ -90,15 +120,29 @@ class Admin extends CI_Controller {
 
     function add_specific_cca()
     {
+        $config['upload_path']          = './assets/images/';
+        $config['allowed_types']        = 'jpg|png';
+        $config['max_size']             = 2000;
+        $config['max_width']            = 1024;
+        $config['max_height']           = 768;
+
+        $this->load->library('upload', $config);
+
+        if ( ! $this->upload->do_upload('image')){
+            $error = array('error' => $this->upload->display_errors());
+        } else {
+            $data = array('upload_data' => $this->upload->data());
+        }
+
         $data = array(
-        
-        'name' => $this->input->post('name'),
-        'category' => $this->input->post('category'),
-        'information' => $this->input->post('information'),
-        'venue' => $this->input->post('venue'),
-        'trgDate' => $this->input->post('trgDate'),
-        'trgTime' => $this->input->post('trgTime'),
-        'image' => $this->input->post('image'));
+            'name' => $this->input->post('name'),
+            'category' => $this->input->post('category'),
+            'information' => $this->input->post('information'),
+            'venue' => $this->input->post('venue'),
+            'trgDate' => $this->input->post('trgDate'),
+            'trgTime' => $this->input->post('trgTime'),
+            'image' => $data['upload_data']['file_name']
+        );
 
         //model function
         $this->load->model('admin_model');
