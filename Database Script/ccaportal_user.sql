@@ -32,7 +32,7 @@ CREATE TABLE `user` (
   `address` varchar(100) NOT NULL,
   `email` varchar(45) NOT NULL,
   `mobile` varchar(45) NOT NULL,
-  `role` set('Admin','Student') NOT NULL DEFAULT 'Student',
+  `role` set('Admin','Student','Leader') NOT NULL DEFAULT 'Student',
   PRIMARY KEY (`userID`),
   UNIQUE KEY `adminNumber_UNIQUE` (`adminNumber`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;

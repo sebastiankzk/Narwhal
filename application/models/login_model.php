@@ -29,4 +29,26 @@
            $row = $query->row();
            return $row->role;
       }  
+
+      public function get_name($username)
+      {
+           //SELECT name FROM user WHERE adminNumber = '$username'
+           $this->db->select('name');
+           $this->db->from('user');
+           $this->db->where('adminNumber', $username);
+           $query = $this->db->get();  
+           $row = $query->row();
+           return $row->name;
+      }
+
+      public function get_userID($username)
+      {
+           //SELECT userID FROM user WHERE adminNumber = '$username'
+           $this->db->select('userID');
+           $this->db->from('user');
+           $this->db->where('adminNumber', $username);
+           $query = $this->db->get();  
+           $row = $query->row();
+           return $row->userID;
+      }
  }  
