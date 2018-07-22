@@ -35,6 +35,25 @@
            return $query->result();
       } 
 
+      public function get_user_info($userID)  
+      {  
+          //Select userID FROM user WHERE adminNumber = $data->userID
+          $this->db->select('*');
+          $this->db->from('user');
+          $this->db->where('userID', $userID);
+          $query = $this->db->get();
+          return $query->row();
+      } 
+
+      // public function ddl_cca_list()  
+      // {  
+      //      //SELECT * FROM CCA
+      //      $this->db->select('ccaID, name');
+      //      $this->db->from('cca');
+      //      $query = $this->db->get();
+      //      return $query->result_array();
+      // } 
+
       public function get_user_id($username)  
       {  
           //Select userID FROM user WHERE adminNumber = $data->userID
@@ -59,4 +78,10 @@
           //INSERT * INTO cca_interest
           $this->db->insert('cca_interest', $data);
       }    
+
+      public function submit_contact_us($data)
+      {
+          //INSERT * INTO contact_us
+          $this->db->insert('contact_us', $data);
+      }
  }  

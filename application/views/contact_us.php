@@ -107,23 +107,16 @@
     <div class="container">
 
       <!-- Page Heading/Breadcrumbs -->
-      <h1 class="mt-4 mb-3">Contact
-        <small>Subheading</small>
+      <h1 class="mt-4 mb-3">Contact Us
+        <small></small>
       </h1>
-
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item">
-          <a href="index.html">Home</a>
-        </li>
-        <li class="breadcrumb-item active">Contact</li>
-      </ol>
 
       <!-- Content Row -->
       <div class="row">
         <!-- Map Column -->
         <div class="col-lg-8 mb-4">
           <!-- Embedded Google Map -->
-          <iframe width="100%" height="400px" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://maps.google.com/maps?hl=en&amp;ie=UTF8&amp;ll=37.0625,-95.677068&amp;spn=56.506174,79.013672&amp;t=m&amp;z=4&amp;output=embed"></iframe>
+          <iframe width="100%" height="400px" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?q=nanyang%20polytechnic&t=&z=13&ie=UTF8&iwloc=&output=embed"></iframe>
         </div>
         <!-- Contact Details Column -->
         <div class="col-lg-4 mb-4">
@@ -153,47 +146,51 @@
       <div class="row">
         <div class="col-lg-8 mb-4">
           <h3>Send us a Message</h3>
-          <form name="sentMessage" id="contactForm" novalidate>
-            <div class="control-group form-group">
-              <div class="controls">
-                <label>Name:</label>
-                <input type="text" class="form-control" id="name" required data-validation-required-message="Please enter your name.">
-                <p class="help-block"></p>
-              </div>
-            </div>
-<!--             <div class="control-group form-group">
-              <div class="controls">
-                <label>CCA:</label>
-                <?php echo form_dropdown('name', $cca_list, '', 'class="form-control"');?>
-              </div>
-            </div> -->
-            <div class="control-group form-group">
-              <div class="controls">
-                <label>Phone Number:</label>
-                <input type="tel" class="form-control" id="phone" required data-validation-required-message="Please enter your phone number.">
-              </div>
-            </div>
-            <div class="control-group form-group">
-              <div class="controls">
-                <label>Email Address:</label>
-                <input type="email" class="form-control" id="email" required data-validation-required-message="Please enter your email address.">
-              </div>
-            </div>
-            <div class="control-group form-group">
-              <div class="controls">
-                <label>Message:</label>
-                <textarea rows="10" cols="100" class="form-control" id="message" required data-validation-required-message="Please enter your message" maxlength="999" style="resize:none"></textarea>
-              </div>
-            </div>
-            <div id="success"></div>
-            <!-- For success/fail messages -->
-            <button type="submit" class="btn btn-primary" id="sendMessageButton">Send Message</button>
-          </form>
+          
+
+    <form method="post" action="<?php echo base_url('index.php/home/contact_us_submitted/'); ?>" enctype='multipart/form-data'>
+      <div class="row">
+        <div class="col-lg-4">
+          <label for="name">Name</label>
+        </div>
+        <div class="row col-lg-12">
+          <input type="text" name="name" class="form-control" placeholder="" required="" value=""</div>
+        </div>
+      </div>
+      <br/>
+      <div class="row">
+        <div class="col-lg-4">
+          <label for="email">Email</label>
+        </div>
+        <div class="row col-lg-12">
+          <input type="email" name="email" class="form-control" placeholder="" required="" value=""</div>
+        </div>
+      </div>
+      <br/>
+      <div class="row">
+        <div class="col-lg-4">
+          <label for="message">Message</label>
+        </div>
+        <div class="row col-lg-12">
+          <textarea name="message" class="form-control" required="" rows="10"></textarea>
+        </div>
+      </div>
+      </br>
+      <div class="row">
+        <div class="col-lg-3">            
+          <input type="submit" name="submit" value="Send Message" class="btn btn-primary" />                
+        </div>
+        <div class="col-lg-4"> 
+          <?php echo $this->session->flashdata('msg');?>
+        </div>
+      </div> 
+      <br/>            
+    </form>
+
         </div>
 
       </div>
-      <!-- /.row -->
-
+      <!-- /.row -->   
     </div>
     <!-- /.container -->
 

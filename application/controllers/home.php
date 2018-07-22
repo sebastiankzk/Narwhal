@@ -71,5 +71,37 @@ class Home extends CI_Controller {
         $this->load->library('user_agent');
         redirect($this->agent->referrer());
         //redirect('admin','refresh');
-	}	   
+	}	
+
+	public function contact_us()
+	{	
+        //model function
+         $this->load->model('home_model');
+         //$data['cca_list'] = $this->home_model->ddl_cca_list();
+         $data['query'] = $this->home_model->get_user_info($this->session->userdata('userID'));
+
+        $this->load->view('contact_us', $data);
+	}  
+
+	public function contact_us_submitted()
+	{	
+        //model function
+         $this->load->model('home_model');
+         //$data['cca_list'] = $this->home_model->ddl_cca_list();
+         $data['query'] = $this->home_model->get_user_info($this->session->userdata('userID'));
+
+        $data = array(
+            'name' => $this->input->post('name'),
+            // 'category' => $this->input->post('phone'),
+            'email' => $this->input->post('email'),
+            'message' => $this->input->post('message')
+        );
+
+        //model function
+        $this->load->model('home_model');
+        $this->home_model->submit_contact_us($data);
+
+        $this->session->set_flashdata('msg', 'Message submitted!');
+        redirect('home/contact_us','refresh');
+	}    
 }
