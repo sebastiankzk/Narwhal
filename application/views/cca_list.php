@@ -145,7 +145,7 @@
               <p class="card-text">Category: <?php echo $row->category; ?></p>
               <p class="card-text">Venue: <?php echo $row->venue; ?></p>
               <p class="card-text">Training Date: <?php echo $row->trgDate; ?></p>
-              <p class="card-text">Training Time: <?php echo $row->trgTime; ?></p>
+              <p class="card-text">Training Time: <?php echo date(" h:i A", strtotime($row->startTime)); ?></p>
               <p class="card-text"><?php echo $row->information; ?></p>
             </div>
           </div>
