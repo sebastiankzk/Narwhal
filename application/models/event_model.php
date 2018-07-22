@@ -10,8 +10,7 @@
 
       public function get_event_list()  
       {  
-         $this->db->select('name');
-         $this->db->select('date');
+         $this->db->select('*');
          $this->db->select('eventID');
          $this->db->from('event');
          $this->db->order_by("date asc");
@@ -21,7 +20,9 @@
 
          //array to store event
          $name = array('-SELECT-');
+         $venue = array('-SELECT-');
          $date = array('-SELECT-');
+         $time = array('-SELECT-');
          for ($i = 0; $i < count($result); $i++)
          {
             array_push($name, $result[$i]->name);
