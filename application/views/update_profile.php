@@ -104,7 +104,6 @@
               <a class="nav-link">Hello, <?php echo $this->session->userdata('username'); ?></a>
             <?php endif; ?>        
           </li>
-
         </ul>
       </div>
     </div>
@@ -137,7 +136,7 @@
         <div class="form-group">
          <div class="row colbox">
            <div class="col-md-4">
-             <label for="studentno" class="control-label">Student Number</label>
+             <label for="adminno" class="control-label">Admin Number</label>
            </div>
            <div class="col-md-8">
             <input id="adminno" name="adminno" placeholder="adminno" type="text"
@@ -150,12 +149,11 @@
       <div class="form-group">
        <div class="row colbox">
          <div class="col-md-4">
-           <label for="studentname" class="control-label">Student Name</label>
+           <label for="name" class="control-label">Student Name</label>
          </div>
          <div class="col-md-8">
-          <input id="name" name="name" placeholder="name"
-          type="text" class="form-control" required="" value="<?php echo set_value('name',
-          $query->name); ?>" />
+          <input id="name" name="name" placeholder="name" type="text" 
+          class="form-control" required="" value="<?php echo set_value('name', $query->name); ?>" />
           <span class="text-danger"><?php echo form_error('name'); ?></span>
         </div>
       </div>
@@ -252,7 +250,6 @@
 </div>
 </div>
 
-
 <div class="form-group">
  <div class="offset-sm-2 col-md-8 text-center">
   <input id="btn_update" name="btn_update" type="submit" class="btn btn-primary"
@@ -277,7 +274,6 @@
   <div class="container">
     <p class="m-0 text-center text-white">180 Ang Mo Kio Avenue 8 Singapore (569830) Tel: 64515115 </br>Copyright &copy; 2018 NYP, Singapore. All rights reserved.</p>
   </div>
-  <!-- /.container -->
 </footer>
 
 <!-- Bootstrap core JavaScript -->

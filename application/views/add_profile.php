@@ -16,11 +16,10 @@
   <!-- Custom styles for this template -->
   <link href="<?=base_url();?>assets/css/modern-business.css" rel="stylesheet">
 
-  <script type="text/javascript">
- //load datepicker control onfocus
- $(function() {$("#dob").datepicker();
-});
-</script>
+  <link rel="stylesheet" type="text/css" href="<?=base_url();?>assets/vendor/jquery/jquery-ui/jquery-ui.min.css">
+
+  <script type="text/javascript" src="assets/vendor/jquery/jquery.js"></script>
+  <script type="text/javascript" src="assets/vendor/jquery/jquery-ui/jquery-ui.min.js"></script>
 
 </head>
 <body>
@@ -109,7 +108,6 @@
               <a class="nav-link">Hello, <?php echo $this->session->userdata('username'); ?></a>
             <?php endif; ?>        
           </li>
-
         </ul>
       </div>
     </div>
@@ -133,19 +131,17 @@
 
    <div class="row">
     <div class="offset-md-3 col-md-6 mb-4">
-      <!-- <form class="form-control" method="post" action="<?php echo base_url('index.php/Profile/get_role/'.$role->userID); ?>"> -->
         <?php
-        $attributes = array("class" => "form-control", "id" => "addprofile", "name" =>
-          "addprofile");
+        $attributes = array("class" => "form-control", "id" => "addprofile", "name" => "addprofile");
           echo form_open("Profile/get_role", $attributes);?>
-        <legend>Add Account</legend>
-        <hr>
+          <legend>Add Account</legend>
+          <hr>
           <fieldset>
 
             <div class="form-group">
              <div class="row colbox">
                <div class="col-md-4">
-                 <label for="studentno" class="control-label">Student Number</label>
+                 <label for="adminno" class="control-label">Admin Number</label>
                </div>
                <div class="col-md-8">
                 <input id="adminno" name="adminno" placeholder="adminno" type="text"
@@ -158,7 +154,7 @@
           <div class="form-group">
            <div class="row colbox">
              <div class="col-md-4">
-               <label for="studentname" class="control-label">Student Name</label>
+               <label for="name" class="control-label">Student Name</label>
              </div>
              <div class="col-md-8">
               <input id="name" name="name" placeholder="name"
@@ -187,8 +183,11 @@
           <label for="gender" class="control-label">Gender</label>
         </div>
         <div class="col-md-8">
-          <input id="gender" name="gender" placeholder="gender" type="text"
-          class="form-control" required="" value="<?php echo set_value('gender'); ?>" />
+          <?php $gender = array(
+            'male' => 'Male',
+            'female'  => 'Female',
+          );
+          echo form_dropdown('gender', $gender, 'male', '<input class="form-control"', '/>');?>
           <span class="text-danger"><?php echo form_error('gender'); ?></span>
         </div>
       </div>
@@ -207,17 +206,23 @@
     </div>
   </div>
 
-  <div class="form-group">
-   <div class="row colbox">
-     <div class="col-md-4">
-       <label for="address" class="control-label">Address</label>
-     </div>
-     <div class="col-md-8">
-      <input id="address" name="address" placeholder="address" type="text"
-      class="form-control" required="" value="<?php echo set_value('address'); ?>" />
-      <span class="text-danger"><?php echo form_error('address'); ?></span>
-    </div>
+  <script type="text/javascript">
+ //load datepicker control onfocus
+ $(function() {$("#dob").datepicker();
+});
+</script>
+
+<div class="form-group">
+ <div class="row colbox">
+   <div class="col-md-4">
+     <label for="address" class="control-label">Address</label>
+   </div>
+   <div class="col-md-8">
+    <input id="address" name="address" placeholder="address" type="text"
+    class="form-control" required="" value="<?php echo set_value('address'); ?>" />
+    <span class="text-danger"><?php echo form_error('address'); ?></span>
   </div>
+</div>
 </div>
 
 <div class="form-group">
@@ -252,8 +257,12 @@
      <label for="role" class="control-label">Role</label>
    </div>
    <div class="col-md-8">
-    <input id="role" name="role" placeholder="role" type="text"
-    class="form-control" required="" value="<?php echo form_dropdown('role',$role,set_value('role'),$attributes); ?>" />
+    <?php $role = array(
+      'student' => 'Student',
+      'leader'  => 'Leader',
+      'admin'   => 'Admin',
+    );
+    echo form_dropdown('role', $role, 'student', '<input class="form-control"', '/>');?>
     <span class="text-danger"><?php echo form_error('role'); ?></span>
   </div>
 </div>
@@ -284,7 +293,6 @@
   <div class="container">
     <p class="m-0 text-center text-white">180 Ang Mo Kio Avenue 8 Singapore (569830) Tel: 64515115 </br>Copyright &copy; 2018 NYP, Singapore. All rights reserved.</p>
   </div>
-  <!-- /.container -->
 </footer>
 
 <!-- Bootstrap core JavaScript -->
@@ -294,7 +302,3 @@
 </body>
 
 </html>
-
-
-
-

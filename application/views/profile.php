@@ -117,7 +117,6 @@
       <h1 class="mt-4 mb-3">Account
         <small>Details</small>
       </h1>
-
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
           <a href="index.html">Home</a>
@@ -128,22 +127,12 @@
      </ol>
 
      <!-- Login form -->
-     <div class="row">  
-        <!-- <div class="col-lg-2 mb-4">
-          <div class="list-group">
-            <a href="index.html" class="list-group-item">Accounts</a>
-            <a href="about.html" class="list-group-item">Update</a>
-            <a href="services.html" class="list-group-item">Delete</a>
-            <a href="contact.html" class="list-group-item">Contact</a>
-            <a href="portfolio-1-col.html" class="list-group-item">1 Column Portfolio</a>
-            <a href="portfolio-2-col.html" class="list-group-item">2 Column Portfolio</a>
-          </div>
-        </div> -->
+     <div class="row">
         <div class="col-lg-12 mb-4">  
           <div class="table-responsive">   
             <?php echo $this->session->flashdata('msg'); ?> 
             <!-- <h3 class="card-header bg-primary text-white">Accounts</h3> -->
-            <h3 class="card-header text-black">Accounts <a href="<?php echo base_url('index.php/Profile/get_role'); ?>" class="btn btn-primary offset-sm-9">Add user</a></h3>
+            <h3 class="card-header text-black">Accounts <a href="<?php echo base_url('index.php/Profile/create_user'); ?>" class="btn btn-primary offset-sm-9">Add user</a></h3>
             <table class="table table-striped table-hover">
              <thead>
                <tr>
@@ -173,7 +162,7 @@
                    <td><?php echo $user[$i]->mobile; ?></td>
                    <td><?php echo $user[$i]->role; ?></td>
                    <td><a href="<?php echo base_url('index.php/Profile/get_user/'.$user[$i]->userID); ?>" class="btn btn-primary">Edit &rarr;</a></td>
-                   <td><a href="<?php echo base_url('index.php/Profile/delete/'.$user[$i]->adminNumber); ?>" class="btn btn-danger" onclick="return confirm('Comfirm delete <?php echo($user[$i]->userID); ?>?')">Delete</a></td>
+                   <td><a href="<?php echo base_url('index.php/Profile/delete/'.$user[$i]->userID); ?>" class="btn btn-danger" onclick="return confirm('Comfirm delete <?php echo($user[$i]->name); ?>?')">Delete</a></td>
                  </tr>
                <?php } ?>
              </tbody>
@@ -188,8 +177,7 @@
     <div class="container">
       <p class="m-0 text-center text-white">180 Ang Mo Kio Avenue 8 Singapore (569830) Tel: 64515115 </br>Copyright &copy; 2018 NYP, Singapore. All rights reserved.</p>
     </div>
-    <!-- /.container -->
-  </footer>
+   </footer>
 
   <!-- Bootstrap core JavaScript -->
   <script src="<?=base_url();?>assets/vendor/jquery/jquery.min.js"></script>

@@ -33,7 +33,7 @@
             <a class="nav-link" href="about.html">About</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="services.html">Services</a>
+            <a class="nav-link" href="<?php echo base_url('index.php/Profile/'); ?>">Accounts</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="contact.html">Contact</a>
@@ -94,47 +94,47 @@
           <li class="nav-item">
             <?php if($this->session->userdata('username') != '') : ?>            
               <a class="nav-link" href="<?php echo base_url('index.php/login/logout'); ?>">Logout</a>
-            <?php else : ?>            
-              <a class="nav-link" href="<?php echo base_url('index.php/login'); ?>">Login</a>
-            <?php endif; ?>        
-          </li>
-          <!-- Display adminNumber if logged in -->
-          <li class="nav-item">
-            <?php if($this->session->userdata('username') != '') : ?>            
-              <a class="nav-link">Hello, <?php echo $this->session->userdata('username'); ?></a>
-            <?php endif; ?>        
-          </li>
+              <?php else : ?>            
+                <a class="nav-link" href="<?php echo base_url('index.php/login'); ?>">Login</a>
+              <?php endif; ?>        
+            </li>
+            <!-- Display adminNumber if logged in -->
+            <li class="nav-item">
+              <?php if($this->session->userdata('username') != '') : ?>            
+                <a class="nav-link">Hello, <?php echo $this->session->userdata('username'); ?></a>
+              <?php endif; ?>        
+            </li>
 
-        </ul>
+          </ul>
+        </div>
       </div>
-    </div>
-  </nav>
+    </nav>
 
-  <!-- Page Content -->
-  <div class="container">
+    <!-- Page Content -->
+    <div class="container">
 
-    <!-- Page Heading/Breadcrumbs -->
-    <h1 class="mt-4 mb-3">CCA in NYP
-      <small>(Admin Mode)</small>
-    </h1>
-
+      <!-- Page Heading/Breadcrumbs -->
+      <h1 class="mt-4 mb-3">CCA in NYP
+        <small>(Admin Mode)</small>
+      </h1>
 
 
-    <div class="row">
-      <div class="col-auto mr-auto"></div>
-      <div class="col-auto">
-       <a href="<?php echo base_url('index.php/admin/add_cca'); ?>" class="btn btn-primary">Add new CCA &rarr;</a>
+
+      <div class="row">
+        <div class="col-auto mr-auto"></div>
+        <div class="col-auto">
+         <a href="<?php echo base_url('index.php/admin/add_cca'); ?>" class="btn btn-primary">Add new CCA &rarr;</a>
+       </div>
      </div>
-   </div>
- </br>
- <div class="row">
-  <div class="col-auto mr-auto">
-    <?php echo $this->session->flashdata('msg');?>
+   </br>
+   <div class="row">
+    <div class="col-auto mr-auto">
+      <?php echo $this->session->flashdata('msg');?>
+    </div>
+    <div class="col-auto">
+      Total CCA count: <b><?php echo $count ?></b>
+    </div>
   </div>
-  <div class="col-auto">
-    Total CCA count: <b><?php echo $count ?></b>
-  </div>
-</div>
 </br>
 <?php foreach($query as $row): ?>
   <div class="card mb-4">
@@ -183,6 +183,6 @@
     <?php if($this->session->flashdata('msg')){ ?>
       $('.confirm-div').html('<?php echo $this->session->flashdata('msg'); ?>').show();
     });
-  <?php } ?>
-  }
+<?php } ?>
+}
 </script>

@@ -31,10 +31,12 @@ class Profile extends CI_Controller {
 		$this->load->model('Profile_model');
 	}
 
+	//when page loaded
 	public function index()
 	{
         //load the Profile_model
 		$this->load->model('Profile_model');
+
         //call the model function to get the User data
 		$userresult = $this->Profile_model->get_user();
 		$data['user'] = $userresult;
@@ -44,15 +46,18 @@ class Profile extends CI_Controller {
 
 	function get_user($studid)
 	{
+		//load the Profile_model
 		$this->load->model('Profile_model');
 		$data['query'] = $this->Profile_model->get_student_record($studid);
 		$this->load->view('update_profile', $data);
 	}
 
-	function get_role()
+	function create_user()
 	{
 		//fetch data from user table
-		$data['role'] = $this->Profile_model->get_role();
+		// $data['role'] = $this->Profile_model->get_role();
+
+		$this->load->library('form_validation');
 
 		//set validation rules
 		$this->form_validation->set_rules('name', 'Name',
@@ -69,7 +74,7 @@ class Profile extends CI_Controller {
 		if ($this->form_validation->run() == FALSE)
 		{
 			//fail validation
-			$this->load->view('add_profile', $data);
+			$this->load->view('add_profile');
 		}
 		else
 		{
@@ -79,7 +84,7 @@ class Profile extends CI_Controller {
 				'password' => $this->input->post('password'),
 				'adminNumber' => $this->input->post('adminno'),
 				'gender' => $this->input->post('gender'),
-				'dob' => @date('Y-m-d', @strtotime($this->input->post('dob'))),
+				'dob' => @date('d-m-Y', @strtotime($this->input->post('dob'))),
 				// $this->input->post('dob'),
 				'address' => $this->input->post('address'),
 				'email' => $this->input->post('email'),

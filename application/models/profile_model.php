@@ -8,6 +8,7 @@ class Profile_model extends CI_Model
     parent::__construct();      
   }
   
+  //fetch all student record
   function get_user()  
   {  
     $sql = 'select * from user';
@@ -16,7 +17,7 @@ class Profile_model extends CI_Model
     return $result;
   }  
 
-      //fetch student record by student no
+  //fetch student record by student no
   function get_student_record($studid)
   {
     $this->db->where('userID', $studid);
@@ -25,6 +26,8 @@ class Profile_model extends CI_Model
     return $query->row();
   }
 
+  //fetch student roles and ID
+  //not in use  
   function get_role()
   {
    $this->db->select('userID');
@@ -43,7 +46,5 @@ class Profile_model extends CI_Model
    }
    return $userid_result = array_combine($userid, $role);
  }
-
- 
 
 }  

@@ -33,7 +33,7 @@
           <a class="nav-link" href="about.html">About</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="services.html">Services</a>
+          <a class="nav-link" href="<?php echo base_url('index.php/Profile/'); ?>">Accounts</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="contact.html">Contact</a>
@@ -94,125 +94,125 @@
         <li class="nav-item">
           <?php if($this->session->userdata('username') != '') : ?>            
             <a class="nav-link" href="<?php echo base_url('index.php/login/logout'); ?>">Logout</a>
-          <?php else : ?>            
-            <a class="nav-link" href="<?php echo base_url('index.php/login'); ?>">Login</a>
-          <?php endif; ?>        
-        </li>
-        <!-- Display adminNumber if logged in -->
-        <li class="nav-item active">
-          <?php if($this->session->userdata('username') != '') : ?>            
-            <a class="nav-link">Hello, <?php echo $this->session->userdata('username'); ?></a>
-          <?php endif; ?>        
-        </li>
+            <?php else : ?>            
+              <a class="nav-link" href="<?php echo base_url('index.php/login'); ?>">Login</a>
+            <?php endif; ?>        
+          </li>
+          <!-- Display adminNumber if logged in -->
+          <li class="nav-item active">
+            <?php if($this->session->userdata('username') != '') : ?>            
+              <a class="nav-link">Hello, <?php echo $this->session->userdata('username'); ?></a>
+            <?php endif; ?>        
+          </li>
 
-      </ul>
-    </div>
-  </div>
-</nav>
-
-<!-- Page Content -->
-<div class="container">
-
-  <!-- Page Heading/Breadcrumbs -->
-  <h1 class="mt-4 mb-3">Add new CCA
-  </h1>
-  <br/>
-
-  <form method="post" action="<?php echo base_url('index.php/admin/add_specific_cca/'); ?>" enctype='multipart/form-data'>
-    <div class="row">
-      <div class="col-lg-2"></div>
-      <div class="col-lg-2">
-        <label for="name">Name</label>
-      </div>
-      <div class="row col-lg-6">
-        <input type="text" name="name" class="form-control" placeholder="Name" required="" value=""</div>
+        </ul>
       </div>
     </div>
+  </nav>
+
+  <!-- Page Content -->
+  <div class="container">
+
+    <!-- Page Heading/Breadcrumbs -->
+    <h1 class="mt-4 mb-3">Add new CCA
+    </h1>
     <br/>
-    <div class="row">
-      <div class="col-lg-2"></div>
-      <div class="col-lg-2">
-        <label for="category">Category</label>
-      </div>
-      <div class="row col-lg-6">
-        <input type="text" name="category" class="form-control" placeholder="Category" required="" value=""</div>
-      </div>
-    </div>
-    <br/>
-    <div class="row">
-      <div class="col-lg-2"></div>
-      <div class="col-lg-2">
-        <label for="information">Information</label>
-      </div>
-      <div class="row col-lg-6">
-        <textarea name="information" class="form-control" required="" rows="10"></textarea>
-      </div>
-    </div>
-    <br/>
-    <div class="row">
-      <div class="col-lg-2"></div>
-      <div class="col-lg-2">
-        <label for="venue">Venue</lab>
+
+    <form method="post" action="<?php echo base_url('index.php/admin/add_specific_cca/'); ?>" enctype='multipart/form-data'>
+      <div class="row">
+        <div class="col-lg-2"></div>
+        <div class="col-lg-2">
+          <label for="name">Name</label>
         </div>
         <div class="row col-lg-6">
-          <input type="text" name="venue" class="form-control" placeholder="Venue" required="" value=""</div>
+          <input type="text" name="name" class="form-control" placeholder="Name" required="" value=""</div>
         </div>
       </div>
       <br/>
       <div class="row">
         <div class="col-lg-2"></div>
         <div class="col-lg-2">
-          <label for="trgDate">Training Date</label>
+          <label for="category">Category</label>
         </div>
         <div class="row col-lg-6">
-          <input type="date" name="trgDate" class="form-control" placeholder="Training Date" required="" value=""</div>
+          <input type="text" name="category" class="form-control" placeholder="Category" required="" value=""</div>
         </div>
       </div>
       <br/>
       <div class="row">
         <div class="col-lg-2"></div>
         <div class="col-lg-2">
-          <label for="trgTime">Training Time</label>
+          <label for="information">Information</label>
         </div>
         <div class="row col-lg-6">
-          <input type="time" name="trgTime" class="form-control" placeholder="Training Time" required="" value=""</div>
+          <textarea name="information" class="form-control" required="" rows="10"></textarea>
         </div>
       </div>
       <br/>
       <div class="row">
         <div class="col-lg-2"></div>
         <div class="col-lg-2">
-          <label for="image">Image</label>
+          <label for="venue">Venue</lab>
+          </div>
+          <div class="row col-lg-6">
+            <input type="text" name="venue" class="form-control" placeholder="Venue" required="" value=""</div>
+          </div>
         </div>
-        <div class="row col-lg-6">
-          <input type="file" name="image" class="form-control" placeholder="Image Url" required="" value=""</div>
+        <br/>
+        <div class="row">
+          <div class="col-lg-2"></div>
+          <div class="col-lg-2">
+            <label for="trgDate">Training Date</label>
+          </div>
+          <div class="row col-lg-6">
+            <input type="date" name="trgDate" class="form-control" placeholder="Training Date" required="" value=""</div>
+          </div>
         </div>
-      </div>
-      <br/>
-      <div class="row">
-        <div class="col-lg-4"></div>
-        <div class="col-lg-6">            
-          <input type="submit" name="submit" value="Add" class="btn btn-primary" />      
+        <br/>
+        <div class="row">
+          <div class="col-lg-2"></div>
+          <div class="col-lg-2">
+            <label for="trgTime">Training Time</label>
+          </div>
+          <div class="row col-lg-6">
+            <input type="time" name="trgTime" class="form-control" placeholder="Training Time" required="" value=""</div>
+          </div>
         </div>
-      </div> 
-      <br/>            
-    </form>
-    
-  </div>
-  <!-- /.container -->
-
-  <!-- Footer -->
-  <footer class="py-5 bg-dark">
-    <div class="container">
-      <p class="m-0 text-center text-white">180 Ang Mo Kio Avenue 8 Singapore (569830) Tel: 64515115 </br>Copyright &copy; 2018 NYP, Singapore. All rights reserved.</p>
+        <br/>
+        <div class="row">
+          <div class="col-lg-2"></div>
+          <div class="col-lg-2">
+            <label for="image">Image</label>
+          </div>
+          <div class="row col-lg-6">
+            <input type="file" name="image" class="form-control" placeholder="Image Url" required="" value=""</div>
+          </div>
+        </div>
+        <br/>
+        <div class="row">
+          <div class="col-lg-4"></div>
+          <div class="col-lg-6">            
+            <input type="submit" name="submit" value="Add" class="btn btn-primary" />      
+          </div>
+        </div> 
+        <br/>            
+      </form>
+      
     </div>
     <!-- /.container -->
-  </footer>
 
-  <!-- Bootstrap core JavaScript -->
-  <script src="<?=base_url();?>assets/vendor/jquery/jquery.min.js"></script>
-  <script src="<?=base_url();?>assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- Footer -->
+    <footer class="py-5 bg-dark">
+      <div class="container">
+        <p class="m-0 text-center text-white">180 Ang Mo Kio Avenue 8 Singapore (569830) Tel: 64515115 </br>Copyright &copy; 2018 NYP, Singapore. All rights reserved.</p>
+      </div>
+      <!-- /.container -->
+    </footer>
 
-</body>
+    <!-- Bootstrap core JavaScript -->
+    <script src="<?=base_url();?>assets/vendor/jquery/jquery.min.js"></script>
+    <script src="<?=base_url();?>assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-</html>
+  </body>
+
+  </html>
