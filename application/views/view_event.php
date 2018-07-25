@@ -8,13 +8,13 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>NYP CCA Portal - Event</title>
+    <title>NYP CCA Portal - Update CCA</title>
 
     <!-- Bootstrap core CSS -->
     <link href="<?=base_url();?>assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="<?=base_url();?>assets/css/modern-business.css" rel="stylesheet"> 
+    <link href="<?=base_url();?>assets/css/modern-business.css" rel="stylesheet">
 
   </head>
 
@@ -58,7 +58,7 @@
         <?php endif; ?>        
       </li>
       <!-- Display adminNumber if logged in -->
-      <li class="nav-item">
+      <li class="nav-item active">
         <?php if($this->session->userdata('username') != '') : ?>            
               <a class="nav-link">Hello, <?php echo $this->session->userdata('username'); ?></a>
         <?php endif; ?>        
@@ -73,76 +73,77 @@
     <div class="container">
 
       <!-- Page Heading/Breadcrumbs -->
-      <h1 class="mt-4 mb-3">Event in NYP
+      <h1 class="mt-4 mb-3">View Event
+        <!--<small>(<?php echo $data->name; ?>)</small>-->
       </h1>
+      <br/>
 
-
-
+    <form method="post" action="<?php echo base_url('index.php/event/update_event/'.$query->eventID); ?>">
       <div class="row">
-        <div class="col-auto mr-auto"></div>
-        <div class="col-auto">
-           <?php if($this->session->userdata('role') == 'Leader') : ?>
-                <td><a href="<?php echo base_url('index.php/event/add_event'); ?>" class="btn btn-primary">Add new Event &rarr;</a></td>
-                <?php endif; ?>
-
+        <div class="col-lg-2"></div>
+        <div class="col-lg-2">
+          <label for="name"> Event Name</label>
+        </div>
+        <div class="row col-lg-6">
+          <input type="text" name="name" class="form-control" placeholder="Name" required="" disabled value="<?php echo $query->name; ?>"</div>
         </div>
       </div>
-      </br>
+      <br/>
       <div class="row">
-        <div class="col-auto mr-auto">
-            <?php echo $this->session->flashdata('msg');?>
+        <div class="col-lg-2"></div>
+        <div class="col-lg-2">
+          <label for="description">Description</label>
         </div>
-        <div class="col-auto">
-        </div>
-      </div>
-      </br>
-      
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-12 col-sm-12">
-            <table class="table table-striped table-hover">
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>Event Name</th>
-                <th>Event Venue</th>
-                <th>Event Date</th>
-                <th>Event Time</th>
-                <th></th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              <?php $index = 1; foreach ($eventlist as $row):?>
-              <tr>
-                <td><?=$index++?></td>
-                <td><?=$row->name?></td>
-                <td><?=$row->venue?></td>
-                <td><?=$row->date?></td>
-                <td><?=$row->time?></td>
-                <form method="post" action="event/view_event">
-                <input type="hidden" id="eventID" name="eventID" value='<?=$row->eventID?>' />
-                <td><button type="submit" class="btn btn-primary">View</button>
-                </td>
-                </form>
-                <?php if($this->session->userdata('role') == 'Leader') : ?>
-                <form method="post" action="event/get_event">
-                <input type="hidden" id="eventID" name="eventID" value='<?=$row->eventID?>' />
-                <td><button type="submit" class="btn btn-primary">Edit</button>
-                </td>
-                </form>
-                <?php endif; ?>
-              </tr>
-                <?php endforeach; ?>
-
-            </tbody>
-            </table>
-          </div>
+        <div class="row col-lg-6">
+          <textarea name="description" class="form-control" required="" disabled rows="10"><?php echo $query->description; ?> </textarea>
         </div>
       </div>
+      <br/>
+      <div class="row">
+        <div class="col-lg-2"></div>
+        <div class="col-lg-2">
+          <label for="venue">Event Venue</label>
+        </div>
+        <div class="row col-lg-6">
+          <input type="text" name="venue" class="form-control" placeholder="Venue" required="" disabled value="<?php echo $query->venue; ?>"</div>
+        </div>
+      </div>
+      <br/>
+      <div class="row">
+        <div class="col-lg-2"></div>
+        <div class="col-lg-2">
+          <label for="date">Event Date</label>
+        </div>
+        <div class="row col-lg-6">
+          <input type="date" name="date" class="form-control" required="" disabled value="<?php echo $query->date; ?>"</div>
+        </div>
+      </div>
+      <br/>
+      <div class="row">
+        <div class="col-lg-2"></div>
+        <div class="col-lg-2">
+          <label for="time">Event Time</label>
+        </div>
+        <div class="row col-lg-6">
+          <input type="time" name="time" class="form-control" required="" disabled value="<?php echo $query->time; ?>"</div>
+        </div>
+      </div>
+      <br/>
+      <div class="row">
+        <div class="col-lg-2"></div>
+        <div class="col-lg-2"></div>
+          
+        <a href="<?php echo base_url('index.php/event'); ?>">
+          <input type="button" class="btn btn-danger" value="Cancel" />
+        </a>
+        
+       
+      </div> 
+      <br/>            
+    </form>
+    
     </div>
-    <br/>
-    <br/>
+    <!-- /.container -->
 
     <!-- Footer -->
     <footer class="py-5 bg-dark">
@@ -159,13 +160,3 @@
   </body>
 
 </html>
-
-<script>
-  // assumes you're using jQuery
-  $(document).ready(function() {
-  $('.confirm-div').hide();
-  <?php if($this->session->flashdata('msg')){ ?>
-  $('.confirm-div').html('<?php echo $this->session->flashdata('msg'); ?>').show();
-  });
-  <?php } ?>
-</script>
