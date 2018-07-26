@@ -17,7 +17,7 @@
           $this->db->from('user');
           $this->db->join('tbl_user_cca', 'tbl_user_cca.userID = user.userID');
           $this->db->join('cca', 'cca.ccaID = tbl_user_cca.ccaID');
-          $this->db->where('cca.ccaID', $userID);
+          //$this->db->where('cca.ccaID', $userID);
           $query = $this->db->get();
           $result = $query->result();
 

@@ -73,6 +73,17 @@ class event extends CI_Controller {
         $this->load->view('update_event', $data);
     }
 
+    function view_event()
+    {
+        //model function
+        $data = array(
+        'eventID' => $this->input->post('eventID'));
+        $this->load->model('event_model'); 
+        $data['query'] = $this->event_model->get_specific_event($data['eventID']);
+        $this->load->view('view_event', $data);
+    }
+
+
     function update_event($eventID)
     {
         //store textbox from form into an array

@@ -18,7 +18,7 @@ class Leader extends CI_Controller {
             $this->load->model('leader_model');
             $userID = $this->session->userdata('userID');
             //$ccaID = $this->leader_model->getCCAID($userID);
-            $data['studentlist'] = $this->leader_model->get_student_list('userID');
+            $data['studentlist'] = $this->leader_model->get_student_list($userID);
 
             $this->load->view('leader', $data);
         }
