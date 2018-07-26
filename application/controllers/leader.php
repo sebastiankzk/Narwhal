@@ -38,4 +38,23 @@ class Leader extends CI_Controller {
         $this->session->set_flashdata('msg', 'Member has been deleted!');
         redirect('leader','refresh');
      }
+
+    function view_record($attid)
+    {
+        $this->load->model('leader_model');
+        //call the model function to get the User data
+        $userresult = $this->leader_model->get_attendance();
+        $data['query'] = $userresult;
+        //load the profile view
+        $this->load->view('add_attendance',$data);
+    }
+
+    function get_record($ccaid)
+    {
+        //load the Profile_model
+        $this->load->model('leader_model');
+        $data['query'] = $this->leader_model->get_attendance($ccaid);
+        $data['datetime'] = $this->leader_model->get_date();
+        $this->load->view('add_attendance', $data);
+    }
 }

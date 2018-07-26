@@ -21,6 +21,12 @@
   <script type="text/javascript" src="assets/vendor/jquery/jquery.js"></script>
   <script type="text/javascript" src="assets/vendor/jquery/jquery-ui/jquery-ui.min.js"></script>
 
+  <style type="text/css">
+  table, th, td {
+   text-align: center;
+ }
+</style>
+
 </head>
 <body>
 
@@ -89,106 +95,65 @@
         </li>
 
         <?php if($this->session->userdata('role') == 'Admin') : ?>
-          <li class="nav-item">
-            <a class="nav-link" href="<?php echo base_url('index.php/admin'); ?>">Admin</a>
-          </li>
+        <li class="nav-item">
+          <a class="nav-link" href="<?php echo base_url('index.php/admin'); ?>">Admin</a>
+        </li>
         <?php endif; ?>
 
         <!-- Login Logout  -->
         <li class="nav-item">
           <?php if($this->session->userdata('username') != '') : ?>            
-            <a class="nav-link" href="<?php echo base_url('index.php/login/logout'); ?>">Logout</a>
-            <?php else : ?>            
-              <a class="nav-link" href="<?php echo base_url('index.php/login'); ?>">Login</a>
-            <?php endif; ?>        
-          </li>
-          <!-- Display adminNumber if logged in -->
-          <li class="nav-item active">
-            <?php if($this->session->userdata('username') != '') : ?>            
-              <a class="nav-link">Hello, <?php echo $this->session->userdata('username'); ?></a>
-            <?php endif; ?>        
-          </li>
-        </ul>
-      </div>
+          <a class="nav-link" href="<?php echo base_url('index.php/login/logout'); ?>">Logout</a>
+          <?php else : ?>            
+          <a class="nav-link" href="<?php echo base_url('index.php/login'); ?>">Login</a>
+          <?php endif; ?>        
+        </li>
+        <!-- Display adminNumber if logged in -->
+        <li class="nav-item active">
+          <?php if($this->session->userdata('username') != '') : ?>            
+          <a class="nav-link">Hello, <?php echo $this->session->userdata('username'); ?></a>
+          <?php endif; ?>        
+        </li>
+      </ul>
     </div>
-  </nav>
+  </div>
+</nav>
 
-  <!-- Page Content -->
-  <div class="container">
+<!-- Page Content -->
+<div class="container">
 
-    <!-- Page Heading/Breadcrumbs -->
-    <h1 class="mt-4 mb-3">Add Account
-    </h1>
-    <ol class="breadcrumb">
-      <li class="breadcrumb-item">
-        <a href="index.html">Home</a>
-      </li>
-      <li class="breadcrumb-item">
-       <a href="<?php echo base_url('index.php/Profile/'); ?>">Accounts</a>
-     </li>
-     <li class="breadcrumb-item active">Add account</li>
-   </ol>
+  <!-- Page Heading/Breadcrumbs -->
+  <h1 class="mt-4 mb-3">Add Account
+  </h1>
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item">
+      <a href="index.html">Home</a>
+    </li>
+    <li class="breadcrumb-item">
+     <a href="<?php echo base_url('index.php/Profile/'); ?>">Accounts</a>
+   </li>
+   <li class="breadcrumb-item active">Add account</li>
+ </ol>
 
-   <div class="row">
-    <div class="offset-md-3 col-md-6 mb-4">
-        <?php
+ <div class="row">
+  <div class="col-lg-12 mb-4"> 
+    <?php
         $attributes = array("class" => "form-control", "id" => "addprofile", "name" => "addprofile");
-          echo form_open("Profile/get_role", $attributes);?>
-          <legend>Add Account</legend>
-          <hr>
-          <fieldset>
-
-            <div class="form-group">
-             <div class="row colbox">
-               <div class="col-md-4">
-                 <label for="adminno" class="control-label">Admin Number</label>
-               </div>
-               <div class="col-md-8">
-                <input id="adminno" name="adminno" placeholder="adminno" type="text"
-                class="form-control" required="" value="<?php echo set_value('adminno'); ?>" />
-                <span class="text-danger"><?php echo form_error('adminno'); ?></span>
-              </div>
-            </div>
-          </div>
-
-          <div class="form-group">
-           <div class="row colbox">
-             <div class="col-md-4">
-               <label for="name" class="control-label">Student Name</label>
-             </div>
-             <div class="col-md-8">
-              <input id="name" name="name" placeholder="name"
-              type="text" class="form-control" required="" value="<?php echo set_value('name'); ?>" />
-              <span class="text-danger"><?php echo form_error('name'); ?></span>
-            </div>
-          </div>
-        </div>
-
-        <div class="form-group">
-         <div class="row colbox">
-           <div class="col-md-4">
-             <label for="password" class="control-label">Password</label>
-           </div>
-           <div class="col-md-8">
-            <input id="password" name="password" placeholder="password" type="text"
-            class="form-control" required="" value="<?php echo set_value('password'); ?>" />
-            <span class="text-danger"><?php echo form_error('password'); ?></span>
-          </div>
-        </div>
-      </div>
+          echo form_open("leader/get_record", $attributes);?>
+    <legend>Add Account</legend>
+    <hr>
+    <fieldset>
 
       <div class="form-group">
        <div class="row colbox">
          <div class="col-md-4">
-          <label for="gender" class="control-label">Gender</label>
+          <label for="date" class="control-label">Date</label>
         </div>
         <div class="col-md-8">
-          <?php $gender = array(
-            'male' => 'Male',
-            'female'  => 'Female',
-          );
-          echo form_dropdown('gender', $gender, 'male', '<input class="form-control"', '/>');?>
-          <span class="text-danger"><?php echo form_error('gender'); ?></span>
+          <?php
+          $attributes = 'class = "form-control" id = "date"';
+          echo form_dropdown('datetime',$datetime,set_value('datetime'),$attributes);?>
+          <span class="text-danger"><?php echo form_error('date'); ?></span>
         </div>
       </div>
     </div>
@@ -196,12 +161,12 @@
     <div class="form-group">
      <div class="row colbox">
        <div class="col-md-4">
-        <label for="dob" class="control-label">Date of Birth</label>
+        <label for="time" class="control-label">Time</label>
       </div>
       <div class="col-md-8">
-        <input id="dob" name="dob" placeholder="dob" type="Date"
-        class="form-control" required="" value="<?php echo set_value('dob'); ?>" />
-        <span class="text-danger"><?php echo form_error('dob'); ?></span>
+        <input id="time" name="time" placeholder="time" type="text"
+        class="form-control" required="" value="<?php echo $query->time; ?>" />
+        <span class="text-danger"><?php echo form_error('time'); ?></span>
       </div>
     </div>
   </div>
@@ -212,69 +177,46 @@
 });
 </script>
 
-<div class="form-group">
- <div class="row colbox">
-   <div class="col-md-4">
-     <label for="address" class="control-label">Address</label>
-   </div>
-   <div class="col-md-8">
-    <input id="address" name="address" placeholder="address" type="text"
-    class="form-control" required="" value="<?php echo set_value('address'); ?>" />
-    <span class="text-danger"><?php echo form_error('address'); ?></span>
-  </div>
-</div>
-</div>
-
-<div class="form-group">
- <div class="row colbox">
-   <div class="col-md-4">
-     <label for="email" class="control-label">Email</label>
-   </div>
-   <div class="col-md-8">
-    <input id="email" name="email" placeholder="email" type="text"
-    class="form-control" required="" value="<?php echo set_value('email'); ?>" />
-    <span class="text-danger"><?php echo form_error('email'); ?></span>
-  </div>
-</div>
-</div>
-
-<div class="form-group">
- <div class="row colbox">
-   <div class="col-md-4">
-     <label for="mobile" class="control-label">Mobile</label>
-   </div>
-   <div class="col-md-8">
-    <input id="mobile" name="mobile" placeholder="mobile" type="text"
-    class="form-control" required="" value="<?php echo set_value('mobile'); ?>" />
-    <span class="text-danger"><?php echo form_error('mobile'); ?></span>
-  </div>
-</div>
+<div class="table-responsive">   
+  <?php echo $this->session->flashdata('msg'); ?> 
+  <!-- <h3 class="card-header bg-primary text-white">Accounts</h3> -->
+  <table class="table table-striped table-hover">
+   <thead>
+     <tr>
+       <th>#</th>
+       <th>Student</th>
+       <th>CCA</th>
+       <th>Present</th>
+       <th>Absent</th>
+       <th>Reason</th>
+       <th>Remarks</th>
+     </tr>
+   </thead>
+   <tbody>
+     <?php for ($i = 0; $i < count($query); ++$i) { ?>
+     <tr>
+       <td><?php echo ($i+1); ?></td>
+       <td><?php echo $query[$i]->userID; ?></td>
+       <td><?php echo $query[$i]->ccaID; ?></td>
+       <td><!-- <?php //echo $user[$i]->attendance; ?> -->
+       <input type="radio" name="attendance <?php echo $query[$i]->userID; ?>" <?php if($query[$i]->attendance=="Present") {echo "checked";} ?> value="Present" >
+       </td>
+       <td>
+       <input type="radio" name="attendance <?php echo $query[$i]->userID; ?>" <?php if($query[$i]->attendance=="Absent") {echo "checked";} ?> value="Absent">
+       </td>
+       <td><?php echo $query[$i]->reason; ?></td>
+       <td><?php echo $query[$i]->remarks; ?></td>
+     </tr>
+     <?php } ?>
+   </tbody>
+ </table>
 </div>
 
-<div class="form-group">
- <div class="row colbox">
-   <div class="col-md-4">
-     <label for="role" class="control-label">Role</label>
-   </div>
-   <div class="col-md-8">
-    <?php $role = array(
-      'student' => 'Student',
-      'leader'  => 'Leader',
-      'admin'   => 'Admin',
-    );
-    echo form_dropdown('role', $role, 'student', '<input class="form-control"', '/>');?>
-    <span class="text-danger"><?php echo form_error('role'); ?></span>
-  </div>
-</div>
-</div>
-
-<div class="form-group">
- <div class="offset-sm-2 col-md-8 text-center">
+<div class="offset-sm-2 col-md-8 text-center">
   <input id="btn_update" name="btn_update" type="submit" class="btn btn-primary"
   value="Update" />
   <input id="btn_cancel" name="btn_cancel" type="reset" class="btn btn-danger"
   value="Cancel" />
-</div>
 </div>
 
 <?php echo $this->session->flashdata('msg'); ?>

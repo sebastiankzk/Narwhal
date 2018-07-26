@@ -50,5 +50,40 @@
            $this->db->where('user_ccaID', $user_ccaID);
            $this->db->delete('tbl_user_cca');
       } 
+
+      function get_attendance($ccaID)  
+      {  
+        // $sql = 'select * from attendance';
+        // $query = $this->db->query($sql);
+        // $result = $query-> result();
+        $query = $this->db->get_where('attendance',array('ccaID' => $ccaID));
+        return $query->result();
+      }  
+
+      function get_ccaID($ccaID)
+      {
+        $this->db->where('ccaID', $ccaID);
+        $this->db->from('attendance');
+        $query = $this->db->get();
+        return $query->row();
+      }
+
+      function get_date()
+      {
+       $this->db->distinct();
+       $this->db->select('date');
+       $this->db->from('attendance');
+       $query = $this->db->get();
+       $result = $query->result();
+
+      //array to store userID id & role
+       $date = array('-SELECT-');
+       for ($i = 0; $i < count($result); $i++)
+       {
+         array_push($date, $result[$i]->date);
+       }
+       return $date;
+      }
+
  }  
  ?>
