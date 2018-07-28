@@ -8,7 +8,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>NYP CCA Portal - Update Accounts</title>
+  <title>NYP CCA Portal - Update Account</title>
 
   <!-- Bootstrap core CSS -->
   <link href="<?=base_url();?>assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -33,7 +33,7 @@
           <a class="nav-link" href="about.html">About</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="<?php echo base_url('index.php/Profile/'); ?>">Accounts</a>
+          <a class="nav-link" href="<?php echo base_url('index.php/Home/get_user/' .$this->session->userdata('userID') ); ?>">Accounts</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="contact.html">Contact</a>
@@ -121,14 +121,14 @@
         <a href="index.html">Home</a>
       </li>
       <li class="breadcrumb-item">
-       <a href="<?php echo base_url('index.php/Profile/'); ?>">Accounts</a>
+       <a href="<?php echo base_url('index.php/Home/'); ?>">Accounts</a>
      </li>
      <li class="breadcrumb-item active">Update</li>
    </ol>
 
    <div class="row">
     <div class="offset-md-2 col-md-8 mb-4">
-      <form class="" method="post" action="<?php echo base_url('index.php/Profile/update/'.$query->userID); ?>">
+      <form class="" method="post" action="<?php echo base_url('index.php/home/update/'.$query->userID); ?>">
        <fieldset>
         <?php echo $this->session->flashdata('msg'); ?>
 
@@ -139,7 +139,7 @@
            </div>
            <div class="row col-md-8">
             <input id="adminno" name="adminno" placeholder="Admin Number" type="text"
-            class="form-control" value="<?php echo $query->adminNumber; ?>" />
+            class="form-control" disabled="disabled" value="<?php echo $query->adminNumber; ?>" />
             <span class="text-danger"><?php echo form_error('adminno'); ?></span>
           </div>
         </div>
@@ -178,7 +178,7 @@
     </div>
     <div class="row col-md-8">
       <input id="gender" name="gender" placeholder="Gender" type="text"
-      class="form-control" value="<?php echo $query->gender; ?>" />
+      class="form-control" disabled="disabled" value="<?php echo $query->gender; ?>" />
       <span class="text-danger"><?php echo form_error('gender'); ?></span>
     </div>
   </div>
@@ -237,24 +237,11 @@
 </div>
 
 <div class="form-group">
- <div class="row colbox">
-   <div class="col-md-3">
-     <label for="role" class="control-label">Role</label>
-   </div>
-   <div class="row col-md-8">
-    <input id="role" name="role" placeholder="Role" type="text"
-    class="form-control" value="<?php echo $query->role; ?>" />
-    <span class="text-danger"><?php echo form_error('role'); ?></span>
-  </div>
-</div>
-</div>
-
-<div class="form-group">
  <div class="offset-md-3 row colbox text-center">
   <input id="btn_update" name="btn_update" type="submit" class="btn btn-primary"
   value="Update" />
   <div class="col-md-1"></div>
-  <a href="<?php echo base_url('index.php/Profile'); ?>">
+  <a href="<?php echo base_url('index.php/home'); ?>">
   <input id="btn_cancel" name="btn_cancel" type="button" class="btn btn-danger"
   value="Cancel" />
   </a>

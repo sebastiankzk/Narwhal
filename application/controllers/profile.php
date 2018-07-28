@@ -33,7 +33,9 @@ class Profile extends CI_Controller {
 
 	//when page loaded
 	public function index()
-	{
+	{ 
+        if($this->session->userdata('role') == 'Admin')
+        {
         //load the Profile_model
 		$this->load->model('Profile_model');
 
@@ -42,119 +44,144 @@ class Profile extends CI_Controller {
 		$data['user'] = $userresult;
         //load the profile view
 		$this->load->view('profile',$data);
+		}
+		else
+        {
+            redirect(base_url() . 'index.php');
+        }
 	}
 
 	function get_user($studid)
 	{
+		if($this->session->userdata('role') == 'Admin')
+        {
 		//load the Profile_model
 		$this->load->model('Profile_model');
 		$data['query'] = $this->Profile_model->get_student_record($studid);
 		$this->load->view('update_profile', $data);
+		}
+		else
+        {
+            redirect(base_url() . 'index.php');
+        }
 	}
 
 	function create_user()
 	{	
-		$this->load->library('form_validation');
+		if($this->session->userdata('role') == 'Admin')
+        {
+			$this->load->library('form_validation');
 
-		//set validation rules
-		$this->form_validation->set_rules('name', 'Name',
-			'trim|required|callback_alpha_only_space');
-		$this->form_validation->set_rules('password', 'Password', 'required|min_length[6]');
-		$this->form_validation->set_rules('adminno', 'AdminNo', 'required|alpha_numeric|exact_length[7]|is_unique[user.adminNumber]');
-		$this->form_validation->set_rules('gender', 'Gender', 'required');
-		$this->form_validation->set_rules('dob', 'Dob', 'required');
-		$this->form_validation->set_rules('address', 'Address', 'required');
-		$this->form_validation->set_rules('email', 'Email', 'required|valid_email');
-		$this->form_validation->set_rules('mobile', 'Mobile', 'required|numeric');
-		$this->form_validation->set_rules('role', 'Role', 'required');
-		
-		if ($this->form_validation->run() == FALSE)
-		{
-			//fail validation
-			$this->load->view('add_profile');
+			//set validation rules
+			$this->form_validation->set_rules('name', 'Name',
+				'trim|required|callback_alpha_only_space');
+			$this->form_validation->set_rules('password', 'Password', 'required|min_length[6]');
+			$this->form_validation->set_rules('adminno', 'AdminNo', 'required|alpha_numeric|exact_length[7]|is_unique[user.adminNumber]');
+			$this->form_validation->set_rules('gender', 'Gender', 'required');
+			$this->form_validation->set_rules('dob', 'Dob', 'required');
+			$this->form_validation->set_rules('address', 'Address', 'required');
+			$this->form_validation->set_rules('email', 'Email', 'required|valid_email');
+			$this->form_validation->set_rules('mobile', 'Mobile', 'required|numeric');
+			$this->form_validation->set_rules('role', 'Role', 'required');
+			
+			if ($this->form_validation->run() == FALSE)
+			{
+				//fail validation
+				$this->load->view('add_profile');
+			}
+			else
+			{
+				//pass validation
+				$data = array(
+					'name' => $this->input->post('name'),
+					'password' => $this->input->post('password'),
+					'adminNumber' => $this->input->post('adminno'),
+					'gender' => $this->input->post('gender'),
+					'dob' => @date('d-m-Y', @strtotime($this->input->post('dob'))),
+					// $this->input->post('dob'),
+					'address' => $this->input->post('address'),
+					'email' => $this->input->post('email'),
+					'mobile' => $this->input->post('mobile'),
+					'role' => $this->input->post('role'),
+				);
+
+				//insert the form data into database
+				$this->db->insert('user', $data);
+
+				//display success message
+				$this->session->set_flashdata('msg', '<div class="alert alert-success textcenter">New user has been added!</div>');
+				redirect('Profile','refresh');
+			}
 		}
 		else
-		{
-			//pass validation
+        {
+            redirect(base_url() . 'index.php');
+        }
+	}
+
+	function update($studid)
+	{
+		if($this->session->userdata('role') == 'Admin')
+        {
+			// $this->load->model('Profile_model');
+
+			// $data['role'] = $this->Profile_model->get_role();
+
+			$data['studid'] = $studid;
+
+			//fetch data from user table
+			$data['user'] = $this->Profile_model->get_user();
+
+			//fetch student record for the given student no.
+			$data['query'] = $this->Profile_model->get_student_record($studid);
+
+			//set validation rules
+			$this->form_validation->set_rules('name', 'Name',
+				'trim|required|callback_alpha_only_space');
+			$this->form_validation->set_rules('password', 'Password', 'required|min_length[6]');
+			$this->form_validation->set_rules('adminno', 'AdminNo', 'required|alpha_numeric|exact_length[7]');
+			$this->form_validation->set_rules('gender', 'Gender', 'required');
+			$this->form_validation->set_rules('dob', 'Dob', 'required');
+			$this->form_validation->set_rules('address', 'Address', 'required');
+			$this->form_validation->set_rules('email', 'Email', 'required|valid_email');
+			$this->form_validation->set_rules('mobile', 'Mobile', 'required|numeric');
+			$this->form_validation->set_rules('role', 'Role', 'required');
+
+			if ($this->form_validation->run() == FALSE)
+			{
+				//fail validation
+				$this->load->view('update_profile', $data);
+
+			}
+			else
+			{
+				//pass validation
 			$data = array(
 				'name' => $this->input->post('name'),
 				'password' => $this->input->post('password'),
 				'adminNumber' => $this->input->post('adminno'),
 				'gender' => $this->input->post('gender'),
-				'dob' => @date('d-m-Y', @strtotime($this->input->post('dob'))),
-				// $this->input->post('dob'),
+				'dob' => $this->input->post('dob'),
 				'address' => $this->input->post('address'),
 				'email' => $this->input->post('email'),
 				'mobile' => $this->input->post('mobile'),
 				'role' => $this->input->post('role'),
+				//'dob' => @date('d-m-Y',@strtotime($this->input->post('dateofbirth'))),
 			);
 
-			//insert the form data into database
-			$this->db->insert('user', $data);
+				//update the student record
+			$this->db->where('userID',$studid);
+			$this->db->update('user',$data);
 
-			//display success message
-			$this->session->set_flashdata('msg', '<div class="alert alert-success textcenter">New user has been added!</div>');
-			redirect('Profile','refresh');
-		}
-	}
-
-	function update($studid)
-	{
-		// $this->load->model('Profile_model');
-
-		// $data['role'] = $this->Profile_model->get_role();
-
-		$data['studid'] = $studid;
-
-		//fetch data from user table
-		$data['user'] = $this->Profile_model->get_user();
-
-		//fetch student record for the given student no.
-		$data['query'] = $this->Profile_model->get_student_record($studid);
-
-		//set validation rules
-		$this->form_validation->set_rules('name', 'Name',
-			'trim|required|callback_alpha_only_space');
-		$this->form_validation->set_rules('password', 'Password', 'required|min_length[6]');
-		$this->form_validation->set_rules('adminno', 'AdminNo', 'required|alpha_numeric|exact_length[7]');
-		$this->form_validation->set_rules('gender', 'Gender', 'required');
-		$this->form_validation->set_rules('dob', 'Dob', 'required');
-		$this->form_validation->set_rules('address', 'Address', 'required');
-		$this->form_validation->set_rules('email', 'Email', 'required|valid_email');
-		$this->form_validation->set_rules('mobile', 'Mobile', 'required|numeric');
-		$this->form_validation->set_rules('role', 'Role', 'required');
-
-		if ($this->form_validation->run() == FALSE)
-		{
-			//fail validation
-			$this->load->view('update_profile', $data);
-
+				//display success message
+			$this->session->set_flashdata('msg','<div class="alert alert-success textcenter">Details has been updated successfully.</div>');
+			redirect('profile/get_user/' . $studid);
+			}
 		}
 		else
-		{
-			//pass validation
-		$data = array(
-			'name' => $this->input->post('name'),
-			'password' => $this->input->post('password'),
-			'adminNumber' => $this->input->post('adminno'),
-			'gender' => $this->input->post('gender'),
-			'dob' => $this->input->post('dob'),
-			'address' => $this->input->post('address'),
-			'email' => $this->input->post('email'),
-			'mobile' => $this->input->post('mobile'),
-			'role' => $this->input->post('role'),
-			//'dob' => @date('d-m-Y',@strtotime($this->input->post('dateofbirth'))),
-		);
-
-			//update the student record
-		$this->db->where('userID',$studid);
-		$this->db->update('user',$data);
-
-			//display success message
-		$this->session->set_flashdata('msg','<div class="alert alert-success textcenter">Details has been updated successfully.</div>');
-		redirect('profile/get_user/' . $studid);
-
-		}
+        {
+            redirect(base_url() . 'index.php');
+        }
 	}
 
 	function delete($studid)
@@ -187,6 +214,7 @@ class Profile extends CI_Controller {
 	}
 
 	//custom validation function for dropdown input
+	//not in use
 	function combo_check($str)
 	{
 		if ($str == "-SELECT-")

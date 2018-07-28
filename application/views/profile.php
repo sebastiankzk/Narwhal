@@ -85,7 +85,7 @@
           </li>
 
           <?php if($this->session->userdata('role') == 'Admin') : ?>
-            <li class="nav-item">
+            <li class="nav-item active">
               <a class="nav-link" href="<?php echo base_url('index.php/admin'); ?>">Admin</a>
             </li>
           <?php endif; ?>
@@ -99,7 +99,7 @@
               <?php endif; ?>        
             </li>
             <!-- Display adminNumber if logged in -->
-            <li class="nav-item active">
+            <li class="nav-item">
               <?php if($this->session->userdata('username') != '') : ?>            
                 <a class="nav-link">Hello, <?php echo $this->session->userdata('username'); ?></a>
               <?php endif; ?>        

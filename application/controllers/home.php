@@ -103,5 +103,91 @@ class Home extends CI_Controller {
 
         $this->session->set_flashdata('msg', 'Message submitted!');
         redirect('home/contact_us','refresh');
-	}    
+	}
+
+        public function get_user($userid)
+    {
+        if($this->session->userdata('userID') == $userid)
+        {
+        //load the Profile_model
+        $this->load->model('home_model');
+        $data['query'] = $this->home_model->get_user_info($userid);
+        $this->load->view('view_profile', $data);
+        }
+        else{
+            redirect('error/cli/error_php.php');
+            // redirect('error/cli/index.html');
+        }
+        
+    }
+
+    public function update($studid)
+    {
+            $this->load->library('form_validation');
+            $this->load->model('Profile_model');
+
+            // $data['role'] = $this->Profile_model->get_role();
+
+            $data['studid'] = $studid;
+
+            //fetch data from user table
+            $data['user'] = $this->Profile_model->get_user();
+
+            //fetch student record for the given student no.
+            $data['query'] = $this->Profile_model->get_student_record($studid);
+
+            //set validation rules
+            $this->form_validation->set_rules('name', 'Name',
+                'trim|required|callback_alpha_only_space');
+            $this->form_validation->set_rules('password', 'Password', 'required|min_length[6]');
+            // $this->form_validation->set_rules('adminno', 'AdminNo', 'required|alpha_numeric|exact_length[7]');
+            // $this->form_validation->set_rules('gender', 'Gender', 'required');
+            $this->form_validation->set_rules('dob', 'Dob', 'required');
+            $this->form_validation->set_rules('address', 'Address', 'required');
+            $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
+            $this->form_validation->set_rules('mobile', 'Mobile', 'required|numeric');
+
+            if ($this->form_validation->run() == FALSE)
+            {
+                //fail validation
+                $this->load->view('view_profile', $data);
+
+            }
+            else
+            {
+                //pass validation
+            $data = array(
+                'name' => $this->input->post('name'),
+                'password' => $this->input->post('password'),
+                // 'adminNumber' => $this->input->post('adminno'),
+                // 'gender' => $this->input->post('gender'),
+                'dob' => $this->input->post('dob'),
+                'address' => $this->input->post('address'),
+                'email' => $this->input->post('email'),
+                'mobile' => $this->input->post('mobile'),
+                //'dob' => @date('d-m-Y',@strtotime($this->input->post('dateofbirth'))),
+            );
+
+                //update the student record
+            $this->db->where('userID',$studid);
+            $this->db->update('user',$data);
+
+                //display success message
+            $this->session->set_flashdata('msg','<div class="alert alert-success textcenter">Details has been updated successfully.</div>');
+            redirect('home/get_user/' . $studid);
+            }
+    }
+
+    function alpha_only_space($str)
+    {
+        if (!preg_match("/^([-a-z ])+$/i", $str))
+        {
+            $this->form_validation->set_message('alpha_only_space', 'The %s field must contain only alphabets or spaces.');
+            return FALSE;
+        }
+        else
+        {
+            return TRUE;
+        }
+    }    
 }
