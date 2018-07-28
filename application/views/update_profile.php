@@ -127,18 +127,16 @@
    </ol>
 
    <div class="row">
-    <div class="offset-md-3 col-md-6 mb-4">
-      <form class="form-control" method="post" action="<?php echo base_url('index.php/Profile/update/'.$query->userID); ?>">
-       <legend>Update Account</legend>
-       <hr>
+    <div class="offset-md-2 col-md-8 mb-4">
+      <form class="" method="post" action="<?php echo base_url('index.php/Profile/update/'.$query->userID); ?>">
        <fieldset>
 
         <div class="form-group">
          <div class="row colbox">
-           <div class="col-md-4">
+           <div class="col-md-3">
              <label for="adminno" class="control-label">Admin Number</label>
            </div>
-           <div class="col-md-8">
+           <div class="row col-md-8">
             <input id="adminno" name="adminno" placeholder="adminno" type="text"
             class="form-control" required="" value="<?php echo $query->adminNumber; ?>" />
             <span class="text-danger"><?php echo form_error('adminno'); ?></span>
@@ -148,10 +146,10 @@
 
       <div class="form-group">
        <div class="row colbox">
-         <div class="col-md-4">
+         <div class="col-md-3">
            <label for="name" class="control-label">Student Name</label>
          </div>
-         <div class="col-md-8">
+         <div class="row col-md-8">
           <input id="name" name="name" placeholder="name" type="text" 
           class="form-control" required="" value="<?php echo set_value('name', $query->name); ?>" />
           <span class="text-danger"><?php echo form_error('name'); ?></span>
@@ -161,10 +159,10 @@
 
     <div class="form-group">
      <div class="row colbox">
-       <div class="col-md-4">
+       <div class="col-md-3">
          <label for="password" class="control-label">Password</label>
        </div>
-       <div class="col-md-8">
+       <div class="row col-md-8">
         <input id="password" name="password" placeholder="password" type="text"
         class="form-control" required="" value="<?php echo $query->password; ?>" />
         <span class="text-danger"><?php echo form_error('password'); ?></span>
@@ -174,10 +172,10 @@
 
   <div class="form-group">
    <div class="row colbox">
-     <div class="col-md-4">
+     <div class="col-md-3">
       <label for="gender" class="control-label">Gender</label>
     </div>
-    <div class="col-md-8">
+    <div class="row col-md-8">
       <input id="gender" name="gender" placeholder="gender" type="text"
       class="form-control" required="" value="<?php echo $query->gender; ?>" />
       <span class="text-danger"><?php echo form_error('gender'); ?></span>
@@ -187,10 +185,10 @@
 
 <div class="form-group">
  <div class="row colbox">
-   <div class="col-md-4">
+   <div class="col-md-3">
     <label for="dob" class="control-label">Date of Birth</label>
   </div>
-  <div class="col-md-8">
+  <div class="row col-md-8">
     <input id="dob" name="dob" placeholder="dob" type="text"
     class="form-control" required="" value="<?php echo $query->dob; ?>" />
     <span class="text-danger"><?php echo form_error('dob'); ?></span>
@@ -200,10 +198,10 @@
 
 <div class="form-group">
  <div class="row colbox">
-   <div class="col-md-4">
+   <div class="col-md-3">
      <label for="address" class="control-label">Address</label>
    </div>
-   <div class="col-md-8">
+   <div class="row col-md-8">
     <input id="address" name="address" placeholder="address" type="text"
     class="form-control" required="" value="<?php echo $query->address; ?>" />
     <span class="text-danger"><?php echo form_error('address'); ?></span>
@@ -213,10 +211,10 @@
 
 <div class="form-group">
  <div class="row colbox">
-   <div class="col-md-4">
+   <div class="col-md-3">
      <label for="email" class="control-label">Email</label>
    </div>
-   <div class="col-md-8">
+   <div class="row col-md-8">
     <input id="email" name="email" placeholder="email" type="text"
     class="form-control" required="" value="<?php echo $query->email; ?>" />
     <span class="text-danger"><?php echo form_error('email'); ?></span>
@@ -226,10 +224,10 @@
 
 <div class="form-group">
  <div class="row colbox">
-   <div class="col-md-4">
+   <div class="col-md-3">
      <label for="mobile" class="control-label">Mobile</label>
    </div>
-   <div class="col-md-8">
+   <div class="row col-md-8">
     <input id="mobile" name="mobile" placeholder="mobile" type="text"
     class="form-control" required="" value="<?php echo $query->mobile; ?>" />
     <span class="text-danger"><?php echo form_error('mobile'); ?></span>
@@ -239,10 +237,10 @@
 
 <div class="form-group">
  <div class="row colbox">
-   <div class="col-md-4">
+   <div class="col-md-3">
      <label for="role" class="control-label">Role</label>
    </div>
-   <div class="col-md-8">
+   <div class="row col-md-8">
     <input id="role" name="role" placeholder="role" type="text"
     class="form-control" required="" value="<?php echo $query->role; ?>" />
     <span class="text-danger"><?php echo form_error('role'); ?></span>
@@ -251,9 +249,10 @@
 </div>
 
 <div class="form-group">
- <div class="offset-sm-2 col-md-8 text-center">
+ <div class="offset-md-3 row colbox text-center">
   <input id="btn_update" name="btn_update" type="submit" class="btn btn-primary"
   value="Update" />
+  <div class="col-md-1"></div>
   <input id="btn_cancel" name="btn_cancel" type="reset" class="btn btn-danger"
   value="Cancel" />
 </div>

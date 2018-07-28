@@ -170,6 +170,22 @@ class Profile extends CI_Controller {
 		redirect('Profile','refresh');
 	}
 
+	function search_user()
+	{
+        //model function
+		$this->load->model('Profile_model');
+		$name = $this->input->post('search');
+
+		// if(isset($name) and !empty($name)){
+			$data['user'] = $this->Profile_model->search_user($name);
+			$this->load->view('Profile',$data);			
+		// } 
+		// else {
+		// 	redirect('Profile','refresh');
+			
+		// }
+	}
+
 	//custom validation function for dropdown input
 	function combo_check($str)
 	{

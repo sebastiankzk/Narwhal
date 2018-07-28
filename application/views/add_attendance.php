@@ -123,36 +123,34 @@
 <div class="container">
 
   <!-- Page Heading/Breadcrumbs -->
-  <h1 class="mt-4 mb-3">Add Account
+  <h1 class="mt-4 mb-3">Update Attendance
   </h1>
   <ol class="breadcrumb">
     <li class="breadcrumb-item">
       <a href="index.html">Home</a>
     </li>
     <li class="breadcrumb-item">
-     <a href="<?php echo base_url('index.php/Profile/'); ?>">Accounts</a>
+     <a href="<?php echo base_url('index.php/Profile/'); ?>">Attendance</a>
    </li>
-   <li class="breadcrumb-item active">Add account</li>
+   <li class="breadcrumb-item active">Update</li>
  </ol>
 
  <div class="row">
   <div class="col-lg-12 mb-4"> 
     <?php
-        $attributes = array("class" => "form-control", "id" => "addprofile", "name" => "addprofile");
+        $attributes = array("class" => "", "id" => "addprofile", "name" => "addprofile");
           echo form_open("leader/get_record", $attributes);?>
-    <legend>Add Account</legend>
-    <hr>
     <fieldset>
 
       <div class="form-group">
        <div class="row colbox">
-         <div class="col-md-4">
+         <div class="offset-md-1 col-md-2">
           <label for="date" class="control-label">Date</label>
         </div>
-        <div class="col-md-8">
+        <div class="col-md-6">
           <?php
           $attributes = 'class = "form-control" id = "date"';
-          echo form_dropdown('datetime',$datetime,set_value('datetime'),$attributes);?>
+          echo form_dropdown('date',$date,set_value('date'),$attributes);?>
           <span class="text-danger"><?php echo form_error('date'); ?></span>
         </div>
       </div>
@@ -160,12 +158,13 @@
 
     <div class="form-group">
      <div class="row colbox">
-       <div class="col-md-4">
+       <div class="offset-md-1 col-md-2">
         <label for="time" class="control-label">Time</label>
       </div>
-      <div class="col-md-8">
-        <input id="time" name="time" placeholder="time" type="text"
-        class="form-control" required="" value="<?php echo $query->time; ?>" />
+      <div class="col-md-6">
+        <?php
+          $attributes = 'class = "form-control" id = "time"';
+          echo form_dropdown('time',$time,set_value('time'),$attributes);?>
         <span class="text-danger"><?php echo form_error('time'); ?></span>
       </div>
     </div>

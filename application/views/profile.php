@@ -8,7 +8,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>NYP CCA Portal - Login</title>
+  <title>NYP CCA Portal - Accounts</title>
 
   <!-- Bootstrap core CSS -->
   <link href="<?=base_url();?>assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -114,15 +114,15 @@
     <div class="container">
 
       <!-- Page Heading/Breadcrumbs -->
-      <h1 class="mt-4 mb-3">Account
-        <small>Details</small>
+      <h1 class="mt-4 mb-3">Accounts
       </h1>
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
           <a href="index.html">Home</a>
         </li>
         <li class="breadcrumb-item active">
-         <a href="<?php echo base_url('index.php/Profile/'); ?>">Accounts</a>
+         <a href="<?php echo base_url('index.php/Profile/'); ?>">Accounts
+         </a>
        </li>
      </ol>
 
@@ -132,7 +132,15 @@
           <div class="table-responsive">   
             <?php echo $this->session->flashdata('msg'); ?> 
             <!-- <h3 class="card-header bg-primary text-white">Accounts</h3> -->
-            <h3 class="card-header text-black">Accounts <a href="<?php echo base_url('index.php/Profile/create_user'); ?>" class="btn btn-primary offset-sm-9">Add user</a></h3>
+            <h3 class="card-header text-black">
+              <form class="form-inline" action="<?php echo base_url('index.php/Profile/search_user'); ?>" method="post">
+                <div class="form-group">
+                  <input type="text" class="form-control" name="search" id="search" placeholder="Name">
+                  <input id="search" name="searchbtn" type="submit" class="btn btn-secondary"
+                  value="Search" />
+                </div>
+              </form>
+            </h3>
             <table class="table table-striped table-hover">
              <thead>
                <tr>
@@ -146,7 +154,8 @@
                  <th>Mobile</th>
                  <th>Role</th>
                  <th></th>
-                 <th></th>
+                 <th><a href="<?php echo base_url('index.php/Profile/create_user'); ?>" class="btn btn-success ">Add user</a></th>
+                 
                </tr>
              </thead>
              <tbody>
@@ -161,7 +170,7 @@
                    <td><?php echo $user[$i]->address; ?></td>
                    <td><?php echo $user[$i]->mobile; ?></td>
                    <td><?php echo $user[$i]->role; ?></td>
-                   <td><a href="<?php echo base_url('index.php/Profile/get_user/'.$user[$i]->userID); ?>" class="btn btn-primary">Edit &rarr;</a></td>
+                   <td><a href="<?php echo base_url('index.php/Profile/get_user/'.$user[$i]->userID); ?>" class="btn btn-primary">Edit</a></td>
                    <td><a href="<?php echo base_url('index.php/Profile/delete/'.$user[$i]->userID); ?>" class="btn btn-danger" onclick="return confirm('Comfirm delete <?php echo($user[$i]->name); ?>?')">Delete</a></td>
                  </tr>
                <?php } ?>

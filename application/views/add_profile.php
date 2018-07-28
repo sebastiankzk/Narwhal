@@ -132,7 +132,7 @@
    <div class="row">
     <div class="offset-md-3 col-md-6 mb-4">
         <?php
-        $attributes = array("class" => "form-control", "id" => "addprofile", "name" => "addprofile");
+        $attributes = array("class" => "", "id" => "addprofile", "name" => "addprofile");
           echo form_open("Profile/get_role", $attributes);?>
           <legend>Add Account</legend>
           <hr>

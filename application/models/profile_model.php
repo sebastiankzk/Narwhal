@@ -45,6 +45,20 @@ class Profile_model extends CI_Model
      array_push($role, $result[$i]->role);
    }
    return $userid_result = array_combine($userid, $role);
- }
+   }
+
+     function search_user($name)
+    {
+      $this->db->select('*');
+      $this->db->from('user');
+      $this->db->like('name',$name);
+      $query = $this->db->get();
+
+      if ($query->num_rows() > 0){
+        return $query->result();
+      }else{
+        return $query->result();
+      }
+     }
 
 }  

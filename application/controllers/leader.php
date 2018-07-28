@@ -54,7 +54,8 @@ class Leader extends CI_Controller {
         //load the Profile_model
         $this->load->model('leader_model');
         $data['query'] = $this->leader_model->get_attendance($ccaid);
-        $data['datetime'] = $this->leader_model->get_date();
+        $data['date'] = $this->leader_model->get_date();
+        $data['time'] = $this->leader_model->get_time();
         $this->load->view('add_attendance', $data);
     }
 }

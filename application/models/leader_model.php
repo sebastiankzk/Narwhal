@@ -77,12 +77,29 @@
        $result = $query->result();
 
       //array to store userID id & role
-       $date = array('-SELECT-');
+       $date = array('Select Date');
        for ($i = 0; $i < count($result); $i++)
        {
          array_push($date, $result[$i]->date);
        }
        return $date;
+      }
+
+      function get_time()
+      {
+       $this->db->distinct();
+       $this->db->select('time');
+       $this->db->from('attendance');
+       $query = $this->db->get();
+       $result = $query->result();
+
+      //array to store userID id & role
+       $time = array('Select Time');
+       for ($i = 0; $i < count($result); $i++)
+       {
+         array_push($time, $result[$i]->time);
+       }
+       return $time;
       }
 
  }  
