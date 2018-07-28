@@ -8,7 +8,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>NYP CCA Portal - Update CCA</title>
+  <title>NYP CCA Portal - Add Accounts</title>
 
   <!-- Bootstrap core CSS -->
   <link href="<?=base_url();?>assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -126,26 +126,24 @@
       <li class="breadcrumb-item">
        <a href="<?php echo base_url('index.php/Profile/'); ?>">Accounts</a>
      </li>
-     <li class="breadcrumb-item active">Add account</li>
+     <li class="breadcrumb-item active">Create</li>
    </ol>
 
    <div class="row">
-    <div class="offset-md-3 col-md-6 mb-4">
+    <div class="offset-md-2 col-md-8 mb-4">
         <?php
         $attributes = array("class" => "", "id" => "addprofile", "name" => "addprofile");
-          echo form_open("Profile/get_role", $attributes);?>
-          <legend>Add Account</legend>
-          <hr>
+          echo form_open("Profile/create_user", $attributes);?>
           <fieldset>
 
             <div class="form-group">
              <div class="row colbox">
-               <div class="col-md-4">
+               <div class="col-md-3">
                  <label for="adminno" class="control-label">Admin Number</label>
                </div>
-               <div class="col-md-8">
-                <input id="adminno" name="adminno" placeholder="adminno" type="text"
-                class="form-control" required="" value="<?php echo set_value('adminno'); ?>" />
+               <div class="row col-md-8">
+                <input id="adminno" name="adminno" placeholder="Admin Number" type="text"
+                class="form-control" value="<?php echo set_value('adminno'); ?>" />
                 <span class="text-danger"><?php echo form_error('adminno'); ?></span>
               </div>
             </div>
@@ -153,12 +151,12 @@
 
           <div class="form-group">
            <div class="row colbox">
-             <div class="col-md-4">
+             <div class="col-md-3">
                <label for="name" class="control-label">Student Name</label>
              </div>
-             <div class="col-md-8">
-              <input id="name" name="name" placeholder="name"
-              type="text" class="form-control" required="" value="<?php echo set_value('name'); ?>" />
+             <div class="row col-md-8">
+              <input id="name" name="name" placeholder="Name"
+              type="text" class="form-control" value="<?php echo set_value('name'); ?>" />
               <span class="text-danger"><?php echo form_error('name'); ?></span>
             </div>
           </div>
@@ -166,12 +164,12 @@
 
         <div class="form-group">
          <div class="row colbox">
-           <div class="col-md-4">
+           <div class="col-md-3">
              <label for="password" class="control-label">Password</label>
            </div>
-           <div class="col-md-8">
-            <input id="password" name="password" placeholder="password" type="text"
-            class="form-control" required="" value="<?php echo set_value('password'); ?>" />
+           <div class="row col-md-8">
+            <input id="password" name="password" placeholder="Password" type="text"
+            class="form-control" value="<?php echo set_value('password'); ?>" />
             <span class="text-danger"><?php echo form_error('password'); ?></span>
           </div>
         </div>
@@ -179,15 +177,15 @@
 
       <div class="form-group">
        <div class="row colbox">
-         <div class="col-md-4">
+         <div class="col-md-3">
           <label for="gender" class="control-label">Gender</label>
         </div>
-        <div class="col-md-8">
+        <div class="row col-md-8">
           <?php $gender = array(
-            'male' => 'Male',
-            'female'  => 'Female',
+            'Male' => 'Male',
+            'Female'  => 'Female',
           );
-          echo form_dropdown('gender', $gender, 'male', '<input class="form-control"', '/>');?>
+          echo form_dropdown('gender', $gender, 'Male', '<input class="form-control"', '/>');?>
           <span class="text-danger"><?php echo form_error('gender'); ?></span>
         </div>
       </div>
@@ -195,12 +193,12 @@
 
     <div class="form-group">
      <div class="row colbox">
-       <div class="col-md-4">
+       <div class="col-md-3">
         <label for="dob" class="control-label">Date of Birth</label>
       </div>
-      <div class="col-md-8">
-        <input id="dob" name="dob" placeholder="dob" type="Date"
-        class="form-control" required="" value="<?php echo set_value('dob'); ?>" />
+      <div class="row col-md-8">
+        <input id="dob" name="dob" placeholder="Date of Birth" type="Date"
+        class="form-control" value="<?php echo set_value('dob'); ?>" />
         <span class="text-danger"><?php echo form_error('dob'); ?></span>
       </div>
     </div>
@@ -214,12 +212,12 @@
 
 <div class="form-group">
  <div class="row colbox">
-   <div class="col-md-4">
+   <div class="col-md-3">
      <label for="address" class="control-label">Address</label>
    </div>
-   <div class="col-md-8">
-    <input id="address" name="address" placeholder="address" type="text"
-    class="form-control" required="" value="<?php echo set_value('address'); ?>" />
+   <div class="row col-md-8">
+    <input id="address" name="address" placeholder="Address" type="text"
+    class="form-control" value="<?php echo set_value('address'); ?>" />
     <span class="text-danger"><?php echo form_error('address'); ?></span>
   </div>
 </div>
@@ -227,12 +225,12 @@
 
 <div class="form-group">
  <div class="row colbox">
-   <div class="col-md-4">
+   <div class="col-md-3">
      <label for="email" class="control-label">Email</label>
    </div>
-   <div class="col-md-8">
-    <input id="email" name="email" placeholder="email" type="text"
-    class="form-control" required="" value="<?php echo set_value('email'); ?>" />
+   <div class="row col-md-8">
+    <input id="email" name="email" placeholder="Email" type="text"
+    class="form-control" value="<?php echo set_value('email'); ?>" />
     <span class="text-danger"><?php echo form_error('email'); ?></span>
   </div>
 </div>
@@ -240,12 +238,12 @@
 
 <div class="form-group">
  <div class="row colbox">
-   <div class="col-md-4">
+   <div class="col-md-3">
      <label for="mobile" class="control-label">Mobile</label>
    </div>
-   <div class="col-md-8">
-    <input id="mobile" name="mobile" placeholder="mobile" type="text"
-    class="form-control" required="" value="<?php echo set_value('mobile'); ?>" />
+   <div class="row col-md-8">
+    <input id="mobile" name="mobile" placeholder="Mobile" type="text"
+    class="form-control" value="<?php echo set_value('mobile'); ?>" />
     <span class="text-danger"><?php echo form_error('mobile'); ?></span>
   </div>
 </div>
@@ -253,10 +251,10 @@
 
 <div class="form-group">
  <div class="row colbox">
-   <div class="col-md-4">
+   <div class="col-md-3">
      <label for="role" class="control-label">Role</label>
    </div>
-   <div class="col-md-8">
+   <div class="row col-md-8">
     <?php $role = array(
       'student' => 'Student',
       'leader'  => 'Leader',
@@ -269,10 +267,12 @@
 </div>
 
 <div class="form-group">
- <div class="offset-sm-2 col-md-8 text-center">
-  <input id="btn_update" name="btn_update" type="submit" class="btn btn-primary"
-  value="Update" />
-  <input id="btn_cancel" name="btn_cancel" type="reset" class="btn btn-danger"
+ <div class="offset-md-3 row colbox text-center">
+  <input id="btn_create" name="btn_create" type="submit" class="btn btn-primary"
+  value="Create" />
+  <div class="col-md-1"></div>
+  <a href="<?php echo base_url('index.php/Profile'); ?>">
+  <input id="btn_cancel" name="btn_cancel" type="button" class="btn btn-danger"
   value="Cancel" />
 </div>
 </div>

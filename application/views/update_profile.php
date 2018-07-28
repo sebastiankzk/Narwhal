@@ -8,7 +8,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>NYP CCA Portal - Update CCA</title>
+  <title>NYP CCA Portal - Update Accounts</title>
 
   <!-- Bootstrap core CSS -->
   <link href="<?=base_url();?>assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -130,6 +130,7 @@
     <div class="offset-md-2 col-md-8 mb-4">
       <form class="" method="post" action="<?php echo base_url('index.php/Profile/update/'.$query->userID); ?>">
        <fieldset>
+        <?php echo $this->session->flashdata('msg'); ?>
 
         <div class="form-group">
          <div class="row colbox">
@@ -137,8 +138,8 @@
              <label for="adminno" class="control-label">Admin Number</label>
            </div>
            <div class="row col-md-8">
-            <input id="adminno" name="adminno" placeholder="adminno" type="text"
-            class="form-control" required="" value="<?php echo $query->adminNumber; ?>" />
+            <input id="adminno" name="adminno" placeholder="Admin Number" type="text"
+            class="form-control" value="<?php echo $query->adminNumber; ?>" />
             <span class="text-danger"><?php echo form_error('adminno'); ?></span>
           </div>
         </div>
@@ -150,8 +151,8 @@
            <label for="name" class="control-label">Student Name</label>
          </div>
          <div class="row col-md-8">
-          <input id="name" name="name" placeholder="name" type="text" 
-          class="form-control" required="" value="<?php echo set_value('name', $query->name); ?>" />
+          <input id="name" name="name" placeholder="Name" type="text" 
+          class="form-control" value="<?php echo set_value('name', $query->name); ?>" />
           <span class="text-danger"><?php echo form_error('name'); ?></span>
         </div>
       </div>
@@ -163,8 +164,8 @@
          <label for="password" class="control-label">Password</label>
        </div>
        <div class="row col-md-8">
-        <input id="password" name="password" placeholder="password" type="text"
-        class="form-control" required="" value="<?php echo $query->password; ?>" />
+        <input id="password" name="password" placeholder="Password" type="text"
+        class="form-control" value="<?php echo $query->password; ?>" />
         <span class="text-danger"><?php echo form_error('password'); ?></span>
       </div>
     </div>
@@ -176,8 +177,8 @@
       <label for="gender" class="control-label">Gender</label>
     </div>
     <div class="row col-md-8">
-      <input id="gender" name="gender" placeholder="gender" type="text"
-      class="form-control" required="" value="<?php echo $query->gender; ?>" />
+      <input id="gender" name="gender" placeholder="Gender" type="text"
+      class="form-control" value="<?php echo $query->gender; ?>" />
       <span class="text-danger"><?php echo form_error('gender'); ?></span>
     </div>
   </div>
@@ -189,8 +190,8 @@
     <label for="dob" class="control-label">Date of Birth</label>
   </div>
   <div class="row col-md-8">
-    <input id="dob" name="dob" placeholder="dob" type="text"
-    class="form-control" required="" value="<?php echo $query->dob; ?>" />
+    <input id="dob" name="dob" placeholder="Date of Birth" type="text"
+    class="form-control" value="<?php echo $query->dob; ?>" />
     <span class="text-danger"><?php echo form_error('dob'); ?></span>
   </div>
 </div>
@@ -202,8 +203,8 @@
      <label for="address" class="control-label">Address</label>
    </div>
    <div class="row col-md-8">
-    <input id="address" name="address" placeholder="address" type="text"
-    class="form-control" required="" value="<?php echo $query->address; ?>" />
+    <input id="address" name="address" placeholder="Address" type="text"
+    class="form-control" value="<?php echo $query->address; ?>" />
     <span class="text-danger"><?php echo form_error('address'); ?></span>
   </div>
 </div>
@@ -215,8 +216,8 @@
      <label for="email" class="control-label">Email</label>
    </div>
    <div class="row col-md-8">
-    <input id="email" name="email" placeholder="email" type="text"
-    class="form-control" required="" value="<?php echo $query->email; ?>" />
+    <input id="email" name="email" placeholder="Email" type="text"
+    class="form-control" value="<?php echo $query->email; ?>" />
     <span class="text-danger"><?php echo form_error('email'); ?></span>
   </div>
 </div>
@@ -228,8 +229,8 @@
      <label for="mobile" class="control-label">Mobile</label>
    </div>
    <div class="row col-md-8">
-    <input id="mobile" name="mobile" placeholder="mobile" type="text"
-    class="form-control" required="" value="<?php echo $query->mobile; ?>" />
+    <input id="mobile" name="mobile" placeholder="Mobile" type="text"
+    class="form-control" value="<?php echo $query->mobile; ?>" />
     <span class="text-danger"><?php echo form_error('mobile'); ?></span>
   </div>
 </div>
@@ -241,8 +242,8 @@
      <label for="role" class="control-label">Role</label>
    </div>
    <div class="row col-md-8">
-    <input id="role" name="role" placeholder="role" type="text"
-    class="form-control" required="" value="<?php echo $query->role; ?>" />
+    <input id="role" name="role" placeholder="Role" type="text"
+    class="form-control" value="<?php echo $query->role; ?>" />
     <span class="text-danger"><?php echo form_error('role'); ?></span>
   </div>
 </div>
@@ -253,11 +254,12 @@
   <input id="btn_update" name="btn_update" type="submit" class="btn btn-primary"
   value="Update" />
   <div class="col-md-1"></div>
-  <input id="btn_cancel" name="btn_cancel" type="reset" class="btn btn-danger"
+  <a href="<?php echo base_url('index.php/Profile'); ?>">
+  <input id="btn_cancel" name="btn_cancel" type="button" class="btn btn-danger"
   value="Cancel" />
+  </a>
 </div>
 </div>
-<?php echo $this->session->flashdata('msg'); ?>
 </fieldset>
 <?php echo form_close(); ?>
 

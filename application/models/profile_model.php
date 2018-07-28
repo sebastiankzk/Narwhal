@@ -30,6 +30,7 @@ class Profile_model extends CI_Model
   //not in use  
   function get_role()
   {
+   // $this->db->distinct();
    $this->db->select('userID');
    $this->db->select('role');
    $this->db->from('user');
@@ -37,8 +38,8 @@ class Profile_model extends CI_Model
    $result = $query->result();
 
   //array to store userID id & role
-   $userid = array('-SELECT-');
-   $role = array('-SELECT-');
+   // $userid = array('-SELECT-');
+   // $role = array('-SELECT-');
    for ($i = 0; $i < count($result); $i++)
    {
      array_push($userid, $result[$i]->userID);

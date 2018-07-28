@@ -53,22 +53,19 @@ class Profile extends CI_Controller {
 	}
 
 	function create_user()
-	{
-		//fetch data from user table
-		// $data['role'] = $this->Profile_model->get_role();
-
+	{	
 		$this->load->library('form_validation');
 
 		//set validation rules
 		$this->form_validation->set_rules('name', 'Name',
 			'trim|required|callback_alpha_only_space');
-		$this->form_validation->set_rules('password', 'Password', 'required');
-		$this->form_validation->set_rules('adminno', 'AdminNo', 'required');
+		$this->form_validation->set_rules('password', 'Password', 'required|min_length[6]');
+		$this->form_validation->set_rules('adminno', 'AdminNo', 'required|alpha_numeric|exact_length[7]|is_unique[user.adminNumber]');
 		$this->form_validation->set_rules('gender', 'Gender', 'required');
 		$this->form_validation->set_rules('dob', 'Dob', 'required');
 		$this->form_validation->set_rules('address', 'Address', 'required');
-		$this->form_validation->set_rules('email', 'Email', 'required');
-		$this->form_validation->set_rules('mobile', 'Mobile', 'required');
+		$this->form_validation->set_rules('email', 'Email', 'required|valid_email');
+		$this->form_validation->set_rules('mobile', 'Mobile', 'required|numeric');
 		$this->form_validation->set_rules('role', 'Role', 'required');
 		
 		if ($this->form_validation->run() == FALSE)
@@ -105,6 +102,8 @@ class Profile extends CI_Controller {
 	{
 		// $this->load->model('Profile_model');
 
+		// $data['role'] = $this->Profile_model->get_role();
+
 		$data['studid'] = $studid;
 
 		//fetch data from user table
@@ -116,23 +115,23 @@ class Profile extends CI_Controller {
 		//set validation rules
 		$this->form_validation->set_rules('name', 'Name',
 			'trim|required|callback_alpha_only_space');
-		$this->form_validation->set_rules('password', 'Password', 'required');
-		$this->form_validation->set_rules('adminno', 'AdminNo', 'required');
+		$this->form_validation->set_rules('password', 'Password', 'required|min_length[6]');
+		$this->form_validation->set_rules('adminno', 'AdminNo', 'required|alpha_numeric|exact_length[7]');
 		$this->form_validation->set_rules('gender', 'Gender', 'required');
 		$this->form_validation->set_rules('dob', 'Dob', 'required');
 		$this->form_validation->set_rules('address', 'Address', 'required');
-		$this->form_validation->set_rules('email', 'Email', 'required');
-		$this->form_validation->set_rules('mobile', 'Mobile', 'required');
-		$this->form_validation->set_rules('role', 'Role', 'callback_combo_check');
+		$this->form_validation->set_rules('email', 'Email', 'required|valid_email');
+		$this->form_validation->set_rules('mobile', 'Mobile', 'required|numeric');
+		$this->form_validation->set_rules('role', 'Role', 'required');
 
-		// if ($this->form_validation->run() == FALSE)
-		// {
-		// 	//fail validation
-		// 	$this->load->view('update_profile', $data);
+		if ($this->form_validation->run() == FALSE)
+		{
+			//fail validation
+			$this->load->view('update_profile', $data);
 
-		// }
-		// else
-		// {
+		}
+		else
+		{
 			//pass validation
 		$data = array(
 			'name' => $this->input->post('name'),
@@ -144,7 +143,7 @@ class Profile extends CI_Controller {
 			'email' => $this->input->post('email'),
 			'mobile' => $this->input->post('mobile'),
 			'role' => $this->input->post('role'),
-				//'dob' => @date('d-m-Y',@strtotime($this->input->post('dateofbirth'))),
+			//'dob' => @date('d-m-Y',@strtotime($this->input->post('dateofbirth'))),
 		);
 
 			//update the student record
@@ -155,6 +154,7 @@ class Profile extends CI_Controller {
 		$this->session->set_flashdata('msg','<div class="alert alert-success textcenter">Details has been updated successfully.</div>');
 		redirect('profile/get_user/' . $studid);
 
+		}
 	}
 
 	function delete($studid)
@@ -205,7 +205,7 @@ class Profile extends CI_Controller {
 	{
 		if (!preg_match("/^([-a-z ])+$/i", $str))
 		{
-			$this->form_validation->set_message('alpha_only_space', 'The %s field must contain only alphabets or spaces');
+			$this->form_validation->set_message('alpha_only_space', 'The %s field must contain only alphabets or spaces.');
 			return FALSE;
 		}
 		else
