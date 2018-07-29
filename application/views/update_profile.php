@@ -36,7 +36,7 @@
           <a class="nav-link" href="<?php echo base_url('index.php/Profile/'); ?>">Accounts</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="contact.html">Contact</a>
+              <a class="nav-link" href="<?php echo base_url('index.php/home/contact_us'); ?>">Contact</a>
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownBlog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
