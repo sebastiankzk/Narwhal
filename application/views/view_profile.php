@@ -29,7 +29,7 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav ml-auto">
-        <li class="nav-item">
+        <li class="nav-item active">
           <?php if($this->session->userdata('role') == 'Admin') : ?>            
           <a class="nav-link" href="<?php echo base_url('index.php/Profile/'); ?>">Accounts</a>
           <?php elseif($this->session->userdata('role') != '') : ?>             
@@ -38,11 +38,15 @@
           <?php endif; ?>
         </li>
         <li class="nav-item">
-<<<<<<< HEAD
+              <a class="nav-link" href="<?php echo base_url('index.php/event'); ?>">Event</a>
+            </li>
+             <?php if($this->session->userdata('role') == 'Leader') : ?>
+            <li class="nav-item">
+              <a class="nav-link" href="<?php echo base_url('index.php/leader'); ?>">Member Info</a>
+            </li>
+        <?php endif; ?>
+        <li class="nav-item">
           <a class="nav-link" href="<?php echo base_url('index.php/home/contact_us'); ?>">Contact</a>
-=======
-              <a class="nav-link" href="<?php echo base_url('index.php/home/contact_us'); ?>">Contact</a>
->>>>>>> 9ae30838edf8a9a6477fbeea75003b1a42d99730
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownBlog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -54,7 +58,7 @@
         </li>
 
         <?php if($this->session->userdata('role') == 'Admin') : ?>
-          <li class="nav-item active">
+          <li class="nav-item">
             <a class="nav-link" href="<?php echo base_url('index.php/admin'); ?>">Admin</a>
           </li>
         <?php endif; ?>
@@ -207,7 +211,7 @@
   <input id="btn_update" name="btn_update" type="submit" class="btn btn-primary"
   value="Update" />
   <div class="col-md-1"></div>
-  <a href="<?php echo base_url('index.php/home'); ?>">
+  <a href="<?php echo base_url('index.php'); ?>">
   <input id="btn_cancel" name="btn_cancel" type="button" class="btn btn-danger"
   value="Cancel" />
   </a>

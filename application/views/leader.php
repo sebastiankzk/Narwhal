@@ -41,7 +41,7 @@
               <a class="nav-link" href="<?php echo base_url('index.php/event'); ?>">Event</a>
             </li>
              <?php if($this->session->userdata('role') == 'Leader') : ?>
-            <li class="nav-item">
+            <li class="nav-item active">
               <a class="nav-link" href="<?php echo base_url('index.php/leader'); ?>">Member Info</a>
             </li>
         <?php endif; ?>

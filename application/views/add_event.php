@@ -38,7 +38,7 @@
                 <?php endif; ?>
               </li>
             <li class="nav-item">
-              <a class="nav-link" href="<?php echo base_url('index.php/event'); ?>">Event</a>
+              <a class="nav-link active" href="<?php echo base_url('index.php/event'); ?>">Event</a>
             </li>
              <?php if($this->session->userdata('role') == 'Leader') : ?>
             <li class="nav-item">
@@ -66,7 +66,7 @@
         <?php endif; ?>        
       </li>
       <!-- Display adminNumber if logged in -->
-      <li class="nav-item active">
+      <li class="nav-item">
         <?php if($this->session->userdata('username') != '') : ?>            
               <a class="nav-link">Hello, <?php echo $this->session->userdata('username'); ?></a>
         <?php endif; ?>        

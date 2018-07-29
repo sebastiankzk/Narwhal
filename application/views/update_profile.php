@@ -29,7 +29,7 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav ml-auto">
-        <li class="nav-item">
+        <li class="nav-item active">
           <?php if($this->session->userdata('role') == 'Admin') : ?>            
             <a class="nav-link" href="<?php echo base_url('index.php/Profile/'); ?>">Accounts</a>
             <?php elseif($this->session->userdata('role') != '') : ?>          
@@ -37,6 +37,9 @@
             <?php else : ?>   
             <?php endif; ?>
           </li>
+        <li class="nav-item">
+              <a class="nav-link" href="<?php echo base_url('index.php/event'); ?>">Event</a>
+            </li>
         <li class="nav-item">
               <a class="nav-link" href="<?php echo base_url('index.php/home/contact_us'); ?>">Contact</a>
         </li>
@@ -50,7 +53,7 @@
         </li>
 
         <?php if($this->session->userdata('role') == 'Admin') : ?>
-          <li class="nav-item active">
+          <li class="nav-item">
             <a class="nav-link" href="<?php echo base_url('index.php/admin'); ?>">Admin</a>
           </li>
         <?php endif; ?>

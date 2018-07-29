@@ -37,7 +37,7 @@
                 <?php else : ?>   
                 <?php endif; ?>
               </li>
-              <a class="nav-link" href="<?php echo base_url('index.php/event'); ?>">Event</a>
+              <a class="nav-link active" href="<?php echo base_url('index.php/event'); ?>">Event</a>
             </li>
              <?php if($this->session->userdata('role') == 'Leader') : ?>
             <li class="nav-item">
