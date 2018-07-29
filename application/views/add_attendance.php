@@ -24,8 +24,14 @@
   <style type="text/css">
   table, th, td {
    text-align: center;
- }
-</style>
+ }</style>
+
+ <!-- <style type="text/css">
+  .form-control {
+   width: 50%;
+   align-self: center;
+ }</style> -->
+
 
 </head>
 <body>
@@ -104,7 +110,7 @@
   <div class="col-lg-12 mb-4"> 
     <?php
         $attributes = array("class" => "", "id" => "addprofile", "name" => "addprofile");
-          echo form_open("leader/get_record", $attributes);?>
+          echo form_open("leader/search_record", $attributes);?>
     <fieldset>
 
       <div class="form-group">
@@ -140,6 +146,13 @@
  $(function() {$("#dob").datepicker();
 });
 </script>
+<?php echo $this->session->flashdata('msg'); ?>
+<input id="search" name="searchbtn" type="submit" class="btn btn-secondary"
+                  value="Search" />
+</fieldset>
+<?php echo form_close(); ?>
+
+
 
 <div class="table-responsive">   
   <?php echo $this->session->flashdata('msg'); ?> 
@@ -160,16 +173,22 @@
      <?php for ($i = 0; $i < count($query); ++$i) { ?>
      <tr>
        <td><?php echo ($i+1); ?></td>
-       <td><?php echo $query[$i]->userID; ?></td>
-       <td><?php echo $query[$i]->ccaID; ?></td>
+       <td><?php echo $query[$i]->User_name; ?></td>
+       <td><?php echo $query[$i]->cca_name; ?></td>
        <td><!-- <?php //echo $user[$i]->attendance; ?> -->
        <input type="radio" name="attendance <?php echo $query[$i]->userID; ?>" <?php if($query[$i]->attendance=="Present") {echo "checked";} ?> value="Present" >
        </td>
        <td>
        <input type="radio" name="attendance <?php echo $query[$i]->userID; ?>" <?php if($query[$i]->attendance=="Absent") {echo "checked";} ?> value="Absent">
        </td>
-       <td><?php echo $query[$i]->reason; ?></td>
-       <td><?php echo $query[$i]->remarks; ?></td>
+       <td>
+            <input size="5" id="name" name="name" placeholder="Name" type="text" 
+            class="form-control" value="<?php echo $query[$i]->reason; ?>" />
+          </td>
+       <td>    
+            <input size="5" id="name" name="name" placeholder="Name" type="text" 
+            class="form-control" value="<?php echo $query[$i]->remarks; ?>" />
+          </td>
      </tr>
      <?php } ?>
    </tbody>
@@ -183,12 +202,7 @@
   value="Cancel" />
 </div>
 
-<?php echo $this->session->flashdata('msg'); ?>
-</fieldset>
-<?php echo form_close(); ?>
 
-
-</form>
 </div>
 </div>
 </div>

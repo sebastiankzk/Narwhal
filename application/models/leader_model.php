@@ -59,7 +59,7 @@ function get_attendance($ccaID)
         // $sql = 'select * from attendance';
         // $query = $this->db->query($sql);
         // $result = $query-> result();
-  $query = $this->db->get_where('attendance',array('ccaID' => $ccaID));
+  $query = $this->db->get_where('attendance_view',array('ccaID' => $ccaID));
   return $query->result();
 }  
 
@@ -104,6 +104,21 @@ function get_time()
  }
  return $time;
 }
+
+function search_dt($date,$time)
+    {
+      $this->db->select('*');
+      $this->db->from('attendance_view');
+      $this->db->like('date',$date);
+      $this->db->like('date',$time);
+      $query = $this->db->get();
+
+      if ($query->num_rows() > 0){
+        return $query->result();
+      }else{
+        return $query->result();
+      }
+     }
 
 }  
 ?>
