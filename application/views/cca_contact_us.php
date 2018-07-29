@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>NYP CCA Portal - Student Interest</title>
+    <title>NYP CCA Portal - Student Contact Us</title>
 
     <!-- Bootstrap core CSS -->
     <link href="<?=base_url();?>assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -80,7 +80,7 @@
     <div class="container">
 
       <!-- Page Heading/Breadcrumbs -->
-      <h1 class="mt-4 mb-3">Interest
+      <h1 class="mt-4 mb-3">CCA Contact Us
       </h1>
 
 
@@ -96,8 +96,8 @@
         <div class="col-auto mr-auto">
             <?php echo $this->session->flashdata('msg');?>
         </div>
-        <div class="col-auto">
-            <a href="<?php echo base_url('index.php/leader'); ?>" class="btn btn-primary">Back</a>
+        <div class="col-auto">          
+          <a href="<?php echo base_url('index.php/leader'); ?>" class="btn btn-primary">Back</a>
         </div>
       </div>
       </br>
@@ -110,10 +110,10 @@
               <tr>
                 <th>#</th>
                 <th>Name</th>
-                <th>Admin Number</th>
-                <th>Gender</th>
                 <th>Email</th>
-                <th>Mobile</th>
+                <th>Message</th>
+                <th></th>
+                <th></th>
                 <th></th>
               </tr>
             </thead>
@@ -121,11 +121,11 @@
               <?php $index = 1; foreach ($query as $row):?>
               <tr>
                 <td><?=$index++?></td>
-                <td><?=$row->user_name?></td>
-                <td><?=$row->adminNumber?></td>
-                <td><?=$row->gender?></td>
+                <td><?=$row->name?></td>
                 <td><?=$row->email?></td>
-                <td><?=$row->mobile?></td>
+                <td><?=$row->message?></td>
+                <td></td>
+                <td></td>
                 <td></td>
 <!--                 <form method="post" action="event/view_event">
                 <input type="hidden" id="eventID" name="eventID" value='<?=$row->eventID?>' />

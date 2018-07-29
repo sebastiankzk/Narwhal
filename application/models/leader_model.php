@@ -70,7 +70,15 @@ function get_attendance($ccaID)
      $this->db->from('cca_interest_view');
      $query = $this->db->get();
      return $query->result();
-  }   
+  } 
+
+  function get_contact_us()  
+  {      
+     $this->db->select('*');
+     $this->db->from('contact_us');
+     $query = $this->db->get();
+     return $query->result();
+  }    
 
 function get_ccaID($ccaID)
 {

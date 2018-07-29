@@ -68,4 +68,12 @@ class Leader extends CI_Controller {
         $data['query'] = $this->leader_model->get_interest($ccaID);
         $this->load->view('interest', $data);
     }
+
+    function get_contact_us()
+    {        
+        //load the Profile_model
+        $this->load->model('leader_model');
+        $data['query'] = $this->leader_model->get_contact_us();
+        $this->load->view('cca_contact_us', $data);
+    }
 }
