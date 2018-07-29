@@ -33,6 +33,9 @@
           <a class="nav-link" href="about.html">About</a>
         </li>
         <li class="nav-item">
+          <a class="nav-link" href="<?php echo base_url('index.php/Home/get_user/' .$this->session->userdata('userID') ); ?>">Account</a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link" href="contact.html">Contact</a>
         </li>
         <li class="nav-item dropdown">
