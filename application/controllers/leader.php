@@ -59,4 +59,13 @@ class Leader extends CI_Controller {
         $data['time'] = $this->leader_model->get_time();
         $this->load->view('add_attendance', $data);
     }
+
+    function get_interest($ccaID)
+    {
+        $userID = $this->session->userdata('userID');
+        //load the Profile_model
+        $this->load->model('leader_model');
+        $data['query'] = $this->leader_model->get_interest($ccaID);
+        $this->load->view('interest', $data);
+    }
 }

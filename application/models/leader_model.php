@@ -63,6 +63,15 @@ function get_attendance($ccaID)
   return $query->result();
 }  
 
+  function get_interest($ccaID)  
+  {      
+     $this->db->select('*');
+     $this->db->where('ccaID', $ccaID);
+     $this->db->from('cca_interest_view');
+     $query = $this->db->get();
+     return $query->result();
+  }   
+
 function get_ccaID($ccaID)
 {
   $this->db->where('ccaID', $ccaID);
@@ -105,5 +114,6 @@ function get_time()
  return $time;
 }
 
-}  
+}
+
 ?>
