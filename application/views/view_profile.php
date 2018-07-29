@@ -38,7 +38,11 @@
           <?php endif; ?>
         </li>
         <li class="nav-item">
+<<<<<<< HEAD
           <a class="nav-link" href="<?php echo base_url('index.php/home/contact_us'); ?>">Contact</a>
+=======
+              <a class="nav-link" href="<?php echo base_url('index.php/home/contact_us'); ?>">Contact</a>
+>>>>>>> 9ae30838edf8a9a6477fbeea75003b1a42d99730
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownBlog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
