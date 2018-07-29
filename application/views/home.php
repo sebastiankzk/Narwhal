@@ -41,7 +41,7 @@
             </li>
         <?php endif; ?>
             <li class="nav-item">   
-              <a class="nav-link" href="contact.html">Contact</a>
+              <a class="nav-link" href="<?php echo base_url('index.php/home/contact_us'); ?>">Contact</a>
             </li>
       <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownBlog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -96,15 +96,15 @@
           <!-- Slide Two - Set the background image for this slide in the line below -->
           <div class="carousel-item" style="background-image: url('../narwhal/assets/images/3.jpg')">
             <div class="carousel-caption d-none d-md-block">
-              <h3>Second Slide</h3>
-              <p>This is a description for the second slide.</p>
+              <h3>Teamwork</h3>
+              <p>Work hard, Play hard</p>
             </div>
           </div>
           <!-- Slide Three - Set the background image for this slide in the line below -->
           <div class="carousel-item" style="background-image: url('../narwhal/assets/images/1.jpeg')">
             <div class="carousel-caption d-none d-md-block">
-              <h3>Third Slide</h3>
-              <p>This is a description for the third slide.</p>
+              <h3>Join Us</h3>
+              <p>Join our CCA today!</p>
             </div>
           </div>
         </div>
@@ -130,7 +130,7 @@
       <!-- Portfolio Section -->
       <div class="row">
         <?php foreach($query as $row): ?>
-          <div class="col-lg-6 col-sm-6 portfolio-item">
+          <div class="col-lg-4 col-sm-4 portfolio-item">
             <div class="card h-100">
               <img class="card-img-top" src="../narwhal/assets/images/<?php echo $row->image; ?>" alt="">
               <div class="card-body">

@@ -20,6 +20,7 @@
 
 <body>
 
+<<<<<<< HEAD
  <!-- Navigation -->
  <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
   <div class="container">
@@ -88,27 +89,62 @@
           <li class="nav-item">
             <a class="nav-link" href="<?php echo base_url('index.php/admin'); ?>">Admin</a>
           </li>
+=======
+  <!-- Navigation -->
+    <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="<?=base_url();?>index.php">NYP CCA Portal</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="index.php#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="<?php echo base_url('index.php/event'); ?>">Event</a>
+            </li>
+             <?php if($this->session->userdata('role') == 'Leader') : ?>
+            <li class="nav-item">
+              <a class="nav-link" href="<?php echo base_url('index.php/leader'); ?>">Member Info</a>
+            </li>
+>>>>>>> 17be03c058d45df82aeec90ce8b8bd7dc34aae72
         <?php endif; ?>
+            <li class="nav-item">   
+              <a class="nav-link" href="<?php echo base_url('index.php/home/contact_us'); ?>">Contact</a>
+            </li>
+      <li class="nav-item dropdown active">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownBlog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                CCA
+              </a>
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownBlog">
+                <a class="dropdown-item" href="<?php echo base_url('index.php/home/cca_list'); ?>">View all CCA</a>
+              </div>
+      </li>
 
-        <!-- Login Logout  -->
-        <li class="nav-item">
-          <?php if($this->session->userdata('username') != '') : ?>            
-            <a class="nav-link" href="<?php echo base_url('index.php/login/logout'); ?>">Logout</a>
-            <?php else : ?>            
+      <?php if($this->session->userdata('role') == 'Admin') : ?>
+      <li class="nav-item">
+              <a class="nav-link" href="<?php echo base_url('index.php/admin'); ?>">Admin</a>
+      </li>
+      <?php endif; ?>
+
+      <!-- Login Logout  -->
+      <li class="nav-item">
+        <?php if($this->session->userdata('username') != '') : ?>            
+              <a class="nav-link" href="<?php echo base_url('index.php/login/logout'); ?>">Logout</a>
+        <?php else : ?>            
               <a class="nav-link" href="<?php echo base_url('index.php/login'); ?>">Login</a>
-            <?php endif; ?>        
-          </li>
-          <!-- Display adminNumber if logged in -->
-          <li class="nav-item active">
-            <?php if($this->session->userdata('username') != '') : ?>            
+        <?php endif; ?>        
+      </li>
+      <!-- Display adminNumber if logged in -->
+      <li class="nav-item">
+        <?php if($this->session->userdata('username') != '') : ?>            
               <a class="nav-link">Hello, <?php echo $this->session->userdata('username'); ?></a>
-            <?php endif; ?>        
-          </li>
+        <?php endif; ?>        
+      </li>
 
-        </ul>
+          </ul>
+        </div>
       </div>
-    </div>
-  </nav>
+    </nav>
 
   <!-- Page Content -->
   <div class="container">
@@ -131,7 +167,7 @@
       <p><?php echo $query->information; ?></p>
       <p>Venue: <?php echo $query->venue; ?></p>
       <p>Training Date: <?php echo $query->trgDate; ?></p>
-      <p>Training Time: <?php echo $query->trgTime; ?></p>
+      <p>Training Time: <?php echo date(" h:i A", strtotime($query->startTime)); ?></p>
     </br>
     <?php if($this->session->userdata('role') != '') : ?>
       <a href="<?php echo base_url('index.php/home/cca_register_interest/'.$query->ccaID); ?>" class="btn btn-primary">Register your interest here! &rarr;</a>
