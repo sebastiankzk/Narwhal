@@ -93,6 +93,7 @@
             <?php echo $this->session->flashdata('msg');?>
         </div>
         <div class="col-auto">
+          <a href="<?php echo base_url('index.php/admin/get_cca/'.$CCAID); ?>" class="btn btn-primary">Edit CCA Details</a>
         </div>
       </div>
       </br>
