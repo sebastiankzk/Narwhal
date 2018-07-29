@@ -116,7 +116,7 @@
                 <td><?=$row->username?></td>
                 <td><?=$row->ccaname?></td>
                 <td><?=$row->quit?></td>
-                <td><a href="<?php echo base_url('index.php/leader/delete_member/'.$row->user_ccaID); ?>" class="btn btn-primary" onClick="return ConfirmDelete()">Delete</a></td>
+                <td><a href="<?php echo base_url('index.php/leader/delete_member/'.$row->user_ccaID); ?>" class="btn btn-primary" onClick="return confirm('Are you sure you want to delete <?php echo($row->username) ?> whose status is <?php echo($row->quit) ?>?')">Delete</a></td>
                 </form>
               </tr>
                 <?php endforeach; ?>
