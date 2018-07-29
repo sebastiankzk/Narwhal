@@ -62,7 +62,7 @@ class Home extends CI_Controller {
         
 		$data = array(        
         'ccaID' => $ccaID,
-        'userID' => $this->home_model->get_user_id($this->session->userdata('username')));
+        'userID' => $this->session->userdata('userID'));
 
         $this->home_model->register_cca_interest($data);
 
