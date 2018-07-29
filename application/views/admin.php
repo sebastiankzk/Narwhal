@@ -93,7 +93,30 @@
 
 
       <div class="row">
-        <div class="col-auto mr-auto"></div>
+        <div class="col-auto mr-auto">
+        <div class="modal fade" id="modalLoginForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <form method="post" action="<?php echo base_url('index.php/admin/updateCCACount/'); ?>">
+                <div class="modal-body mx-3">
+                  <div class="md-form mb-5">
+                    <i class="fa fa-envelope prefix grey-text"></i>
+                    <input type="number" name="count" id="defaultForm-email" value="<?php echo $limit[0]->CCALimit ?>"class="form-control validate">
+                    <label data-error="wrong" data-success="right" for="defaultForm-email">Update Maximum CCA Count per student</label>
+                  </div>
+                </div>
+                <div class="modal-footer d-flex justify-content-center">
+                  <input type="submit" name="submit" value="Update" class="btn btn-primary" />
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div>Current limit: <?php echo $limit[0]->CCALimit ?></div>
+        <div class="text-center">
+          <a href="" class="btn btn-primary" data-toggle="modal" data-target="#modalLoginForm">Change Count</a>
+        </div>
+        </div>
         <div class="col-auto">
          <a href="<?php echo base_url('index.php/admin/add_cca'); ?>" class="btn btn-primary">Add new CCA &rarr;</a>
        </div>

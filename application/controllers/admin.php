@@ -35,6 +35,10 @@ class Admin extends CI_Controller {
             $data['query'] = $this->admin_model->get_cca_list();
             $data['count'] = $this->admin_model->count_all_cca();
 
+            $this->load->model('CCALimit_model');
+
+            $data['limit'] = $this->CCALimit_model->get_limit();
+
             $this->load->view('Admin', $data);
         }
         else
@@ -58,9 +62,6 @@ class Admin extends CI_Controller {
         //store textbox from form into an array
         $config['upload_path']          = './assets/images/';
         $config['allowed_types']        = 'jpg|png';
-        $config['max_size']             = 2000;
-        $config['max_width']            = 1024;
-        $config['max_height']           = 768;
 
         $this->load->library('upload', $config);
 
@@ -100,7 +101,12 @@ class Admin extends CI_Controller {
         $this->admin_model->update_specific_cca($ccaID, $data);
 
         $this->session->set_flashdata('msg', 'CCA Updated!');
-        redirect('admin','refresh');
+
+        if($this->session->userdata('role') == 'Leader'){
+            redirect('leader','refresh');
+        }else{
+            redirect('admin','refresh');
+        }
     }
 
     function delete_cca($ccaID)
@@ -122,27 +128,33 @@ class Admin extends CI_Controller {
     {
         $config['upload_path']          = './assets/images/';
         $config['allowed_types']        = 'jpg|png';
-        $config['max_size']             = 2000;
-        $config['max_width']            = 1024;
-        $config['max_height']           = 768;
 
         $this->load->library('upload', $config);
 
         if ( ! $this->upload->do_upload('image')){
             $error = array('error' => $this->upload->display_errors());
+
+            $data = array(
+                'name' => $this->input->post('name'),
+                'category' => $this->input->post('category'),
+                'information' => $this->input->post('information'),
+                'venue' => $this->input->post('venue'),
+                'trgDate' => $this->input->post('trgDate'),
+                'trgTime' => $this->input->post('trgTime'),
+            );
         } else {
             $data = array('upload_data' => $this->upload->data());
-        }
 
-        $data = array(
-            'name' => $this->input->post('name'),
-            'category' => $this->input->post('category'),
-            'information' => $this->input->post('information'),
-            'venue' => $this->input->post('venue'),
-            'trgDate' => $this->input->post('trgDate'),
-            'trgTime' => $this->input->post('trgTime'),
-            'image' => $data['upload_data']['file_name']
-        );
+            $data = array(
+                'name' => $this->input->post('name'),
+                'category' => $this->input->post('category'),
+                'information' => $this->input->post('information'),
+                'venue' => $this->input->post('venue'),
+                'trgDate' => $this->input->post('trgDate'),
+                'trgTime' => $this->input->post('trgTime'),
+                'image' => $data['upload_data']['file_name']
+            );
+        }
 
         //model function
         $this->load->model('admin_model');
@@ -157,5 +169,14 @@ class Admin extends CI_Controller {
         //model function
         $this->load->model('admin_model');
         $this->admin_model->count_all_cca();
+    }
+
+    function updateCCACount()
+    {
+        $count = $this->input->post('count');
+        $this->load->model('CCALimit_model');
+        $this->CCALimit_model->set_limit($count);
+
+        redirect('admin','refresh');
     }
 }
