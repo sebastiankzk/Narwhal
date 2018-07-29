@@ -92,14 +92,10 @@
         <div class="col-auto mr-auto">
             <?php echo $this->session->flashdata('msg');?>
         </div>
-<<<<<<< HEAD
         <div class="col-auto">
           <a href="<?php echo base_url('index.php/leader/get_interest/'.$CCAID); ?>" class="btn btn-primary">View Interested Students</a>
           <a href="<?php echo base_url('index.php/admin/get_cca/'.$CCAID); ?>" class="btn btn-primary">Edit CCA Details</a>
         </div>
-=======
-  
->>>>>>> 7937a12a674998ad89dbff6edd0fbed85aa48a96
       </div>
       </br>
       
