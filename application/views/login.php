@@ -30,7 +30,7 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-              <a class="nav-link" href="<?php echo base_url('index.php/event'); ?>">Event</a>
+                <a class="nav-link" href="<?php echo base_url('index.php/event'); ?>">Event</a>
             </li>
              <?php if($this->session->userdata('role') == 'Leader') : ?>
             <li class="nav-item">

@@ -31,8 +31,13 @@
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
               <li class="nav-item">
-                <a class="nav-link" href="<?php echo base_url('index.php/Home/get_user/' .$this->session->userdata('userID') ); ?>">Account</a>
-              </li>
+                <?php if($this->session->userdata('role') == 'Admin') : ?>            
+                  <a class="nav-link" href="<?php echo base_url('index.php/Profile/'); ?>">Accounts</a>
+                  <?php elseif($this->session->userdata('role') != '') : ?>              
+                  <a class="nav-link" href="<?php echo base_url('index.php/Home/get_user/' .$this->session->userdata('userID') ); ?>">Account</a>
+                  <?php else : ?>   
+                  <?php endif; ?>
+                </li>
               <a class="nav-link" href="<?php echo base_url('index.php/event'); ?>">Event</a>
             </li>
              <?php if($this->session->userdata('role') == 'Leader') : ?>
