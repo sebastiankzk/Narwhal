@@ -157,8 +157,10 @@
         <div class="row">
           <div class="col-lg-4"></div>
           <div class="col-lg-6">            
-            <input type="submit" name="submit" value="Add" class="btn btn-primary" />      
+            <input type="submit" name="submit" value="Add" class="btn btn-primary" />   
+            <a href="<?php echo base_url('index.php/Admin'); ?>"><input id="btn_cancel" name="btn_cancel" type="button" class="btn btn-danger" value="Cancel" />   
           </div>
+
         </div> 
         <br/>            
       </form>

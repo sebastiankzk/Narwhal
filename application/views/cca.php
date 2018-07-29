@@ -96,7 +96,7 @@
       <p><?php echo $query->information; ?></p>
       <p>Venue: <?php echo $query->venue; ?></p>
       <p>Training Date: <?php echo $query->trgDate; ?></p>
-      <p>Training Time: <?php echo $query->trgTime; ?></p>
+      <p>Training Time: <?php echo date(" h:i A", strtotime($query->startTime)); ?></p>
     </br>
     <?php if($this->session->userdata('role') != '') : ?>
       <a href="<?php echo base_url('index.php/home/cca_register_interest/'.$query->ccaID); ?>" class="btn btn-primary">Register your interest here! &rarr;</a>

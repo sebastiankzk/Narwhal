@@ -160,7 +160,8 @@
         <div class="col-lg-2"></div>
         <div class="col-lg-2"></div>
         <div class="col-lg-2">            
-          <input type="submit" name="submit" value="Update" class="btn btn-primary" />      
+          <input type="submit" name="submit" value="Update" class="btn btn-primary" />   
+          <a href="<?php echo base_url('index.php/Admin'); ?>"><input id="btn_cancel" name="btn_cancel" type="button" class="btn btn-danger" value="Cancel" />     
         </div>
       </div> 
       <br/>            

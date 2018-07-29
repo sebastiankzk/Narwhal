@@ -93,15 +93,15 @@
           <!-- Slide Two - Set the background image for this slide in the line below -->
           <div class="carousel-item" style="background-image: url('../narwhal/assets/images/3.jpg')">
             <div class="carousel-caption d-none d-md-block">
-              <h3>Second Slide</h3>
-              <p>This is a description for the second slide.</p>
+              <h3>Teamwork</h3>
+              <p>Work hard, Play hard</p>
             </div>
           </div>
           <!-- Slide Three - Set the background image for this slide in the line below -->
           <div class="carousel-item" style="background-image: url('../narwhal/assets/images/1.jpeg')">
             <div class="carousel-caption d-none d-md-block">
-              <h3>Third Slide</h3>
-              <p>This is a description for the third slide.</p>
+              <h3>Join Us</h3>
+              <p>Join our CCA today!</p>
             </div>
           </div>
         </div>

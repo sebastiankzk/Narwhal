@@ -80,7 +80,7 @@
 
       <!-- Page Heading/Breadcrumbs -->
       <h1 class="mt-4 mb-3">CCA in NYP
-        <small>(Admin Mode)</small>
+        <small>(Administrative Mode)</small>
       </h1>
 
 
@@ -116,7 +116,8 @@
           <p class="card-text">Training Time: <?php echo date(" h:i A", strtotime($row->startTime)); ?></p>
           <p class="card-text"><?php echo $row->information; ?></p>
           <a href="<?php echo base_url('index.php/admin/get_cca/'.$row->ccaID); ?>" class="btn btn-primary">Edit &rarr;</a>
-          <a href="<?php echo base_url('index.php/admin/delete_cca/'.$row->ccaID); ?>" class="btn btn-primary">Delete &rarr;</a>
+          <a href="<?php echo base_url('index.php/admin/delete_cca/'.$row->ccaID); ?>" class="btn btn-danger" onclick="return confirm('Comfirm delete <?php echo($row->name); ?>?')">Delete &rarr;</a>
+
         </div>
       </div>
     </div>
