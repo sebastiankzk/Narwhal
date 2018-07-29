@@ -33,7 +33,7 @@
           <a class="nav-link" href="about.html">About</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="<?php echo base_url('index.php/Home/get_user/' .$this->session->userdata('userID') ); ?>">Accounts</a>
+          <a class="nav-link" href="<?php echo base_url('index.php/Home/get_user/' .$this->session->userdata('userID') ); ?>">Account</a>
         </li>
         <li class="nav-item">
               <a class="nav-link" href="<?php echo base_url('index.php/home/contact_us'); ?>">Contact</a>
@@ -121,7 +121,7 @@
         <a href="index.html">Home</a>
       </li>
       <li class="breadcrumb-item">
-       <a href="<?php echo base_url('index.php/Home/'); ?>">Accounts</a>
+       <a href="<?php echo base_url('index.php/Home/'); ?>">Account</a>
      </li>
      <li class="breadcrumb-item active">Update</li>
    </ol>

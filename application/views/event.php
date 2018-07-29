@@ -30,9 +30,8 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-              <a class="nav-link" href="<?php echo base_url('index.php/Profile/'); ?>">Accounts</a>
-            </li>
-            <li class="nav-item">
+                <a class="nav-link" href="<?php echo base_url('index.php/Home/get_user/' .$this->session->userdata('userID') ); ?>">Account</a>
+              </li>
               <a class="nav-link" href="<?php echo base_url('index.php/event'); ?>">Event</a>
             </li>
              <?php if($this->session->userdata('role') == 'Leader') : ?>
