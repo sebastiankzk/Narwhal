@@ -122,6 +122,7 @@ class leader_model extends CI_Model
     return $time;
   }
 
+  //not in use
   function search_dt($date,$time)
   {
     $this->db->select('*');

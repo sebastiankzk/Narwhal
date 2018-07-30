@@ -53,6 +53,15 @@
           <?php else : ?>   
           <?php endif; ?>
         </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownBlog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Attendance
+          </a>
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownBlog">
+            <a class="dropdown-item" href="<?php echo base_url('index.php/leader/get_record/'); ?>">Create Record</a>
+            <a class="dropdown-item" href="<?php echo base_url('index.php/leader/get_record/'); ?>">Update Record</a>
+          </div>
+        </li>
         <li class="nav-item">
           <a class="nav-link" href="<?php echo base_url('index.php/home/contact_us'); ?>">Contact</a>
         </li>
@@ -94,7 +103,7 @@
 <div class="container">
 
   <!-- Page Heading/Breadcrumbs -->
-  <h1 class="mt-4 mb-3">Update Attendance
+  <h1 class="mt-4 mb-3">Create Attendance
   </h1>
   <ol class="breadcrumb">
     <li class="breadcrumb-item">
@@ -103,14 +112,14 @@
     <li class="breadcrumb-item">
      <a href="<?php echo base_url('index.php/Profile/'); ?>">Attendance</a>
    </li>
-   <li class="breadcrumb-item active">Update</li>
+   <li class="breadcrumb-item active">Create</li>
  </ol>
 
  <div class="row">
   <div class="col-lg-12 mb-4"> 
     <?php
         $attributes = array("class" => "", "id" => "addprofile", "name" => "addprofile");
-          echo form_open("leader/search_record", $attributes);?>
+          echo form_open("leader/create_record", $attributes);?>
     <fieldset>
 
       <div class="form-group">
@@ -119,9 +128,8 @@
           <label for="date" class="control-label">Date</label>
         </div>
         <div class="col-md-6">
-          <?php
-          $attributes = 'class = "form-control" id = "date"';
-          echo form_dropdown('date',$date,set_value('date'),$attributes);?>
+          <input id="date" name="date" placeholder="" type="Date"
+          class="form-control" value="<?php echo set_value('date'); ?>" />
           <span class="text-danger"><?php echo form_error('date'); ?></span>
         </div>
       </div>
@@ -133,9 +141,8 @@
         <label for="time" class="control-label">Time</label>
       </div>
       <div class="col-md-6">
-        <?php
-          $attributes = 'class = "form-control" id = "time"';
-          echo form_dropdown('time',$time,set_value('time'),$attributes);?>
+        <input id="time" name="time" placeholder="" type="time"
+        class="form-control" value="<?php echo set_value('time'); ?>" />
         <span class="text-danger"><?php echo form_error('time'); ?></span>
       </div>
     </div>
@@ -143,16 +150,9 @@
 
   <script type="text/javascript">
  //load datepicker control onfocus
- $(function() {$("#dob").datepicker();
+ $(function() {$("#date").datepicker();
 });
 </script>
-<?php echo $this->session->flashdata('msg'); ?>
-<input id="search" name="searchbtn" type="submit" class="btn btn-secondary"
-                  value="Search" />
-</fieldset>
-<?php echo form_close(); ?>
-
-
 
 <div class="table-responsive">   
   <?php echo $this->session->flashdata('msg'); ?> 
@@ -175,20 +175,19 @@
        <td><?php echo ($i+1); ?></td>
        <td><?php echo $query[$i]->User_name; ?></td>
        <td><?php echo $query[$i]->cca_name; ?></td>
-       <td><!-- <?php //echo $user[$i]->attendance; ?> -->
-       <input type="radio" name="attendance <?php echo $query[$i]->userID; ?>" <?php if($query[$i]->attendance=="Present") {echo "checked";} ?> value="Present" >
+       <td>
+       <input onclick="document.getElementById('reason <?php echo $query[$i]->userID; ?>').disabled = true; document.getElementById('remarks <?php echo $query[$i]->userID; ?>').disabled = true;" type="radio" name="attendance <?php echo $query[$i]->userID; ?>" value="Present" Checked >
+       </td>
+
+       <td>
+       <input onclick="document.getElementById('reason <?php echo $query[$i]->userID; ?>').disabled = false; document.getElementById('remarks <?php echo $query[$i]->userID; ?>').disabled = false;" type="radio" name="attendance <?php echo $query[$i]->userID; ?>" value="Absent">
        </td>
        <td>
-       <input type="radio" name="attendance <?php echo $query[$i]->userID; ?>" <?php if($query[$i]->attendance=="Absent") {echo "checked";} ?> value="Absent">
+            <input size="5" id="reason <?php echo $query[$i]->userID; ?>" name="reason" placeholder="Reason" type="text" class="form-control" value="" disabled="disabled" />
        </td>
-       <td>
-            <input size="5" id="name" name="name" placeholder="Name" type="text" 
-            class="form-control" value="<?php echo $query[$i]->reason; ?>" />
-          </td>
        <td>    
-            <input size="5" id="name" name="name" placeholder="Name" type="text" 
-            class="form-control" value="<?php echo $query[$i]->remarks; ?>" />
-          </td>
+            <input size="5" id="remarks <?php echo $query[$i]->userID; ?>" name="remarks" placeholder="Remarks" type="text" class="form-control" value="" disabled="disabled" />
+       </td>
      </tr>
      <?php } ?>
    </tbody>
@@ -196,12 +195,15 @@
 </div>
 
 <div class="offset-sm-2 col-md-8 text-center">
-  <input id="btn_update" name="btn_update" type="submit" class="btn btn-primary"
-  value="Update" />
+  <input id="btn_create" name="btn_create" type="submit" class="btn btn-secondary"
+  value="Create" />
   <input id="btn_cancel" name="btn_cancel" type="reset" class="btn btn-danger"
   value="Cancel" />
 </div>
 
+<?php echo $this->session->flashdata('msg'); ?>
+</fieldset>
+<?php echo form_close(); ?>
 
 </div>
 </div>

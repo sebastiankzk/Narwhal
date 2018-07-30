@@ -61,6 +61,53 @@ class Leader extends CI_Controller {
         $this->load->view('add_attendance', $data);
     }
 
+    function create_record()
+    {   
+        // if($this->session->userdata('role') == 'Admin')
+        // {
+            $this->load->library('form_validation');
+
+            //set validation rules
+            $this->form_validation->set_rules('date', 'Date', 'required');
+            $this->form_validation->set_rules('time', 'Time', 'required');
+            
+            // if ($this->form_validation->run() == FALSE)
+            // {
+            //     //fail validation
+            //     $this->load->view('add_profile');
+            // }
+            // else
+            // {
+                //pass validation
+                $data = array(
+                    'date' => @date('d-m-Y', @strtotime($this->input->post('date'))),
+                    // $this->input->post('dob'),
+                    'time' => $this->input->post('time'),
+                );
+
+                //insert the form data into database
+                $this->db->insert('attendance', $data);
+
+                //create insert
+                $data = array(
+                    'title' => 'My title',
+                    'name' => 'My Name',
+                    'date' => 'My date'
+                );
+
+                $this->db->insert('mytable', $data);
+
+                //display success message
+                $this->session->set_flashdata('msg', '<div class="alert alert-success textcenter">New user has been added!</div>');
+                redirect('Profile','refresh');
+            // }
+        // }
+        // else
+        // {
+        //     redirect(base_url() . 'index.php');
+        // }
+    }
+
     function update_record()
     {
         $data['studid'] = $studid;
