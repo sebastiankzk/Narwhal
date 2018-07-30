@@ -9,7 +9,8 @@ VIEW `attendance_view` AS
         `user`.`name` AS `User_name`,
         `attendance`.`ccaID` AS `ccaID`,
         `cca`.`name` AS `cca_name`,
-        `attendance`.`dateTime` AS `dateTime`,
+        `attendance`.`date` AS `date`,
+        `attendance`.`time` AS `time`,
         `attendance`.`attendance` AS `attendance`,
         `attendance`.`reason` AS `reason`,
         `attendance`.`remarks` AS `remarks`
