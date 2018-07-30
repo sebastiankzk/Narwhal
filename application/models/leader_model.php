@@ -63,6 +63,23 @@ function get_attendance($ccaID)
   return $query->result();
 }  
 
+  function get_interest($ccaID)  
+  {      
+     $this->db->select('*');
+     $this->db->where('ccaID', $ccaID);
+     $this->db->from('cca_interest_view');
+     $query = $this->db->get();
+     return $query->result();
+  } 
+
+  function get_contact_us()  
+  {      
+     $this->db->select('*');
+     $this->db->from('contact_us');
+     $query = $this->db->get();
+     return $query->result();
+  }    
+
 function get_ccaID($ccaID)
 {
   $this->db->where('ccaID', $ccaID);
@@ -105,6 +122,7 @@ function get_time()
  return $time;
 }
 
+<<<<<<< HEAD
 function search_dt($date,$time)
     {
       $this->db->select('*');
@@ -121,4 +139,8 @@ function search_dt($date,$time)
      }
 
 }  
+=======
+}
+
+>>>>>>> f822b7251c92820dc92171192337281913bb52cd
 ?>

@@ -61,6 +61,60 @@ class Leader extends CI_Controller {
         $this->load->view('add_attendance', $data);
     }
 
+    function update_record()
+    {
+        $data['studid'] = $studid;
+
+            //fetch data from user table
+            $data['user'] = $this->Profile_model->get_user();
+
+            //fetch student record for the given student no.
+            $data['query'] = $this->Profile_model->get_student_record($studid);
+
+            //set validation rules
+            $this->form_validation->set_rules('name', 'Name',
+                'trim|required|callback_alpha_only_space');
+            $this->form_validation->set_rules('password', 'Password', 'required|min_length[6]');
+            $this->form_validation->set_rules('adminno', 'AdminNo', 'required|alpha_numeric|exact_length[7]');
+            $this->form_validation->set_rules('gender', 'Gender', 'required');
+            $this->form_validation->set_rules('dob', 'Dob', 'required');
+            $this->form_validation->set_rules('address', 'Address', 'required');
+            $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
+            $this->form_validation->set_rules('mobile', 'Mobile', 'required|numeric');
+            $this->form_validation->set_rules('role', 'Role', 'required');
+
+            if ($this->form_validation->run() == FALSE)
+            {
+                //fail validation
+                $this->load->view('update_profile', $data);
+
+            }
+            else
+            {
+                //pass validation
+            $data = array(
+                'name' => $this->input->post('name'),
+                'password' => $this->input->post('password'),
+                'adminNumber' => $this->input->post('adminno'),
+                'gender' => $this->input->post('gender'),
+                'dob' => $this->input->post('dob'),
+                'address' => $this->input->post('address'),
+                'email' => $this->input->post('email'),
+                'mobile' => $this->input->post('mobile'),
+                'role' => $this->input->post('role'),
+                //'dob' => @date('d-m-Y',@strtotime($this->input->post('dateofbirth'))),
+            );
+
+                //update the student record
+            $this->db->where('userID',$studid);
+            $this->db->update('user',$data);
+
+                //display success message
+            $this->session->set_flashdata('msg','<div class="alert alert-success textcenter">Details has been updated successfully.</div>');
+            redirect('profile/get_user/' . $studid);
+            }
+    }
+
     function search_record()
     {
         //load the Profile_model
