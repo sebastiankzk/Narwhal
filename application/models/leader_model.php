@@ -122,7 +122,6 @@ function get_time()
  return $time;
 }
 
-<<<<<<< HEAD
 function search_dt($date,$time)
     {
       $this->db->select('*');
@@ -138,9 +137,7 @@ function search_dt($date,$time)
       }
      }
 
-}  
-=======
 }
 
->>>>>>> f822b7251c92820dc92171192337281913bb52cd
+
 ?>
