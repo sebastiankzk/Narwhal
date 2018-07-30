@@ -127,4 +127,21 @@ class Leader extends CI_Controller {
         $data['datetime'] = $this->leader_model->search_dt($date,$time);
         $this->load->view('add_attendance',$data);   
     }
+
+     function get_interest($ccaID)
+    {
+        $userID = $this->session->userdata('userID');
+        //load the Profile_model
+        $this->load->model('leader_model');
+        $data['query'] = $this->leader_model->get_interest($ccaID);
+        $this->load->view('interest', $data);
+    }
+
+    function get_contact_us()
+    {        
+        //load the Profile_model
+        $this->load->model('leader_model');
+        $data['query'] = $this->leader_model->get_contact_us();
+        $this->load->view('cca_contact_us', $data);
+    }
 }
