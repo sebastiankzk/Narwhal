@@ -136,7 +136,7 @@
     <div class="card-body">
       <div class="row">
         <div class="col-lg-4">
-          <a href="../assets/images/<?php echo $row->image; ?>"><img class="img-fluid rounded" src="../assets/images/<?php echo $row->image; ?>" alt=""></a>
+          <img class="img-fluid rounded" src="../assets/images/<?php echo $row->image; ?>" alt="">
         </div>
         <div class="col-lg-8">
           <h2 class="card-title"><?php echo $row->name; ?></h2>
