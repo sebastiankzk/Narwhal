@@ -136,7 +136,7 @@
       <div class="row">
         <?php foreach($query as $row): ?>
           <div class="col-lg-4 col-sm-4 portfolio-item">
-            <div class="card h-100">
+            <div class="card h-100" style="background: #F8F8F8">
               <img class="card-img-top" src="../narwhal/assets/images/<?php echo $row->image; ?>" alt="">
               <div class="card-body">
                 <h4 class="card-title"><a href="<?php echo base_url('index.php/home/cca/'.$row->ccaID); ?>"><?php echo $row->name; ?></a></h4>

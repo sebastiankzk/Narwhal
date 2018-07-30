@@ -108,7 +108,7 @@
   </br>
   <?php foreach($query as $row): ?>
     <div class="card mb-4">
-      <div class="card-body">
+     <div class="card-body" style="background: #F8F8F8;">
         <div class="row">
           <div class="col-lg-4">
             <a href="<?php echo base_url('assets/images/'.$row->image); ?>"><img class="img-fluid rounded" src="<?php echo base_url('assets/images/'.$row->image); ?>" alt=""></a>
