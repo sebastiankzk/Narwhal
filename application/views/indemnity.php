@@ -87,16 +87,7 @@
 
 
 
-      <div class="row">
-        <div class="col-auto mr-auto"></div>
-        <div class="col-auto">
-           <?php if($this->session->userdata('role') == 'Leader') : ?>
-                <td><a href="<?php echo base_url('index.php/event/add_event'); ?>" class="btn btn-primary">Add new Event &rarr;</a></td>
-                <?php endif; ?>
-
-        </div>
-      </div>
-      </br>
+      
       <div class="row">
         <div class="col-auto mr-auto">
             <?php echo $this->session->flashdata('msg');?>
