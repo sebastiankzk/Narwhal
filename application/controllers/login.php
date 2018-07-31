@@ -54,8 +54,11 @@ class Login extends CI_Controller {
             //true
             $username = $this->input->post('username');
             $password = $this->input->post('password');
+            //Hash password
+            //$password = $this->hash_password($password);
             //model function
             $this->load->model('login_model');
+
             if($this->login_model->can_login($username, $password))
             {
                 //Check if login user is Admin or Student
@@ -81,6 +84,12 @@ class Login extends CI_Controller {
             $this->login2();
         }
     }
+
+    private function hash_password($password)
+    {
+        return password_hash($password, PASSWORD_DEFAULT);
+    }
+
     function enter()
     {
         if($this->session->userdata('username') != '')

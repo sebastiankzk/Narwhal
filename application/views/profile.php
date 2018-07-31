@@ -119,7 +119,7 @@
                <tr>
                  <th>#</th>
                  <th>Name</th>
-                 <th>Password</th>
+<!--                  <th>Password</th> -->
                  <th>Admin</th>
                  <th>Gender</th>
                  <th>Birth date</th>
@@ -136,7 +136,7 @@
                  <tr>
                    <td><?php echo ($i+1); ?></td>
                    <td><?php echo $user[$i]->name; ?></td>
-                   <td><?php echo $user[$i]->password; ?></td>
+<!--                    <td><?php echo $user[$i]->password; ?></td> -->
                    <td><?php echo $user[$i]->adminNumber; ?></td>
                    <td><?php echo $user[$i]->gender; ?></td>
                    <td><?php echo $user[$i]->dob; ?></td>
