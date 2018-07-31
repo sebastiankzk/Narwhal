@@ -58,13 +58,18 @@ class Leader extends CI_Controller {
         $data['query'] = $this->leader_model->get_attendance($ccaid);
         $data['date'] = $this->leader_model->get_date();
         $data['time'] = $this->leader_model->get_time();
+        $data['ccaid']=$ccaid;
         $this->load->view('add_attendance', $data);
     }
 
-    function create_record()
+    function create_record($ccaid)
     {   
         // if($this->session->userdata('role') == 'Admin')
         // {
+
+            $this->load->model('leader_model');
+            // $data['query'] = $this->leader_model->get_attendance($ccaid);
+            // $this->load->view('add_attendance', $data);
             $this->load->library('form_validation');
 
             //set validation rules
@@ -79,27 +84,50 @@ class Leader extends CI_Controller {
             // else
             // {
                 //pass validation
-                $data = array(
-                    'date' => @date('d-m-Y', @strtotime($this->input->post('date'))),
-                    // $this->input->post('dob'),
-                    'time' => $this->input->post('time'),
-                );
+
+                // $insert = $this->leader_model->get_attendance($ccaid);
+                // for($i=0;$i<$insert;$i++) {
+                // $data[$i]=array(
+                //     'userid' => $this->input->post('userid'),
+                //     'ccaid' => $this->input->post('ccaid'),
+                //     'date' => $this->input->post('date'),
+                //     'time' => $this->input->post('time'),
+                //     'attendance'=>$_POST['attendance'.$insert[$i]->userID],
+                //     'reason' => $this->input->post('reason'),
+                //     'remarks' => $this->input->post('remarks'),
+                // );}
+               // var_dump($this->input->post('userid'));
+                $rows = count($this->leader_model->get_attendance($ccaid));
+               // $temp = "attendance" . $this->input->post('userid');
+                $data = array();
+
+                for($i=0; $i < $rows; $i++) {
+                    $data[] = array(
+                        'userid' => $this->input->post('userid')[$i],
+                        'ccaid' => $this->input->post('ccaid')[$i],
+                        'date' => $this->input->post('date')[$i],
+                        // $this->input->post('dob'),
+                        'time' => $this->input->post('time')[$i],
+                        //'attendance' => $this->input->post[$temp][$i],
+                        'reason' => $this->input->post('reason')[$i],
+                        'remarks' => $this->input->post('remarks')[$i],
+                    );
+                }
+
 
                 //insert the form data into database
-                $this->db->insert('attendance', $data);
+                $this->db->insert_batch('attendance', $data);
 
-                //create insert
-                $data = array(
-                    'title' => 'My title',
-                    'name' => 'My Name',
-                    'date' => 'My date'
-                );
+                //  $data_view = array(
+                //     'User_name' => $this->input->post('username'),
+                //     'cca_name' => $this->input->post('ccaname'),
+                // );
 
-                $this->db->insert('mytable', $data);
+                // $this->db->insert('attendance_view', $data_view);
 
                 //display success message
                 $this->session->set_flashdata('msg', '<div class="alert alert-success textcenter">New user has been added!</div>');
-                redirect('Profile','refresh');
+                redirect('add_attendance','refresh');
             // }
         // }
         // else

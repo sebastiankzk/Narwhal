@@ -158,7 +158,7 @@
     <label for="dob" class="control-label">Date of Birth</label>
   </div>
   <div class="row col-md-8">
-    <input id="dob" name="dob" placeholder="Date of Birth" type="text"
+    <input id="dob" name="dob" placeholder="Date of Birth" type="date"
     class="form-control" value="<?php echo $query->dob; ?>" />
     <span class="text-danger"><?php echo form_error('dob'); ?></span>
   </div>

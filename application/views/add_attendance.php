@@ -117,7 +117,8 @@
   <div class="col-lg-12 mb-4"> 
     <?php
         $attributes = array("class" => "", "id" => "addprofile", "name" => "addprofile");
-          echo form_open("leader/create_record", $attributes);?>
+          echo form_open("leader/create_record/". $query[0]->ccaID, $attributes);?>
+
     <fieldset>
 
       <div class="form-group">
@@ -153,12 +154,9 @@
 </script>
 
 <div class="table-responsive">   
-  <?php echo $this->session->flashdata('msg'); ?> 
   <!-- <h3 class="card-header bg-primary text-white">Accounts</h3> -->
   <table class="table table-striped table-hover">
    <thead>
-     <tr>
-       <th>#</th>
        <th>Student</th>
        <th>CCA</th>
        <th>Present</th>
@@ -168,24 +166,28 @@
      </tr>
    </thead>
    <tbody>
-     <?php for ($i = 0; $i < count($query); ++$i) { ?>
+    
+     <?php foreach($query as $row){?>
      <tr>
-       <td><?php echo ($i+1); ?></td>
-       <td><?php echo $query[$i]->User_name; ?></td>
-       <td><?php echo $query[$i]->cca_name; ?></td>
-       <td>
-       <input onclick="document.getElementById('reason <?php echo $query[$i]->userID; ?>').disabled = true; document.getElementById('remarks <?php echo $query[$i]->userID; ?>').disabled = true;" type="radio" name="attendance <?php echo $query[$i]->userID; ?>" value="Present" Checked >
+       <td> <input size="5" id="username" name="username[]" type="text" class="form-control" value="<?php echo $row->User_name; ?>"/>
+            <input type="hidden" id="userid" name="userid[]" value="<?php echo $row->userID; ?>">
        </td>
-
-       <td>
-       <input onclick="document.getElementById('reason <?php echo $query[$i]->userID; ?>').disabled = false; document.getElementById('remarks <?php echo $query[$i]->userID; ?>').disabled = false;" type="radio" name="attendance <?php echo $query[$i]->userID; ?>" value="Absent">
+       <td><input size="5" id="ccaname" name="ccaname[]" type="text" class="form-control" value="<?php echo $row->cca_name; ?>"/>
+            <input type="hidden" id="ccaid" name="ccaid[]" value="<?php echo $row->ccaID; ?>">
        </td>
        <td>
-            <input size="5" id="reason <?php echo $query[$i]->userID; ?>" name="reason" placeholder="Reason" type="text" class="form-control" value="" disabled="disabled" />
+       <input type="radio" name="attendance<?php echo $row->userID; ?>[]" value="Present" Checked >
+       </td>
+       <td>
+       <input type="radio" name="attendance<?php echo $row->userID; ?>[]"  value="Absent">
+       </td>
+       <td>
+            <input size="5" id="reason" name="reason[]" placeholder="Reason" type="text" class="form-control" value=""/>
        </td>
        <td>    
-            <input size="5" id="remarks <?php echo $query[$i]->userID; ?>" name="remarks" placeholder="Remarks" type="text" class="form-control" value="" disabled="disabled" />
+            <input size="5" id="remarks" name="remarks[]" placeholder="Remarks" type="text" class="form-control" value="" />
        </td>
+
      </tr>
      <?php } ?>
    </tbody>

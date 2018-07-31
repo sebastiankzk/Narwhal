@@ -98,7 +98,7 @@
 
    <div class="row">
     <div class="offset-md-2 col-md-8 mb-4">
-      <form class="" method="post" action="<?php echo base_url('index.php/home/update/'.$query->userID); ?>">
+      <form class="" method="post" action="<?php echo base_url('index.php/home/update/'.$query->userID[0]); ?>">
        <fieldset>
         <?php echo $this->session->flashdata('msg'); ?>
 

@@ -97,7 +97,7 @@ class Profile extends CI_Controller {
 					'password' => $this->input->post('password'),
 					'adminNumber' => $this->input->post('adminno'),
 					'gender' => $this->input->post('gender'),
-					'dob' => @date('d-m-Y', @strtotime($this->input->post('dob'))),
+					'dob' => ($this->input->post('dob')),
 					// $this->input->post('dob'),
 					'address' => $this->input->post('address'),
 					'email' => $this->input->post('email'),
