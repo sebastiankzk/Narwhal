@@ -92,9 +92,14 @@ class Profile extends CI_Controller {
 			else
 			{
 				//pass validation
+				$password = $this->input->post('password');
+				//Hash password
+				$password = $this->hash_password($password);
+
+				//pass validation
 				$data = array(
 					'name' => $this->input->post('name'),
-					'password' => $this->input->post('password'),
+					'password' => $password,
 					'adminNumber' => $this->input->post('adminno'),
 					'gender' => $this->input->post('gender'),
 					'dob' => @date('d-m-Y', @strtotime($this->input->post('dob'))),
@@ -117,6 +122,11 @@ class Profile extends CI_Controller {
         {
             redirect(base_url() . 'index.php');
         }
+	}
+
+	private function hash_password($password)
+	{
+		return password_hash($password, PASSWORD_DEFAULT);
 	}
 
 	function update($studid)
@@ -155,10 +165,15 @@ class Profile extends CI_Controller {
 			}
 			else
 			{
-				//pass validation
+			//pass validation
+			$password = $this->input->post('password');			
+			//Hash password
+			$password = $this->hash_password($password);
+
+			//pass validation
 			$data = array(
 				'name' => $this->input->post('name'),
-				'password' => $this->input->post('password'),
+				'password' => $password,
 				'adminNumber' => $this->input->post('adminno'),
 				'gender' => $this->input->post('gender'),
 				'dob' => $this->input->post('dob'),

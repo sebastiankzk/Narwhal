@@ -6,12 +6,13 @@
       {  
            //SELECT * FROM user WHERE adminNumber = '$username' AND password = '$password'
            $this->db->where('adminNumber', $username);
-           $this->db->where('password', $password);  
+           //$this->db->where('password', $password);  
            $query = $this->db->get('user');  
-
-           if($query->num_rows() > 0)  
-           {  
-                return true;  
+           $db_hash_password = $query->row()->password;
+           
+           if(($query->num_rows() > 0) && (password_verify($password ,$db_hash_password)))
+           {
+                return true;         
            }  
            else  
            {  
