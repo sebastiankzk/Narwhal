@@ -159,6 +159,7 @@
           </div>
           <div class="row col-lg-6">
             <input type="file" name="image" class="form-control" placeholder="Image Url" required="" value=""</div>
+            Only jpg, jpeg or png supported
           </div>
         </div>
         <br/>
