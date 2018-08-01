@@ -169,7 +169,12 @@
         <div class="col-lg-2"></div>
         <div class="col-lg-2">            
           <input type="submit" name="submit" value="Update" class="btn btn-primary" />   
-          <a href="<?php echo base_url('index.php/Admin'); ?>"><input id="btn_cancel" name="btn_cancel" type="button" class="btn btn-danger" value="Cancel" />     
+          <?php if($this->session->userdata('role') == 'Admin') : ?>
+          <a href="<?php echo base_url('index.php/Admin'); ?>"><input id="btn_cancel" name="btn_cancel" type="button" class="btn btn-danger" value="Cancel" />   
+          <?php elseif($this->session->userdata('role') == 'Leader') : ?>   
+          <a href="<?php echo base_url('index.php/Leader'); ?>"><input id="btn_cancel" name="btn_cancel" type="button" class="btn btn-danger" value="Cancel" /> 
+          <?php else : ?>   
+          <?php endif; ?> 
         </div>
       </div> 
       <br/>            
