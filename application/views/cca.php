@@ -89,6 +89,19 @@
     <!-- Page Heading/Breadcrumbs -->
     <h1 class="mt-4 mb-3"><?php echo $query->name; ?>
   </h1>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="<?php echo base_url('index.php'); ?>">Home</a>
+        </li>
+        <li class="breadcrumb-item">
+         <a href="<?php echo base_url('index.php/home/cca_list'); ?>">CCA
+         </a>
+       </li>
+       <li class="breadcrumb-item active">
+         <?php echo $query->name; ?>
+         </a>
+       </li>
+     </ol>
   <br/>    
 
   <!-- Portfolio Item Row -->

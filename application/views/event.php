@@ -55,6 +55,11 @@
                 <a class="dropdown-item" href="<?php echo base_url('index.php/home/cca_list'); ?>">View all CCA</a>
               </div>
       </li>
+      <?php if($this->session->userdata('role') == 'Admin') : ?>
+      <li class="nav-item">
+              <a class="nav-link" href="<?php echo base_url('index.php/admin'); ?>">Admin</a>
+      </li>
+      <?php endif; ?>
 
       <!-- Login Logout  -->
       <li class="nav-item">
