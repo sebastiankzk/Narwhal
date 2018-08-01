@@ -153,33 +153,38 @@
 });
 </script>
 
+</br>
+
 <div class="table-responsive">   
   <!-- <h3 class="card-header bg-primary text-white">Accounts</h3> -->
+  <h3 class="card-header text-black"><?php echo $query[0]->cca_name; ?></h3>
   <table class="table table-striped table-hover">
    <thead>
+       <th>#</th>
        <th>Student</th>
-       <th>CCA</th>
        <th>Present</th>
-       <th>Absent</th>
        <th>Reason</th>
        <th>Remarks</th>
      </tr>
    </thead>
    <tbody>
     
-     <?php foreach($query as $row){?>
+     <?php $index = 1; foreach($query as $row){?>
      <tr>
+       <td> 
+            <?php echo $index++; ?>
+       </td>
        <td> <input size="5" id="username" name="username[]" type="text" class="form-control" value="<?php echo $row->User_name; ?>"/>
             <input type="hidden" id="userid" name="userid[]" value="<?php echo $row->userID; ?>">
-       </td>
-       <td><input size="5" id="ccaname" name="ccaname[]" type="text" class="form-control" value="<?php echo $row->cca_name; ?>"/>
             <input type="hidden" id="ccaid" name="ccaid[]" value="<?php echo $row->ccaID; ?>">
        </td>
+       <!-- <td><input size="5" id="ccaname" name="ccaname[]" type="text" class="form-control" value="<?php echo $row->cca_name; ?>"/>
+            
+       </td> -->
+            
+         
        <td>
-       <input type="radio" name="attendance<?php echo $row->userID; ?>[]" value="Present" Checked >
-       </td>
-       <td>
-       <input type="radio" name="attendance<?php echo $row->userID; ?>[]"  value="Absent">
+            <input type="checkbox" name="attendance[]" value="1" checked="checked" />
        </td>
        <td>
             <input size="5" id="reason" name="reason[]" placeholder="Reason" type="text" class="form-control" value=""/>
@@ -194,6 +199,8 @@
  </table>
 </div>
 
+<?php echo $this->session->flashdata('msg'); ?>
+
 <div class="offset-sm-2 col-md-8 text-center">
   <input id="btn_create" name="btn_create" type="submit" class="btn btn-secondary"
   value="Create" />
@@ -201,7 +208,6 @@
   value="Cancel" />
 </div>
 
-<?php echo $this->session->flashdata('msg'); ?>
 </fieldset>
 <?php echo form_close(); ?>
 

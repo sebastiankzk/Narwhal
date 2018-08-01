@@ -56,8 +56,8 @@ class Leader extends CI_Controller {
         $this->load->model('leader_model');
 
         $data['query'] = $this->leader_model->get_attendance($ccaid);
-        $data['date'] = $this->leader_model->get_date();
-        $data['time'] = $this->leader_model->get_time();
+        // $data['date'] = $this->leader_model->get_date();
+        // $data['time'] = $this->leader_model->get_time();
         $data['ccaid']=$ccaid;
         $this->load->view('add_attendance', $data);
     }
@@ -96,7 +96,7 @@ class Leader extends CI_Controller {
                 //     'reason' => $this->input->post('reason'),
                 //     'remarks' => $this->input->post('remarks'),
                 // );}
-               // var_dump($this->input->post('userid'));
+               var_dump($this->input->post('attendance'));
                 $rows = count($this->leader_model->get_attendance($ccaid));
                // $temp = "attendance" . $this->input->post('userid');
                 $data = array();
@@ -105,10 +105,10 @@ class Leader extends CI_Controller {
                     $data[] = array(
                         'userid' => $this->input->post('userid')[$i],
                         'ccaid' => $this->input->post('ccaid')[$i],
-                        'date' => $this->input->post('date')[$i],
+                        'date' => $this->input->post('date'),
                         // $this->input->post('dob'),
-                        'time' => $this->input->post('time')[$i],
-                        //'attendance' => $this->input->post[$temp][$i],
+                        'time' => $this->input->post('time'),
+                        'attendance' => $this->input->post('attendance')[$i] ? 1:0,
                         'reason' => $this->input->post('reason')[$i],
                         'remarks' => $this->input->post('remarks')[$i],
                     );

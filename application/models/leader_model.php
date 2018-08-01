@@ -59,7 +59,7 @@ class leader_model extends CI_Model
     // $sql = 'select * from attendance';
     // $query = $this->db->query($sql);
     // $result = $query-> result();
-    $query = $this->db->get_where('attendance_view',array('ccaID' => $ccaID));
+    $query = $this->db->get_where('usercca_view',array('ccaID' => $ccaID));
     return $query->result();
   }  
 
