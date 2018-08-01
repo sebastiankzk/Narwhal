@@ -180,7 +180,7 @@
       <div class="row">
         <div class="col-lg-2"></div>
         <div class="col-lg-2"></div>
-        <div class="col-lg-2">            
+        <div class="col-lg-6">            
           <input type="submit" name="submit" value="Update" class="btn btn-primary" />   
           <?php if($this->session->userdata('role') == 'Admin') : ?>
           <a href="<?php echo base_url('index.php/Admin'); ?>"><input id="btn_cancel" name="btn_cancel" type="button" class="btn btn-danger" value="Cancel" />   
