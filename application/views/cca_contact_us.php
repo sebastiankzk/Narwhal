@@ -112,7 +112,7 @@
                 <th>Name</th>
                 <th>Email</th>
                 <th>Message</th>
-                <th>Date</th>
+                <th>Date of Contact</th>
                 <th></th>
                 <th></th>
               </tr>
