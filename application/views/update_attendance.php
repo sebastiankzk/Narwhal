@@ -172,9 +172,9 @@
        <td> 
             <?php echo ($i++); ?>
        </td>
-       <td> <!-- <input size="5" id="username" name="username[]" type="text" class="form-control" value="<?php echo $cca[i]->User_name; ?>"/>
-            <input type="hidden" id="userid" name="userid[]" value="<?php echo $query[i]->userID; ?>">
-            <input type="hidden" id="ccaid" name="ccaid[]" value="<?php echo $query[i]->ccaID; ?>"> -->
+       <td> <input size="5" id="username" name="username[]" type="text" class="form-control" value="<?php echo $cca[$i]->User_name; ?>"/>
+            <input type="hidden" id="userid" name="userid[]" value="<?php echo $query[$i]->userID; ?>">
+            <input type="hidden" id="ccaid" name="ccaid[]" value="<?php echo $query[$i]->ccaID; ?>">
        </td>
        <td>
             <!-- <input type="checkbox" name="attendance[]" value="<?php echo $query[$i]->attendance; ?>"/> -->

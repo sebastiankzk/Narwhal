@@ -94,7 +94,7 @@
           <a href="<?php echo base_url('index.php'); ?>">Home</a>
         </li>
         <li class="breadcrumb-item active">
-         <a href="<?php echo base_url('index.php/Profile/'); ?>">Accounts
+         <a href="<?php echo base_url('index.php/leader/view_record/' . $view[0]->ccaID); ?>">Attendance
          </a>
        </li>
      </ol>
@@ -112,6 +112,9 @@
                   <input id="search" name="searchbtn" type="submit" class="btn btn-secondary"
                   value="Search" />
                 </div>
+                <div class="offset-sm-7 form-group">
+                  <a href="<?php echo base_url('index.php/leader/get_record/'. $view[0]->userID); ?>" class="btn btn-success ">Add record</a>
+                </div>
               </form>
             </h3>
             <table class="table table-striped table-hover">
@@ -128,11 +131,10 @@
                <?php for ($i = 0; $i < count($view); ++$i) { ?>
                  <tr>
                    <td><?php echo ($i+1); ?></td>
-                   <td><?php echo $view[$i]->date; ?></td>
+                   <td><?php echo$view[$i]->date; ?></td>
                    <td><?php echo $view[$i]->time; ?></td>
                    <td><a href="<?php echo base_url('index.php/leader/get_recordupdate/'.$view[$i]->ccaID); ?>" class="btn btn-primary">Edit</a></td>
-                   <td><a href="" class="btn btn-danger">Delete</a>
-                   </td>
+                   <td><a href="" class="btn btn-danger">Delete</a></td>
                  </tr>
                <?php } ?>
              </tbody>

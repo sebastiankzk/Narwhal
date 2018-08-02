@@ -55,7 +55,7 @@ class leader_model extends CI_Model
   } 
 
   function get_allattendance($ccaid)  
-  {  
+  { 
     $this->db->where('ccaID', $ccaid);
     $this->db->from('attendance');
     $query = $this->db->get();
@@ -122,6 +122,14 @@ class leader_model extends CI_Model
       array_push($date, $result[$i]->date);
     }
     return $date;
+  }
+
+  function get_date2()
+  {
+    $this->db->group_by('date');
+    $this->db->from('attendance');
+    $query = $this->db->get();
+    $result = $query->row();
   }
 
   function get_time()

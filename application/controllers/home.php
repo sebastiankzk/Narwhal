@@ -130,7 +130,9 @@ class Home extends CI_Controller {
         $data['query'] = $this->home_model->get_user_info($userid);
         $this->load->view('view_profile', $data);
         }
-        else{
+        else
+        {
+            // redirect('error/cli/error_php.php');
             redirect(base_url() . 'index.php');
             // redirect('error/cli/index.html');
         }

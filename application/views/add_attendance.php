@@ -109,6 +109,10 @@
     <li class="breadcrumb-item">
       <a href="<?php echo base_url('index.php'); ?>">Home</a>
     </li>
+    <li class="breadcrumb-item">
+      <a href="<?php echo base_url('index.php/leader/view_record/' . $query[0]->ccaID); ?>">Attendance</a>
+   </li>
+   </li>
     <li class="breadcrumb-item active">Create
    </li>
  </ol>
@@ -201,11 +205,16 @@
 
 <?php echo $this->session->flashdata('msg'); ?>
 
-<div class="offset-sm-2 col-md-8 text-center">
+<div class="form-group">
+<div class="offset-md-4 row colbox text-center">
   <input id="btn_create" name="btn_create" type="submit" class="btn btn-secondary"
   value="Create" />
+  <div class="col-md-1"></div>
+  <a href="<?php echo base_url('index.php/leader/view_record/' . $query[0]->ccaID); ?>">
   <input id="btn_cancel" name="btn_cancel" type="reset" class="btn btn-danger"
   value="Cancel" />
+  </a>
+</div>
 </div>
 
 </fieldset>

@@ -41,11 +41,13 @@ class Leader extends CI_Controller {
         $this->session->set_flashdata('msg', 'Member has been deleted!');
         redirect('leader','refresh');
      }
-
+    
+    //show all records based on specific cca
     function view_record($ccaid)
     {
         $this->load->model('leader_model');
         $viewrecord= $this->leader_model->get_allattendance($ccaid);
+        $data['date'] = $this->leader_model->get_date2();
         $data['view'] = $viewrecord;
         $this->load->view('attendance',$data);
     }
@@ -114,11 +116,11 @@ class Leader extends CI_Controller {
                 $data = array();
 
                 for($i=0; $i < $rows; $i++) {
-                    if (isset($this->input->post('attendance')[$i])) {
-                        $attendance[$i] = 1;
-                    } else {
-                        $attendance[$i] = 0;
-                    }
+                    // if (isset($this->input->post('attendance')[$i])) {
+                    //     $attendance[$i] = 1;
+                    // } else {
+                    //     $attendance[$i] = 0;
+                    // }
                     
                     $data[] = array(
                         'userid' => $this->input->post('userid')[$i],
@@ -126,7 +128,7 @@ class Leader extends CI_Controller {
                         'date' => $this->input->post('date'),
                         // $this->input->post('dob'),
                         'time' => $this->input->post('time'),
-                        'attendance' => $attendance[$i],
+                        'attendance' => $this->input->post('attendance')[$i] ? 1:0,
                         'reason' => $this->input->post('reason')[$i],
                         'remarks' => $this->input->post('remarks')[$i],
                     );
@@ -145,7 +147,7 @@ class Leader extends CI_Controller {
 
                 //display success message
                 $this->session->set_flashdata('msg', '<div class="alert alert-success textcenter">New user has been added!</div>');
-                // redirect('leader/get_record/' . $ccaid);
+                redirect('leader/get_record/' . $ccaid);
             // }
         // }
         // else
