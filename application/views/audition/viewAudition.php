@@ -18,6 +18,7 @@
 					<div class="col-lg-2">
 						<?php if($this->session->userdata('role') == 'Leader'): ?>
 							<a href="<?php echo base_url('index.php/audition/edit/'.$row['id']); ?>" class="btn btn-primary">Edit</a>
+							<a href="<?php echo base_url('index.php/audition/auditionAttendees/'.$row['id']); ?>" class="btn btn-primary">View</a>
 						<?php else: ?>
 							<a href="<?php echo base_url('index.php/audition/addAudition/'.$row['id']); ?>" class="btn btn-primary">Apply</a>
 						<?php endif?>
