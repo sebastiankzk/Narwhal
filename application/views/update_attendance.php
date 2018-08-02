@@ -167,7 +167,7 @@
    </thead>
    <tbody>
     
-     <?php for ($i = 1; $i < count($query); ++$i) { ?>
+     <?php for ($i = 1; $i < count($cca); ++$i) { ?>
      <tr>
        <td> 
             <?php echo ($i++); ?>
@@ -177,13 +177,13 @@
             <input type="hidden" id="ccaid" name="ccaid[]" value="<?php echo $query[i]->ccaID; ?>"> -->
        </td>
        <td>
-            <input type="checkbox" name="attendance[]" value="<?php echo $query[i]->attendance; ?>"/>
+            <!-- <input type="checkbox" name="attendance[]" value="<?php echo $query[$i]->attendance; ?>"/> -->
        </td>
        <td>
-            <input type="text" id="reason" name="reason[]" class="form-control" value="<?php echo $query[i]->reason; ?>">
+            <input type="text" id="reason" name="reason[]" class="form-control" value="<?php echo $cca[$i]->reason; ?>">
        </td>
        <td>
-            <input type="text" id="remarks" name="remarks[]" class="form-control" value="<?php echo $query[i]->remarks; ?>">
+            <input type="text" id="remarks" name="remarks[]" class="form-control" value="<?php echo $cca[$i]->remarks; ?>">
        </td>
 
      </tr>
