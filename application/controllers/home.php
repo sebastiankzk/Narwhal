@@ -131,7 +131,7 @@ class Home extends CI_Controller {
         $this->load->view('view_profile', $data);
         }
         else{
-            redirect('error/cli/error_php.php');
+            redirect(base_url() . 'index.php');
             // redirect('error/cli/index.html');
         }
         
