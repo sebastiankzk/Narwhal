@@ -33,6 +33,15 @@ class Home extends CI_Controller {
         $this->load->model('home_model');
         $data['query'] = $this->home_model->get_specific_cca($ccaID);
 
+        $userId = $this->session->userdata('userID');
+        //check limit
+        $limit = $this->home_model->cca_register_limit($userId);
+        $data['limitCheck'] = $limit;
+
+        //check if registered
+        $test = $this->home_model->get_cca_interest($userId,$ccaID);
+        $data['checkIfRegisted'] = $test;
+
         $this->load->view('cca', $data);
 	}
 
@@ -65,11 +74,18 @@ class Home extends CI_Controller {
         'userID' => $this->session->userdata('userID'));
 
         $this->home_model->register_cca_interest($data);
-
         $this->session->set_flashdata('msg', 'Interest registered!');
 
         $this->load->library('user_agent');
-        redirect($this->agent->referrer());
+        
+        $this->load->model('audition_model');
+        $test = $this->audition_model->load($ccaID);
+
+        if($test){
+            redirect('audition/'.$ccaID,'refresh');
+        }else{
+            redirect($this->agent->referrer());
+        }
         //redirect('admin','refresh');
 	}	
 
