@@ -38,8 +38,7 @@ class Leader extends CI_Controller {
 
         $this->session->set_flashdata('msg', 'Member has been deleted!');
         redirect('leader','refresh');
-<<<<<<< HEAD
-     }
+    }
     
     //show all records based on specific cca
     function view_record($ccaid)
@@ -49,19 +48,17 @@ class Leader extends CI_Controller {
         $data['date'] = $this->leader_model->get_date2();
         $data['view'] = $viewrecord;
         $this->load->view('attendance',$data);
-=======
     }
 
-    function view_record($attid)
-    {
-        $this->load->model('leader_model');
-        //call the model function to get the User data
-        $userresult = $this->leader_model->get_attendance();
-        $data['query'] = $userresult;
-        //load the profile view
-        $this->load->view('add_attendance',$data);
->>>>>>> a2a918463be003de5a603998200a9521db02865c
-    }
+    // function view_record($attid)
+    // {
+    //     $this->load->model('leader_model');
+    //     //call the model function to get the User data
+    //     $userresult = $this->leader_model->get_attendance();
+    //     $data['query'] = $userresult;
+    //     //load the profile view
+    //     $this->load->view('add_attendance',$data);
+    // }
 
     function get_record($ccaid)
     {  
@@ -92,7 +89,7 @@ class Leader extends CI_Controller {
             // else
             // {
                 //pass validation
-<<<<<<< HEAD
+
 
                 // $insert = $this->leader_model->get_attendance($ccaid);
                 // for($i=0;$i<$insert;$i++) {
@@ -129,13 +126,12 @@ class Leader extends CI_Controller {
                     );
                 }
 
-=======
         $data = array(
             'date' => @date('d-m-Y', @strtotime($this->input->post('date'))),
                     // $this->input->post('dob'),
             'time' => $this->input->post('time'),
         );
->>>>>>> a2a918463be003de5a603998200a9521db02865c
+
 
                 //insert the form data into database
         $this->db->insert('attendance', $data);
@@ -150,13 +146,13 @@ class Leader extends CI_Controller {
         $this->db->insert('mytable', $data);
 
                 //display success message
-<<<<<<< HEAD
+
                 $this->session->set_flashdata('msg', '<div class="alert alert-success textcenter">New user has been added!</div>');
                 redirect('leader/get_record/' . $ccaid);
-=======
+
         $this->session->set_flashdata('msg', '<div class="alert alert-success textcenter">New user has been added!</div>');
         redirect('Profile','refresh');
->>>>>>> a2a918463be003de5a603998200a9521db02865c
+
             // }
         // }
         // else

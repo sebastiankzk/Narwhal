@@ -54,27 +54,26 @@ class leader_model extends CI_Model
     $this->db->delete('tbl_user_cca');
   } 
 
-<<<<<<< HEAD
   function get_allattendance($ccaid)  
   { 
     $this->db->where('ccaID', $ccaid);
     $this->db->from('attendance');
     $query = $this->db->get();
     return $query->result();
-  }  
-=======
+  } 
+
   public function add_member($data)  
   {  
      $this->db->insert('tbl_user_cca', $data);
   }
->>>>>>> a2a918463be003de5a603998200a9521db02865c
+
 
   function get_attendance($ccaID)  
   {  
     // $sql = 'select * from attendance';
     // $query = $this->db->query($sql);
     // $result = $query-> result();
-    $query = $this->db->get_where('attendance_view',array('ccaID' => $ccaID));
+    $query = $this->db->get_where('usercca_view',array('ccaID' => $ccaID));
     return $query->result();
   }  
 
