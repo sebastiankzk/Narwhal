@@ -56,11 +56,33 @@ class Audition_model extends CI_Model {
 		$this->db->update('users_audition', $data);
 	}
 
-	function getAudition($id){
+	function getAudition($auditionId){
 		$this->db->select('*');
 		$this->db->from('users_audition');
-		$this->db->where('auditionId', $id);
+		$this->db->where('auditionId', $auditionId);
 
+		$query = $this->db->get();
+		$result = $query->result();
+
+		$auditionList = [];
+
+		$this->load->model('profile_model');
+
+		for ($i = 0; $i < count($result); $i++)
+		{
+			$name = $this->profile_model->get_student_record($result[$i]->userId);
+			array_push($auditionList, array('id'=> $result[$i]->id, 'auditionId' => $result[$i]->auditionId, 'userId' => $result[$i]->userId, 'status' => $result[$i]->status, 'name' => $name->name, 'mobile' => $name->mobile,));
+		}
+
+		return $auditionList;
+	}
+
+	function getAuditionPerson($auditionId,$userId){
+		$this->db->select('*');
+		$this->db->from('users_audition');
+		$this->db->where('auditionId', $auditionId);
+		$this->db->where('userId', $userId);
+		
 		$query = $this->db->get();
 		$result = $query->result();
 
