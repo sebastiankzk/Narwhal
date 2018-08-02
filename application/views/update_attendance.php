@@ -8,7 +8,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>NYP CCA Portal - Create Attendance</title>
+  <title>NYP CCA Portal - Update Attendance</title>
 
   <!-- Bootstrap core CSS -->
   <link href="<?=base_url();?>assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -117,7 +117,7 @@
   <div class="col-lg-12 mb-4"> 
     <?php
         $attributes = array("class" => "", "id" => "addprofile", "name" => "addprofile");
-          echo form_open("leader/create_record/". $query[0]->ccaID, $attributes);?>
+          echo form_open("leader/update_record/". $query[0]->ccaID, $attributes);?>
 
     <fieldset>
 
@@ -127,8 +127,7 @@
           <label for="date" class="control-label">Date</label>
         </div>
         <div class="col-md-6">
-          <input id="date" name="date" placeholder="" type="Date"
-          class="form-control" value="<?php echo set_value('date'); ?>" />
+          <input id="date" name="date" type="text" class="form-control" value="<?php echo $query[0]->date; ?>" disabled />
           <span class="text-danger"><?php echo form_error('date'); ?></span>
         </div>
       </div>
@@ -140,8 +139,7 @@
         <label for="time" class="control-label">Time</label>
       </div>
       <div class="col-md-6">
-        <input id="time" name="time" placeholder="" type="time"
-        class="form-control" value="<?php echo set_value('time'); ?>" />
+        <input id="date" name="date" type="text" class="form-control" value="<?php echo $query[0]->time; ?>" disabled />
         <span class="text-danger"><?php echo form_error('time'); ?></span>
       </div>
     </div>
@@ -157,7 +155,7 @@
 
 <div class="table-responsive">   
   <!-- <h3 class="card-header bg-primary text-white">Accounts</h3> -->
-  <h3 class="card-header text-black"><?php echo $query[0]->cca_name; ?></h3>
+  <h3 class="card-header text-black"><?php echo $cca[0]->cca_name; ?></h3>
   <table class="table table-striped table-hover">
    <thead>
        <th>#</th>
@@ -169,28 +167,23 @@
    </thead>
    <tbody>
     
-     <?php $index = 1; foreach($query as $i => $row){?>
+     <?php for ($i = 1; $i < count($query); ++$i) { ?>
      <tr>
        <td> 
-            <?php echo $index++; ?>
+            <?php echo ($i++); ?>
        </td>
-       <td> <input size="5" id="username" name="username[]" type="text" class="form-control" value="<?php echo $row->User_name; ?>"/>
-            <input type="hidden" id="userid" name="userid[]" value="<?php echo $row->userID; ?>">
-            <input type="hidden" id="ccaid" name="ccaid[]" value="<?php echo $row->ccaID; ?>">
-       </td>
-       <!-- <td><input size="5" id="ccaname" name="ccaname[]" type="text" class="form-control" value="<?php echo $row->cca_name; ?>"/>
-            
-       </td> -->
-            
-         
-       <td>
-            <input type="checkbox" name="attendance[]" value="1" checked="checked" />
+       <td> <!-- <input size="5" id="username" name="username[]" type="text" class="form-control" value="<?php echo $cca[i]->User_name; ?>"/>
+            <input type="hidden" id="userid" name="userid[]" value="<?php echo $query[i]->userID; ?>">
+            <input type="hidden" id="ccaid" name="ccaid[]" value="<?php echo $query[i]->ccaID; ?>"> -->
        </td>
        <td>
-            <input size="5" id="reason" name="reason[]" placeholder="Reason" type="text" class="form-control" value=""/>
+            <input type="checkbox" name="attendance[]" value="<?php echo $query[i]->attendance; ?>"/>
        </td>
-       <td>    
-            <input size="5" id="remarks" name="remarks[]" placeholder="Remarks" type="text" class="form-control" value="" />
+       <td>
+            <input type="text" id="reason" name="reason[]" class="form-control" value="<?php echo $query[i]->reason; ?>">
+       </td>
+       <td>
+            <input type="text" id="remarks" name="remarks[]" class="form-control" value="<?php echo $query[i]->remarks; ?>">
        </td>
 
      </tr>
@@ -203,7 +196,7 @@
 
 <div class="offset-sm-2 col-md-8 text-center">
   <input id="btn_create" name="btn_create" type="submit" class="btn btn-secondary"
-  value="Create" />
+  value="Update" />
   <input id="btn_cancel" name="btn_cancel" type="reset" class="btn btn-danger"
   value="Cancel" />
 </div>

@@ -7,6 +7,8 @@ class Leader extends CI_Controller {
     function __construct()
     {
         parent::__construct();
+        // $this->load->helper('checkbox');
+        $this->load->library('form_validation');
     }
 
 	public function index()
@@ -40,14 +42,12 @@ class Leader extends CI_Controller {
         redirect('leader','refresh');
      }
 
-    function view_record($attid)
+    function view_record($ccaid)
     {
         $this->load->model('leader_model');
-        //call the model function to get the User data
-        $userresult = $this->leader_model->get_attendance();
-        $data['query'] = $userresult;
-        //load the profile view
-        $this->load->view('add_attendance',$data);
+        $viewrecord= $this->leader_model->get_allattendance($ccaid);
+        $data['view'] = $viewrecord;
+        $this->load->view('attendance',$data);
     }
 
     function get_record($ccaid)
@@ -58,8 +58,20 @@ class Leader extends CI_Controller {
         $data['query'] = $this->leader_model->get_attendance($ccaid);
         // $data['date'] = $this->leader_model->get_date();
         // $data['time'] = $this->leader_model->get_time();
-        $data['ccaid']=$ccaid;
+        // $data['ccaid']=$ccaid;
         $this->load->view('add_attendance', $data);
+    }
+
+    function get_recordupdate($ccaid)
+    {  
+         //load the Profile_model
+        $this->load->model('leader_model');
+
+        $data['query'] = $this->leader_model->get_attendanceupdate($ccaid);
+        $data['cca'] = $this->leader_model->get_attendance($ccaid);
+        $data['date'] = $this->leader_model->get_date();
+        $data['time'] = $this->leader_model->get_time();
+        $this->load->view('update_attendance', $data);
     }
 
     function create_record($ccaid)
@@ -96,19 +108,25 @@ class Leader extends CI_Controller {
                 //     'reason' => $this->input->post('reason'),
                 //     'remarks' => $this->input->post('remarks'),
                 // );}
-               var_dump($this->input->post('attendance'));
+               
                 $rows = count($this->leader_model->get_attendance($ccaid));
                // $temp = "attendance" . $this->input->post('userid');
                 $data = array();
 
                 for($i=0; $i < $rows; $i++) {
+                    if (isset($this->input->post('attendance')[$i])) {
+                        $attendance[$i] = 1;
+                    } else {
+                        $attendance[$i] = 0;
+                    }
+                    
                     $data[] = array(
                         'userid' => $this->input->post('userid')[$i],
                         'ccaid' => $this->input->post('ccaid')[$i],
                         'date' => $this->input->post('date'),
                         // $this->input->post('dob'),
                         'time' => $this->input->post('time'),
-                        'attendance' => $this->input->post('attendance')[$i] ? 1:0,
+                        'attendance' => $attendance[$i],
                         'reason' => $this->input->post('reason')[$i],
                         'remarks' => $this->input->post('remarks')[$i],
                     );
@@ -127,7 +145,7 @@ class Leader extends CI_Controller {
 
                 //display success message
                 $this->session->set_flashdata('msg', '<div class="alert alert-success textcenter">New user has been added!</div>');
-                redirect('add_attendance','refresh');
+                // redirect('leader/get_record/' . $ccaid);
             // }
         // }
         // else
