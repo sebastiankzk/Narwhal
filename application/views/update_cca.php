@@ -90,6 +90,19 @@
     <h1 class="mt-4 mb-3">Update CCA
       <small>(<?php echo $query->name; ?>)</small>
     </h1>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="<?php echo base_url('index.php'); ?>">Home</a>
+        </li>
+        <li class="breadcrumb-item active">
+         <a href="<?php echo base_url('index.php/admin'); ?>">Admin
+         </a>
+       </li>
+       <li class="breadcrumb-item active">
+         Update
+         </a>
+       </li>
+     </ol>
     <br/>
 
     <form method="post" action="<?php echo base_url('index.php/admin/update_cca/'.$query->ccaID); ?>" enctype='multipart/form-data'>
@@ -167,9 +180,14 @@
       <div class="row">
         <div class="col-lg-2"></div>
         <div class="col-lg-2"></div>
-        <div class="col-lg-2">            
+        <div class="col-lg-6">            
           <input type="submit" name="submit" value="Update" class="btn btn-primary" />   
-          <a href="<?php echo base_url('index.php/Admin'); ?>"><input id="btn_cancel" name="btn_cancel" type="button" class="btn btn-danger" value="Cancel" />     
+          <?php if($this->session->userdata('role') == 'Admin') : ?>
+          <a href="<?php echo base_url('index.php/Admin'); ?>"><input id="btn_cancel" name="btn_cancel" type="button" class="btn btn-danger" value="Cancel" />   
+          <?php elseif($this->session->userdata('role') == 'Leader') : ?>   
+          <a href="<?php echo base_url('index.php/Leader'); ?>"><input id="btn_cancel" name="btn_cancel" type="button" class="btn btn-danger" value="Cancel" /> 
+          <?php else : ?>   
+          <?php endif; ?> 
         </div>
       </div> 
       <br/>            

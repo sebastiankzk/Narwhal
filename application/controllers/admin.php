@@ -61,7 +61,7 @@ class Admin extends CI_Controller {
     {
         //store textbox from form into an array
         $config['upload_path']          = './assets/images/';
-        $config['allowed_types']        = 'jpg|png';
+        $config['allowed_types']        = 'jpg|jpeg|png';
 
         $this->load->library('upload', $config);
 
@@ -127,7 +127,7 @@ class Admin extends CI_Controller {
     function add_specific_cca()
     {
         $config['upload_path']          = './assets/images/';
-        $config['allowed_types']        = 'jpg|png';
+        $config['allowed_types']        = 'jpg|jpeg|png';
 
         $this->load->library('upload', $config);
 

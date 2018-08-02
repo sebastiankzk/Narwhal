@@ -112,7 +112,7 @@
                 <th>Name</th>
                 <th>Email</th>
                 <th>Message</th>
-                <th></th>
+                <th>Date of Contact</th>
                 <th></th>
                 <th></th>
               </tr>
@@ -124,7 +124,7 @@
                 <td><?=$row->name?></td>
                 <td><?=$row->email?></td>
                 <td><?=$row->message?></td>
-                <td></td>
+                <td><?=$row->contactdate?></td>
                 <td></td>
                 <td></td>
 <!--                 <form method="post" action="event/view_event">

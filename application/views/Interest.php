@@ -114,7 +114,7 @@
                 <th>Gender</th>
                 <th>Email</th>
                 <th>Mobile</th>
-                <th></th>
+                <th>Date of Registration</th>
               </tr>
             </thead>
             <tbody>
@@ -126,7 +126,7 @@
                 <td><?=$row->gender?></td>
                 <td><?=$row->email?></td>
                 <td><?=$row->mobile?></td>
-                <td></td>
+                <td><?=$row->reg_date?></td>
 <!--                 <form method="post" action="event/view_event">
                 <input type="hidden" id="eventID" name="eventID" value='<?=$row->eventID?>' />
                 <td><button type="submit" class="btn btn-primary">View</button>

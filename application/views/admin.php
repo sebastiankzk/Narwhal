@@ -89,8 +89,15 @@
       <h1 class="mt-4 mb-3">CCA in NYP
         <small>(Administrative Mode)</small>
       </h1>
-
-
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="<?php echo base_url('index.php'); ?>">Home</a>
+        </li>
+        <li class="breadcrumb-item active">
+         Admin
+         </a>
+       </li>
+     </ol>
 
       <div class="row">
         <div class="col-auto mr-auto">
@@ -112,10 +119,11 @@
             </div>
           </div>
         </div>
-        <div>Current limit: <?php echo $limit[0]->CCALimit ?></div>
+        
         <div class="text-center">
           <a href="" class="btn btn-primary" data-toggle="modal" data-target="#modalLoginForm">Change Count</a>
         </div>
+        <div>Current limit: <?php echo $limit[0]->CCALimit ?></div>
         </div>
         <div class="col-auto">
          <a href="<?php echo base_url('index.php/admin/add_cca'); ?>" class="btn btn-primary">Add new CCA &rarr;</a>

@@ -136,7 +136,7 @@
       <!-- Portfolio Section -->
       <div class="row">
         <?php foreach($query as $row): ?>
-          <div class="col-lg-4 col-sm-4 portfolio-item">
+          <div class="col-lg-4 col-sm-6 col-xs-12 portfolio-item">
             <div class="card h-100" style="background: #F8F8F8">
               <img class="card-img-top" src="../narwhal/assets/images/<?php echo $row->image; ?>" alt="">
               <div class="card-body">

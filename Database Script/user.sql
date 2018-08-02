@@ -1,10 +1,10 @@
-CREATE TABLE `user` (
+SELECT * FROM narwhal.user;CREATE TABLE `user` (
   `userID` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(200) NOT NULL,
+  `name` varchar(45) NOT NULL,
   `password` varchar(100) NOT NULL,
   `adminNumber` varchar(45) NOT NULL,
   `gender` varchar(45) NOT NULL,
-  `dob` varchar(45) NOT NULL,
+  `dob` date NOT NULL,
   `address` varchar(100) NOT NULL,
   `email` varchar(45) NOT NULL,
   `mobile` varchar(45) NOT NULL,

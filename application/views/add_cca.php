@@ -89,6 +89,19 @@
     <!-- Page Heading/Breadcrumbs -->
     <h1 class="mt-4 mb-3">Add new CCA
     </h1>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="<?php echo base_url('index.php'); ?>">Home</a>
+        </li>
+        <li class="breadcrumb-item active">
+         <a href="<?php echo base_url('index.php/admin'); ?>">Admin
+         </a>
+       </li>
+       <li class="breadcrumb-item active">
+         Create
+         </a>
+       </li>
+     </ol>
     <br/>
 
     <form method="post" action="<?php echo base_url('index.php/admin/add_specific_cca/'); ?>" enctype='multipart/form-data'>
@@ -159,6 +172,7 @@
           </div>
           <div class="row col-lg-6">
             <input type="file" name="image" class="form-control" placeholder="Image Url" required="" value=""</div>
+            Only jpg, jpeg or png supported
           </div>
         </div>
         <br/>
