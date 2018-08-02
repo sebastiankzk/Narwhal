@@ -52,3 +52,5 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'home';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
+$route['audition/:num'] = 'audition';
+$route['audition/edit/:num'] = 'audition/edit';
