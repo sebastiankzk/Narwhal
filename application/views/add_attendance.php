@@ -54,10 +54,10 @@
           <?php endif; ?>
         </li>
         <li class="nav-item active">
-          <?php if($this->session->userdata('role') == 'Leader') : ?>            
-            <a class="nav-link" href="<?php echo base_url('index.php/leader/view_record/'. $this->session->userdata('userID') ); ?>">Attendance</a>
-          <?php endif; ?>
-        </li>
+                <?php if($this->session->userdata('role') == 'Leader') : ?>            
+                  <a class="nav-link" href="<?php echo base_url('index.php/leader/view_record/'. $this->session->userdata('ccaID') ); ?>">Attendance</a>
+              <?php endif; ?>
+            </li>
         <li class="nav-item">
           <a class="nav-link" href="<?php echo base_url('index.php/home/contact_us'); ?>">Contact</a>
         </li>
