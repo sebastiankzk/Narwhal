@@ -66,7 +66,7 @@ class Home extends CI_Controller {
 
         $this->home_model->register_cca_interest($data);
 
-        $this->session->set_flashdata('msg', 'Interest registered!');
+        $this->session->set_flashdata('msg', '<div class="alert alert-success textcenter">Interest registered!');
 
         $this->load->library('user_agent');
         redirect($this->agent->referrer());
@@ -101,7 +101,8 @@ class Home extends CI_Controller {
         $this->load->model('home_model');
         $this->home_model->submit_contact_us($data);
 
-        $this->session->set_flashdata('msg', 'Message submitted!');
+        $this->session->set_flashdata('msg', '<div class="alert alert-success textcenter">Message submitted!');
+
         redirect('home/contact_us','refresh');
 	}
 

@@ -132,10 +132,15 @@
    </br>
    <div class="row">
     <div class="col-auto mr-auto">
-      <?php echo $this->session->flashdata('msg');?>
+
     </div>
     <div class="col-auto">
       Total CCA count: <b><?php echo $count ?></b>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12">
+      <?php echo $this->session->flashdata('msg');?>
     </div>
   </div>
 </br>

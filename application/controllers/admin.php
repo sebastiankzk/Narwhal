@@ -100,7 +100,7 @@ class Admin extends CI_Controller {
         $this->load->model('admin_model');
         $this->admin_model->update_specific_cca($ccaID, $data);
 
-        $this->session->set_flashdata('msg', 'CCA Updated!');
+        $this->session->set_flashdata('msg', '<div class="alert alert-success textcenter">CCA Updated!');
 
         if($this->session->userdata('role') == 'Leader'){
             redirect('leader','refresh');
@@ -115,7 +115,7 @@ class Admin extends CI_Controller {
         $this->load->model('admin_model');
         $this->admin_model->delete_specific_cca($ccaID);
 
-        $this->session->set_flashdata('msg', 'CCA Deleted!');
+        $this->session->set_flashdata('msg', '<div class="alert alert-success textcenter">CCA Deleted!');
         redirect('admin','refresh');
     }
 
@@ -151,7 +151,7 @@ class Admin extends CI_Controller {
                 'information' => $this->input->post('information'),
                 'venue' => $this->input->post('venue'),
                 'trgDate' => $this->input->post('trgDate'),
-                'trgTime' => $this->input->post('trgTime'),
+                'startTime' => $this->input->post('trgTime'),
                 'image' => $data['upload_data']['file_name']
             );
         }
@@ -160,7 +160,7 @@ class Admin extends CI_Controller {
         $this->load->model('admin_model');
         $this->admin_model->add_specific_cca($data);
 
-        $this->session->set_flashdata('msg', 'CCA Added!');
+        $this->session->set_flashdata('msg', '<div class="alert alert-success textcenter">CCA Added!');
         redirect('admin','refresh');
     }
 
