@@ -44,6 +44,8 @@
             </li>
             <li>
               <a class="nav-link" href="<?php echo base_url('index.php/event'); ?>">Event</a>
+            </li>
+            <li>
               <a class="nav-link active" href="<?php echo base_url('index.php/indemnity'); ?>">Indemnity</a>
             </li>
 

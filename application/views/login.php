@@ -75,6 +75,7 @@
       </div>
     </nav>
 
+</br></br></br>
     <!-- Page Content -->
     <div class="container">
 
@@ -88,10 +89,10 @@
               <form method="post" action="<?php echo base_url(); ?>index.php/login/login_validation">
 
                 <ul class="list-group list-group-flush">
-                  <li class="list-group-item"><input type="text" name="username" class="form-control" placeholder="Name" required="" value="142514Z" />
+                  <li class="list-group-item"><input type="text" name="username" class="form-control" placeholder="Name" required="" value="" />
                     <span class="text-danger"><?php echo form_error('username'); ?></span></li>                  
 
-                  <li class="list-group-item"><input type="password" name="password" class="form-control" placeholder="Password" required="" value="123456" />
+                  <li class="list-group-item"><input type="password" name="password" class="form-control" placeholder="Password" required="" value="" />
                     <span class="text-danger"><?php echo form_error('password'); ?></span></li>                  
 
                   <li class="list-group-item"><input type="submit" name="insert" value="Login" class="btn btn-primary" /></li>
@@ -103,6 +104,8 @@
         </div>
       </div>
   </div>
+
+</br></br></br></br>
 
     <!-- Footer -->
     <footer class="py-5 bg-dark">

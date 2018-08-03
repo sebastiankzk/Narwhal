@@ -4,6 +4,7 @@
 <br/>
 
 <div class="row">
+	<?php if(!empty($list)): ?>
 	<table class="table table-striped table-hover">
 		<thead>
 			<tr>
@@ -16,10 +17,8 @@
 			</tr>
 		</thead>
 		<tbody>
-			<?php if(!empty($list)): ?>
-				<?php foreach($list as $row): ?>
-
-					<?php $index = 1; foreach ($list as $row):?>
+			<?php foreach($list as $row): ?>
+				<?php $index = 1; foreach ($list as $row):?>
 					<tr>
 						<td><?=$index++?></td>
 						<td><?=$row['name']?></td>
@@ -27,15 +26,14 @@
 						<td><?=$row['status']?></td>
 						<td><a href="<?php echo base_url('index.php/audition/passAttendee/'.$row['id']); ?>">Pass</a></td>
 						<td><a href="<?php echo base_url('index.php/audition/failAttendee/'.$row['id']); ?>">Fail</a></td>
-					</form>
-				</tr>
+					</tr>
+				<?php endforeach; ?>
 			<?php endforeach; ?>
 		</tbody>
 	</table>
+	<?php else: ?>
+		There are no Auditions Attendees for this Timeslot
+	<?php endif ?>
 </div>
-<?php endforeach; ?>
-<?php else: ?>
 
-	There are no Auditions Attendees for this Timeslot
 
-<?php endif ?>

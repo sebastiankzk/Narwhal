@@ -108,7 +108,8 @@ class Login extends CI_Controller {
         //unset session data
         $this->session->unset_userdata(array('username', 'role','userID'));
         //redirect(base_url() . 'index.php');
-        $this->load->library('user_agent');
-        redirect($this->agent->referrer());
+        //$this->load->library('user_agent');
+        //redirect($this->agent->referrer());
+        redirect(base_url() . 'index.php');
     }
 }

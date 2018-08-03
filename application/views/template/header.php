@@ -40,6 +40,9 @@
             <li class="nav-item">
               <a class="nav-link" href="<?php echo base_url('index.php/event'); ?>">Event</a>
             </li>
+            <li>
+              <a class="nav-link active" href="<?php echo base_url('index.php/indemnity'); ?>">Indemnity</a>
+            </li>
              <?php if($this->session->userdata('role') == 'Leader') : ?>
             <li class="nav-item">
               <a class="nav-link" href="<?php echo base_url('index.php/leader'); ?>">Member Info</a>

@@ -159,11 +159,8 @@ class Leader extends CI_Controller {
 
                 //display success message
 
-                $this->session->set_flashdata('msg', '<div class="alert alert-success textcenter">New user has been added!</div>');
+                $this->session->set_flashdata('msg', '<div class="alert alert-success textcenter">New attendance record has been added!</div>');
                 redirect('leader/get_record/' . $ccaid);
-
-        $this->session->set_flashdata('msg', '<div class="alert alert-success textcenter">New user has been added!</div>');
-        redirect('Profile','refresh');
 
             // }
         // }
@@ -255,7 +252,7 @@ class Leader extends CI_Controller {
 
                 //display success message
                 $this->session->set_flashdata('msg', '<div class="alert alert-success textcenter">New training session has been added!</div>');
-                redirect('add_training','refresh');
+                redirect(base_url(). '/index.php/leader/get_training/3','refresh');
             }
         // }
         // else
