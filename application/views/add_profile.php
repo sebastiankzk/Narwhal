@@ -42,6 +42,11 @@
           <?php endif; ?>
         </li>
         <li class="nav-item">
+                <?php if($this->session->userdata('role') == 'Leader') : ?>            
+                  <a class="nav-link" href="<?php echo base_url('index.php/leader/view_record/3' ); ?>">Attendance</a>
+              <?php endif; ?>
+            </li>
+        <li class="nav-item">
               <a class="nav-link" href="<?php echo base_url('index.php/event'); ?>">Event</a>
             </li>
         <li class="nav-item">

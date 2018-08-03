@@ -54,12 +54,26 @@ class leader_model extends CI_Model
     $this->db->delete('tbl_user_cca');
   } 
 
+  function get_allattendance($ccaid)  
+  { 
+    $this->db->where('ccaID', $ccaid);
+    $this->db->from('attendance');
+    $query = $this->db->get();
+    return $query->result();
+  } 
+
+  public function add_member($data)  
+  {  
+     $this->db->insert('tbl_user_cca', $data);
+  }
+
+
   function get_attendance($ccaID)  
   {  
     // $sql = 'select * from attendance';
     // $query = $this->db->query($sql);
     // $result = $query-> result();
-    $query = $this->db->get_where('attendance_view',array('ccaID' => $ccaID));
+    $query = $this->db->get_where('usercca_view',array('ccaID' => $ccaID));
     return $query->result();
   }  
 
@@ -68,7 +82,6 @@ class leader_model extends CI_Model
     $this->db->select('*');
     $this->db->where('ccaID', $ccaID);
     $this->db->from('cca_interest_view');
-    $this->db->order_by('reg_date', 'desc');
     $query = $this->db->get();
     return $query->result();
   } 
@@ -77,7 +90,6 @@ class leader_model extends CI_Model
   {      
     $this->db->select('*');
     $this->db->from('contact_us');
-    $this->db->order_by('contactdate', 'desc');
     $query = $this->db->get();
     return $query->result();
   }    
@@ -88,40 +100,6 @@ class leader_model extends CI_Model
     $this->db->from('attendance');
     $query = $this->db->get();
     return $query->row();
-  }
-
-  function get_date()
-  {
-    $this->db->distinct();
-    $this->db->select('date');
-    $this->db->from('attendance');
-    $query = $this->db->get();
-    $result = $query->result();
-
-    //array to store userID id & role
-    $date = array('Select Date');
-    for ($i = 0; $i < count($result); $i++)
-    {
-      array_push($date, $result[$i]->date);
-    }
-    return $date;
-  }
-
-  function get_time()
-  {
-    $this->db->distinct();
-    $this->db->select('time');
-    $this->db->from('attendance');
-    $query = $this->db->get();
-    $result = $query->result();
-
-    //array to store userID id & role
-    $time = array('Select Time');
-    for ($i = 0; $i < count($result); $i++)
-    {
-      array_push($time, $result[$i]->time);
-    }
-    return $time;
   }
 
   //not in use
@@ -141,6 +119,57 @@ class leader_model extends CI_Model
       return $query->result();
     }
   }
+
+  function get_datetime($ccaID)
+  {
+   $this->db->select('trainingID');
+   $this->db->select('datetime');
+   $this->db->where('ccaID', $ccaID);
+   $this->db->from('training');
+   $query = $this->db->get();
+   $result = $query->result();
+  //array to store training id & date
+   $trainingid = array('Select Date Time');
+   $datetime = array('Select Date Time');
+   for ($i = 0; $i < count($result); $i++)
+   {
+     array_push($trainingid, $result[$i]->trainingID);
+     array_push($datetime, $result[$i]->datetime);
+   }
+   return $training_result = array_combine($trainingid, $datetime);
+  }
+
+  function get_training($ccaID)
+  {
+   $this->db->select('*');
+   $this->db->where('ccaID', $ccaID);
+   $this->db->from('training');
+   $query = $this->db->get();
+   return $query->result();
+  }
+
+  //  function search_training($dateime)
+  // {
+  //   $this->db->select('*');
+  //   $this->db->from('training');
+  //   $this->db->like('datetime',$dateime);
+  //   $query = $this->db->get();
+
+  //   if ($query->num_rows() > 0){
+  //     return $query->result();
+  //   }else{
+  //     return $query->result();
+  //   }
+  //  }
+
+  function get_interest_base($id)  
+  {      
+    $this->db->select('*');
+    $this->db->where('id', $id);
+    $this->db->from('cca_interest');
+    $query = $this->db->get();
+    return $query->result();
+  } 
 
 }
 ?>

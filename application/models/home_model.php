@@ -77,7 +77,42 @@
       {  
           //INSERT * INTO cca_interest
           $this->db->insert('cca_interest', $data);
+      }
+
+      public function get_cca_interest($id,$ccaID)  
+      {  
+          $this->db->select('*');
+          $this->db->from('cca_interest');
+          $this->db->where('userID',$id);
+          $this->db->where('ccaID',$ccaID);
+
+          $query = $this->db->get();
+          $result = $query->result();
+
+          if($result){
+            return true;
+          }else{
+            return false;
+          }
       }    
+
+      public function cca_register_limit($id){
+          $this->db->select('*');
+          $this->db->from('cca_interest');
+          $this->db->where('userID',$id);
+
+          $query = $this->db->get();
+          $result = $query->result();
+
+          $this->load->model('CCALimit_model');
+          $check = $this->CCALimit_model->get_limit();
+
+          if(count($result) < $check[0]->CCALimit){
+            return true;
+          }else{
+            return false;
+          }
+      }
 
       public function submit_contact_us($data)
       {

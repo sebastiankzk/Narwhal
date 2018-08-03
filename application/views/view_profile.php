@@ -38,6 +38,11 @@
           <?php endif; ?>
         </li>
         <li class="nav-item">
+                <?php if($this->session->userdata('role') == 'Leader') : ?>            
+                  <a class="nav-link" href="<?php echo base_url('index.php/leader/view_record/3' ); ?>">Attendance</a>
+              <?php endif; ?>
+            </li>
+        <li class="nav-item">
               <a class="nav-link" href="<?php echo base_url('index.php/event'); ?>">Event</a>
             </li>
              <?php if($this->session->userdata('role') == 'Leader') : ?>
@@ -98,7 +103,7 @@
 
    <div class="row">
     <div class="offset-md-2 col-md-8 mb-4">
-      <form class="" method="post" action="<?php echo base_url('index.php/home/update/'.$query->userID[0]); ?>">
+      <form class="" method="post" action="<?php echo base_url('index.php/Home/update/'.$query->userID); ?>">
        <fieldset>
         <?php echo $this->session->flashdata('msg'); ?>
 
@@ -160,7 +165,7 @@
     <label for="dob" class="control-label">Date of Birth</label>
   </div>
   <div class="row col-md-8">
-    <input id="dob" name="dob" placeholder="Date of Birth" type="text"
+    <input id="dob" name="dob" placeholder="Date of Birth" type="Date"
     class="form-control" value="<?php echo $query->dob; ?>" />
     <span class="text-danger"><?php echo form_error('dob'); ?></span>
   </div>

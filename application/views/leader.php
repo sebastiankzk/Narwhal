@@ -37,6 +37,11 @@
                 <?php else : ?>   
                 <?php endif; ?>
               </li>
+              <li class="nav-item">
+                <?php if($this->session->userdata('role') == 'Leader') : ?>            
+                  <a class="nav-link" href="<?php echo base_url('index.php/leader/view_record/3' ); ?>">Attendance</a>
+              <?php endif; ?>
+            </li>
             <li class="nav-item">
               <a class="nav-link" href="<?php echo base_url('index.php/event'); ?>">Event</a>
             </li>
@@ -93,6 +98,7 @@
             <?php echo $this->session->flashdata('msg');?>
         </div>
         <div class="col-auto">
+          <a href="<?php echo base_url('index.php/audition/'.$CCAID); ?>" class="btn btn-primary">View Auditions</a>
           <a href="<?php echo base_url('index.php/leader/get_interest/'.$CCAID); ?>" class="btn btn-primary">View Interested Students</a>
           <a href="<?php echo base_url('index.php/leader/get_contact_us/'.$CCAID); ?>" class="btn btn-primary">CCA Contact Us</a>
           <a href="<?php echo base_url('index.php/admin/get_cca/'.$CCAID); ?>" class="btn btn-primary">Edit CCA Details</a>

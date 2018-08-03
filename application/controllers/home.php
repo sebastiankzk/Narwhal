@@ -33,6 +33,15 @@ class Home extends CI_Controller {
         $this->load->model('home_model');
         $data['query'] = $this->home_model->get_specific_cca($ccaID);
 
+        $userId = $this->session->userdata('userID');
+        //check limit
+        $limit = $this->home_model->cca_register_limit($userId);
+        $data['limitCheck'] = $limit;
+
+        //check if registered
+        $test = $this->home_model->get_cca_interest($userId,$ccaID);
+        $data['checkIfRegisted'] = $test;
+
         $this->load->view('cca', $data);
 	}
 
@@ -65,11 +74,23 @@ class Home extends CI_Controller {
         'userID' => $this->session->userdata('userID'));
 
         $this->home_model->register_cca_interest($data);
+<<<<<<< HEAD
 
         $this->session->set_flashdata('msg', '<div class="alert alert-success textcenter">Interest registered!');
+=======
+        $this->session->set_flashdata('msg', 'Interest registered!');
+>>>>>>> 4fb81d83230521559126f018eadee13f457e7b82
 
         $this->load->library('user_agent');
-        redirect($this->agent->referrer());
+        
+        $this->load->model('audition_model');
+        $test = $this->audition_model->load($ccaID);
+
+        if($test){
+            redirect('audition/'.$ccaID,'refresh');
+        }else{
+            redirect($this->agent->referrer());
+        }
         //redirect('admin','refresh');
 	}	
 
@@ -115,8 +136,10 @@ class Home extends CI_Controller {
         $data['query'] = $this->home_model->get_user_info($userid);
         $this->load->view('view_profile', $data);
         }
-        else{
-            redirect('error/cli/error_php.php');
+        else
+        {
+            // redirect('error/cli/error_php.php');
+            redirect(base_url() . 'index.php');
             // redirect('error/cli/index.html');
         }
         

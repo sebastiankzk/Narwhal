@@ -37,6 +37,12 @@
                 <?php else : ?>   
                 <?php endif; ?>
               </li>
+              <li class="nav-item">
+                <?php if($this->session->userdata('role') == 'Leader') : ?>            
+                  <a class="nav-link" href="<?php echo base_url('index.php/leader/view_record/3' ); ?>">Attendance</a>
+              <?php endif; ?>
+            </li>
+            <li>
               <a class="nav-link" href="<?php echo base_url('index.php/event'); ?>">Event</a>
             </li>
              <?php if($this->session->userdata('role') == 'Leader') : ?>
@@ -114,7 +120,8 @@
                 <th>Gender</th>
                 <th>Email</th>
                 <th>Mobile</th>
-                <th>Date of Registration</th>
+                <th>Audition Status</th>
+                <th></th>
               </tr>
             </thead>
             <tbody>
@@ -126,7 +133,14 @@
                 <td><?=$row->gender?></td>
                 <td><?=$row->email?></td>
                 <td><?=$row->mobile?></td>
-                <td><?=$row->reg_date?></td>
+                <td><?=$row->audiStatus?></td>
+                <td>
+                  <?php if($row->audiStatus == 'Passed'): ?>
+                    <a href="<?php echo base_url('index.php/leader/acceptUser/'.$row->id); ?>" class="btn btn-primary">Accept Membership</a>
+                  <?php elseif($row->audiStatus == 'No Audition for this CCA'): ?>
+                    <a href="<?php echo base_url('index.php/leader/acceptUser/'.$row->id); ?>" class="btn btn-primary">Accept Membership</a>
+                  <?php endif ?>
+                </td>
 <!--                 <form method="post" action="event/view_event">
                 <input type="hidden" id="eventID" name="eventID" value='<?=$row->eventID?>' />
                 <td><button type="submit" class="btn btn-primary">View</button>

@@ -52,4 +52,15 @@
            $row = $query->row();
            return $row->userID;
       }
+
+      public function get_ccaID($userid)
+      {
+           //SELECT userID FROM user WHERE adminNumber = '$username'
+           $this->db->select('ccaID');
+           $this->db->from('tbl_user_cca');
+           $this->db->where('userID', $userid);
+           $query = $this->db->get();  
+           $row = $query->row();
+           return $row->ccaID;
+      }
  }  

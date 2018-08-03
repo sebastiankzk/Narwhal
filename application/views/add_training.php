@@ -48,7 +48,7 @@
         <li class="nav-item">
           <?php if($this->session->userdata('role') == 'Admin') : ?>            
           <a class="nav-link" href="<?php echo base_url('index.php/Profile/'); ?>">Accounts</a>
-          <?php elseif($this->session->userdata('role') != '') : ?>             
+          <?php elseif($this->session->userdata('role') != '') : ?>          
           <a class="nav-link" href="<?php echo base_url('index.php/Home/get_user/' .$this->session->userdata('userID') ); ?>">Account</a>
           <?php else : ?>   
           <?php endif; ?>
@@ -59,7 +59,10 @@
               <?php endif; ?>
             </li>
         <li class="nav-item">
-          <a class="nav-link" href="<?php echo base_url('index.php/home/contact_us'); ?>">Contact</a>
+              <a class="nav-link" href="<?php echo base_url('index.php/event'); ?>">Event</a>
+            </li>
+        <li class="nav-item">
+              <a class="nav-link" href="<?php echo base_url('index.php/home/contact_us'); ?>">Contact</a>
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownBlog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -71,25 +74,25 @@
         </li>
 
         <?php if($this->session->userdata('role') == 'Admin') : ?>
-        <li class="nav-item">
-          <a class="nav-link" href="<?php echo base_url('index.php/admin'); ?>">Admin</a>
-        </li>
+          <li class="nav-item">
+            <a class="nav-link" href="<?php echo base_url('index.php/admin'); ?>">Admin</a>
+          </li>
         <?php endif; ?>
 
         <!-- Login Logout  -->
         <li class="nav-item">
           <?php if($this->session->userdata('username') != '') : ?>            
-          <a class="nav-link" href="<?php echo base_url('index.php/login/logout'); ?>">Logout</a>
-          <?php else : ?>            
-          <a class="nav-link" href="<?php echo base_url('index.php/login'); ?>">Login</a>
-          <?php endif; ?>        
-        </li>
-        <!-- Display adminNumber if logged in -->
-        <li class="nav-item">
-          <?php if($this->session->userdata('username') != '') : ?>            
-          <a class="nav-link">Hello, <?php echo $this->session->userdata('username'); ?></a>
-          <?php endif; ?>        
-        </li>
+            <a class="nav-link" href="<?php echo base_url('index.php/login/logout'); ?>">Logout</a>
+            <?php else : ?>            
+              <a class="nav-link" href="<?php echo base_url('index.php/login'); ?>">Login</a>
+            <?php endif; ?>        
+          </li>
+          <!-- Display adminNumber if logged in -->
+          <li class="nav-item">
+            <?php if($this->session->userdata('username') != '') : ?>            
+              <a class="nav-link">Hello, <?php echo $this->session->userdata('username'); ?></a>
+            <?php endif; ?>        
+          </li>
       </ul>
     </div>
   </div>
@@ -99,14 +102,14 @@
 <div class="container">
 
   <!-- Page Heading/Breadcrumbs -->
-  <h1 class="mt-4 mb-3">Create Attendance
+  <h1 class="mt-4 mb-3">Add Training Session
   </h1>
   <ol class="breadcrumb">
     <li class="breadcrumb-item">
       <a href="<?php echo base_url('index.php'); ?>">Home</a>
     </li>
     <li class="breadcrumb-item">
-      <a href="<?php echo base_url('index.php/leader/view_record/' . $query[0]->ccaID); ?>">Attendance</a>
+      <a href="<?php echo base_url('index.php/leader/view_record/' . $query[0]->ccaID); ?>">Training</a>
    </li>
    </li>
     <li class="breadcrumb-item active">Create
@@ -117,7 +120,12 @@
   <div class="col-lg-12 mb-4"> 
     <?php
         $attributes = array("class" => "", "id" => "addprofile", "name" => "addprofile");
-          echo form_open("leader/create_record/". $query[0]->ccaID, $attributes);?>
+          echo form_open("leader/create_training/". $query[0]->ccaID, $attributes);?>
+
+      </br>
+      </br>
+      </br>
+      </br>
 
     <fieldset>
 
@@ -127,9 +135,8 @@
           <label for="datetime" class="control-label">Date Time</label>
         </div>
         <div class="col-md-6">
-          <?php
-          $attributes = 'class = "form-control" id = "datetime"';
-          echo form_dropdown('datetime',$datetime,set_value('datetime'),$attributes);?>
+          <input id="datetime" name="datetime" type="datetime-local" class="form-control" value="" />
+          <input id="ccaid" name="ccaid" type="hidden" class="form-control" value="<?php echo $query[0]->ccaID ?>" />
           <span class="text-danger"><?php echo form_error('datetime'); ?></span>
         </div>
       </div>
@@ -137,62 +144,18 @@
 
   <script type="text/javascript">
  //load datepicker control onfocus
- $(function() {$("#date").datepicker();
+ $(function() {$("#datetime").datetimepicker();
 });
 </script>
 
-</br>
 
-<div class="table-responsive">   
-  <!-- <h3 class="card-header bg-primary text-white">Accounts</h3> -->
-  <h3 class="card-header text-black"><?php echo $query[0]->cca_name; ?></h3>
-  <table class="table table-striped table-hover">
-   <thead>
-       <th>#</th>
-       <th>Student</th>
-       <th>Present</th>
-       <th>Reason</th>
-       <th>Remarks</th>
-     </tr>
-   </thead>
-   <tbody>
-    
-     <?php $index = 1; foreach($query as $i => $row){?>
-     <tr>
-       <td> 
-            <?php echo $index++; ?>
-       </td>
-       <td> <input size="5" id="username" name="username[]" type="text" class="form-control" value="<?php echo $row->User_name; ?>"/>
-            <input type="hidden" id="userid" name="userid[]" value="<?php echo $row->userID; ?>">
-            <input type="hidden" id="ccaid" name="ccaid[]" value="<?php echo $row->ccaID; ?>">
-       </td>
-       <!-- <td><input size="5" id="ccaname" name="ccaname[]" type="text" class="form-control" value="<?php echo $row->cca_name; ?>"/>
-            
-       </td> -->
-            
-         
-       <td>
-            <input type="checkbox" name="attendance[]" value="1" checked="checked" />
-       </td>
-       <td>
-            <input size="5" id="reason" name="reason[]" placeholder="Reason" type="text" class="form-control" value=""/>
-       </td>
-       <td>    
-            <input size="5" id="remarks" name="remarks[]" placeholder="Remarks" type="text" class="form-control" value="" />
-       </td>
-
-     </tr>
-     <?php } ?>
-   </tbody>
- </table>
-</div>
 
 <?php echo $this->session->flashdata('msg'); ?>
 
 <div class="form-group">
 <div class="offset-md-4 row colbox text-center">
   <input id="btn_create" name="btn_create" type="submit" class="btn btn-secondary"
-  value="Create" />
+  value="Add" />
   <div class="col-md-1"></div>
   <a href="<?php echo base_url('index.php/leader/view_record/' . $query[0]->ccaID); ?>">
   <input id="btn_cancel" name="btn_cancel" type="reset" class="btn btn-danger"
@@ -208,6 +171,14 @@
 </div>
 </div>
 <!-- /.container -->
+</br>
+</br>
+</br>
+</br>
+</br>
+</br>
+</br>
+
 
 <!-- Footer -->
 <footer class="py-5 bg-dark">

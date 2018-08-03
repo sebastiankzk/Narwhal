@@ -8,19 +8,19 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>NYP CCA Portal - CCA</title>
+  <title>NYP CCA Portal - Attendance</title>
 
   <!-- Bootstrap core CSS -->
   <link href="<?=base_url();?>assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
   <!-- Custom styles for this template -->
-  <link href="<?=base_url();?>assets/css/modern-business.css" rel="stylesheet"> 
+  <link href="<?=base_url();?>assets/css/modern-business.css" rel="stylesheet">
 
 </head>
 
 <body>
 
-<!-- Navigation -->
+   <!-- Navigation -->
     <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
       <div class="container">
         <a class="navbar-brand" href="<?=base_url();?>index.php">NYP CCA Portal</a>
@@ -29,15 +29,15 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
-           <li class="nav-item">
-            <?php if($this->session->userdata('role') == 'Admin') : ?>            
-              <a class="nav-link" href="<?php echo base_url('index.php/Profile/'); ?>">Accounts</a>
-              <?php elseif($this->session->userdata('role') != '') : ?>               
-              <a class="nav-link" href="<?php echo base_url('index.php/Home/get_user/' .$this->session->userdata('userID') ); ?>">Account</a>
-              <?php else : ?>   
-              <?php endif; ?>
-            </li>
             <li class="nav-item">
+              <?php if($this->session->userdata('role') == 'Admin') : ?>            
+                <a class="nav-link" href="<?php echo base_url('index.php/Profile/'); ?>">Accounts</a>
+                <?php elseif($this->session->userdata('role') != '') : ?>               
+                <a class="nav-link" href="<?php echo base_url('index.php/Home/get_user/' .$this->session->userdata('userID') ); ?>">Account</a>
+                <?php else : ?>   
+                <?php endif; ?>
+              </li>
+              <li class="nav-item active">
                 <?php if($this->session->userdata('role') == 'Leader') : ?>            
                   <a class="nav-link" href="<?php echo base_url('index.php/leader/view_record/3' ); ?>">Attendance</a>
               <?php endif; ?>
@@ -53,7 +53,7 @@
             <li class="nav-item">   
               <a class="nav-link" href="<?php echo base_url('index.php/home/contact_us'); ?>">Contact</a>
             </li>
-      <li class="nav-item dropdown active">
+      <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownBlog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 CCA
               </a>
@@ -92,83 +92,68 @@
     <div class="container">
 
       <!-- Page Heading/Breadcrumbs -->
-      <h1 class="mt-4 mb-3">CCA in NYP
-        <small></small>
+      <h1 class="mt-4 mb-3">Attendance records
       </h1>
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
           <a href="<?php echo base_url('index.php'); ?>">Home</a>
         </li>
         <li class="breadcrumb-item active">
-         CCA
+         <a href="<?php echo base_url('index.php/leader/view_record/' . $view[0]->ccaID); ?>">Attendance
          </a>
        </li>
      </ol>
 
-      <div class="row">
-        <div class="col-auto mr-auto"></div>
-        <div class="col-auto">
-         <!-- <a href="<?php echo base_url('index.php/admin/add_cca'); ?>" class="btn btn-primary">Add new CCA &rarr;</a> -->
+     <!-- Login form -->
+     <div class="row">
+      <div class="col-lg-12 mb-4">  
+        <div class="table-responsive">   
+          <?php echo $this->session->flashdata('msg'); ?> 
+          <!-- <h3 class="card-header bg-primary text-white">Accounts</h3> -->
+          <!-- <h3 class="card-header text-black"> -->
+            <form class="offset-sm-7 form-inline mb-3">
+              <div class="form-group">
+                <a href="<?php echo base_url('index.php/leader/get_training/'. $view[0]->userID); ?>" class="btn btn-success offset-sm-7">Add Training</a>
+              </div>
+              <div class="offset-sm-1 form-inline"><a href="<?php echo base_url('index.php/leader/get_record/'. $view[0]->userID); ?>" class="btn btn-success offset-sm-7">Add Attendance</a></div>
+            </form> 
+          <!-- </h3>   -->              
+         </div>
+
+
+            <table class="table table-striped table-hover">
+             <thead>
+               <tr>
+                 <th>#</th>
+                 <th>Date Time</th>             
+               </tr>
+             </thead>
+             <tbody>
+               <?php for ($i = 0; $i < count($training); ++$i) { ?>
+                 <tr>
+                   <td><?php echo ($i+1); ?></td>
+                   <td><?php echo $training[$i]->datetime; ?></td>
+                   
+                 </tr>
+               <?php } ?>
+             </tbody>
+           </table>
+         </div>
        </div>
      </div>
-     <div class="row">
-      <div class="col-auto mr-auto">
-        <?php echo $this->session->flashdata('msg');?>
-      </div>
-      <div class="col-auto">
-        <!-- Total CCA count: <b><?php echo $count ?></b> -->
-      </div>
-    </div>
-  </br>
-  <?php foreach($query as $row): ?>
-    <div class="card mb-4">
-     <div class="card-body" style="background: #F8F8F8;">
-        <div class="row">
-          <div class="col-lg-4">
-            <a href="<?php echo base_url('assets/images/'.$row->image); ?>"><img class="img-fluid rounded" src="<?php echo base_url('assets/images/'.$row->image); ?>" alt=""></a>
-          </div>
-          <div class="col-lg-8">
-            <h2 class="card-title"><a href="<?php echo base_url('index.php/home/cca/'.$row->ccaID); ?>"><?php echo $row->name; ?></a></h2>
-            <p class="card-text">Category: <?php echo $row->category; ?></p>
-            <p class="card-text">Venue: <?php echo $row->venue; ?></p>
-            <p class="card-text">Training Date: <?php echo $row->trgDate; ?></p>
-            <p class="card-text">Training Time: <?php echo date(" h:i A", strtotime($row->startTime)); ?></p>
-            <p class="card-text"><?php echo $row->information; ?></p>
-          </div>
-        </div>
-      </div>
-    </div>
-  <?php endforeach; ?>
-</div>
-<!-- /.container -->
+   </div>
 
-<!-- Footer -->
-<footer class="py-5 bg-dark">
-  <div class="container">
-    <p class="m-0 text-center text-white">180 Ang Mo Kio Avenue 8 Singapore (569830) Tel: 64515115 </br>Copyright &copy; 2018 NYP, Singapore. All rights reserved.</p>
-  </div>
-  <!-- /.container -->
-</footer>
+   <!-- Footer -->
+   <footer class="py-5 bg-dark">
+    <div class="container">
+      <p class="m-0 text-center text-white">180 Ang Mo Kio Avenue 8 Singapore (569830) Tel: 64515115 </br>Copyright &copy; 2018 NYP, Singapore. All rights reserved.</p>
+    </div>
+   </footer>
 
-<!-- Bootstrap core JavaScript -->
-<script src="<?=base_url();?>assets/vendor/jquery/jquery.min.js"></script>
-<script src="<?=base_url();?>assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <!-- Bootstrap core JavaScript -->
+  <script src="<?=base_url();?>assets/vendor/jquery/jquery.min.js"></script>
+  <script src="<?=base_url();?>assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 </body>
 
 </html>
-
-<script>
-  // assumes you're using jQuery
-  $(document).ready(function() {
-    $('.confirm-div').hide();
-    <?php if($this->session->flashdata('msg')){ ?>
-      $('.confirm-div').html('<?php echo $this->session->flashdata('msg'); ?>').show();
-    });
-<?php } ?>
-
-$(".myBox").click(function() {
-  window.location = $(this).find("a").attr("href"); 
-  return false;
-});
-</script>
