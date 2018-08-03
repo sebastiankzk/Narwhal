@@ -74,7 +74,16 @@ class Home extends CI_Controller {
         'userID' => $this->session->userdata('userID'));
 
         $this->home_model->register_cca_interest($data);
+<<<<<<< HEAD
         $this->session->set_flashdata('msg', '<div class="alert alert-success textcenter">Interest registered!');
+=======
+<<<<<<< HEAD
+
+        $this->session->set_flashdata('msg', '<div class="alert alert-success textcenter">Interest registered!');
+=======
+        $this->session->set_flashdata('msg', 'Interest registered!');
+>>>>>>> 4fb81d83230521559126f018eadee13f457e7b82
+>>>>>>> 95f557615c1be19724a5183a311b5791f3c7bdac
 
         $this->load->library('user_agent');
         
@@ -118,6 +127,10 @@ class Home extends CI_Controller {
         $this->home_model->submit_contact_us($data);
 
         $this->session->set_flashdata('msg', '<div class="alert alert-success textcenter">Message submitted!');
+<<<<<<< HEAD
+=======
+
+>>>>>>> 95f557615c1be19724a5183a311b5791f3c7bdac
         redirect('home/contact_us','refresh');
 	}
 
