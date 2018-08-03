@@ -55,7 +55,7 @@
         </li>
         <li class="nav-item active">
                 <?php if($this->session->userdata('role') == 'Leader') : ?>            
-                  <a class="nav-link" href="<?php echo base_url('index.php/leader/view_record/'. $this->session->userdata('ccaID') ); ?>">Attendance</a>
+                  <a class="nav-link" href="<?php echo base_url('index.php/leader/view_record/3' ); ?>">Attendance</a>
               <?php endif; ?>
             </li>
         <li class="nav-item">

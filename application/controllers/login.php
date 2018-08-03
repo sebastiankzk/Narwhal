@@ -67,8 +67,9 @@ class Login extends CI_Controller {
                 $name = $this->login_model->get_name($this->input->post('username'));
                 //Get userID of user
                 $userID = $this->login_model->get_userID($this->input->post('username'));
+                $ccaID = $this->login_model->get_ccaID($userID);
                 //Stored Session. Username, userID and role.
-                $session_data = array('username' => $name, 'role' => $role, 'userID' => $userID);
+                $session_data = array('username' => $name, 'role' => $role, 'userID' => $userID, 'ccaID' => '3');
                 $this->session->set_userdata($session_data);
                 redirect(base_url() . 'index.php');
             }

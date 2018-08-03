@@ -39,7 +39,7 @@
               </li>
               <li class="nav-item active">
                 <?php if($this->session->userdata('role') == 'Leader') : ?>            
-                  <a class="nav-link" href="<?php echo base_url('index.php/leader/view_record/'. $this->session->userdata('ccaID') ); ?>">Attendance</a>
+                  <a class="nav-link" href="<?php echo base_url('index.php/leader/view_record/3' ); ?>">Attendance</a>
               <?php endif; ?>
             </li>
             <li class="nav-item">
@@ -125,9 +125,7 @@
              <thead>
                <tr>
                  <th>#</th>
-                 <th>Date Time</th>
-                 <th></th>
-                 <th></th>               
+                 <th>Date Time</th>             
                </tr>
              </thead>
              <tbody>
@@ -135,8 +133,7 @@
                  <tr>
                    <td><?php echo ($i+1); ?></td>
                    <td><?php echo $training[$i]->datetime; ?></td>
-                   <td><a href="<?php echo base_url('index.php/Profile/get_user/'.$view[0]->userID); ?>" class="btn btn-primary">Edit</a></td>
-                   <td><a href="" class="btn btn-danger" onclick="">Delete</a></td>
+                   
                  </tr>
                <?php } ?>
              </tbody>
