@@ -7,6 +7,8 @@ class Leader extends CI_Controller {
     function __construct()
     {
         parent::__construct();
+        $this->load->model('leader_model');
+        $this->load->helper('form');
     }
 
     public function index()
@@ -44,9 +46,9 @@ class Leader extends CI_Controller {
     function view_record($ccaid)
     {
         $this->load->model('leader_model');
-        $viewrecord= $this->leader_model->get_allattendance($ccaid);
-        $data['date'] = $this->leader_model->get_date2();
-        $data['view'] = $viewrecord;
+        $data['training'] = $this->leader_model->get_training($ccaid);
+        $data['view'] = $this->leader_model->get_allattendance($ccaid);
+        
         $this->load->view('attendance',$data);
     }
 
@@ -66,20 +68,30 @@ class Leader extends CI_Controller {
         $this->load->model('leader_model');
 
         $data['query'] = $this->leader_model->get_attendance($ccaid);
-        $data['date'] = $this->leader_model->get_date();
-        $data['time'] = $this->leader_model->get_time();
+        $data['datetime'] = $this->leader_model->get_datetime($ccaid);
+        // $data['date'] = $this->leader_model->get_date();
+        // $data['time'] = $this->leader_model->get_time();
         $this->load->view('add_attendance', $data);
     }
 
-    function create_record()
+    function get_training($ccaid)
+    {  
+         //load the Profile_model
+        $this->load->model('leader_model');
+
+        $data['query'] = $this->leader_model->get_attendance($ccaid);
+        $this->load->view('add_training', $data);
+    }
+
+    function create_record($ccaid)
     {   
         // if($this->session->userdata('role') == 'Admin')
         // {
         $this->load->library('form_validation');
 
             //set validation rules
-        $this->form_validation->set_rules('date', 'Date', 'required');
-        $this->form_validation->set_rules('time', 'Time', 'required');
+        // $this->form_validation->set_rules('date', 'Date', 'required');
+        // $this->form_validation->set_rules('time', 'Time', 'required');
 
             // if ($this->form_validation->run() == FALSE)
             // {
@@ -117,33 +129,33 @@ class Leader extends CI_Controller {
                     $data[] = array(
                         'userid' => $this->input->post('userid')[$i],
                         'ccaid' => $this->input->post('ccaid')[$i],
-                        'date' => $this->input->post('date'),
+                        'trainingID' => $this->input->post('datetime'),
                         // $this->input->post('dob'),
-                        'time' => $this->input->post('time'),
+                        // 'time' => $this->input->post('time'),
                         'attendance' => $this->input->post('attendance')[$i] ? 1:0,
                         'reason' => $this->input->post('reason')[$i],
                         'remarks' => $this->input->post('remarks')[$i],
                     );
                 }
 
-        $data = array(
-            'date' => @date('d-m-Y', @strtotime($this->input->post('date'))),
-                    // $this->input->post('dob'),
-            'time' => $this->input->post('time'),
-        );
+        // $data = array(
+        //     'date' => @date('d-m-Y', @strtotime($this->input->post('date'))),
+        //             // $this->input->post('dob'),
+        //     'time' => $this->input->post('time'),
+        // );
 
 
                 //insert the form data into database
-        $this->db->insert('attendance', $data);
+        $this->db->insert_batch('attendance', $data);
 
                 //create insert
-        $data = array(
-            'title' => 'My title',
-            'name' => 'My Name',
-            'date' => 'My date'
-        );
+        // $data = array(
+        //     'title' => 'My title',
+        //     'name' => 'My Name',
+        //     'date' => 'My date'
+        // );
 
-        $this->db->insert('mytable', $data);
+        // $this->db->insert('mytable', $data);
 
                 //display success message
 
@@ -215,18 +227,56 @@ class Leader extends CI_Controller {
         }
     }
 
-    function search_record()
+    function create_training()
     {
-        //load the Profile_model
-        $this->load->model('leader_model');
+        // if($this->session->userdata('role') == 'Admin')
+        // {
+            $this->load->library('form_validation');
 
-        $date = $this->input->post('date');
-        $time = $this->input->post('time');
+            //set validation rules
+            
+            $this->form_validation->set_rules('datetime', 'datetime', 'required');
+            if ($this->form_validation->run() == FALSE)
+            {
+                //fail validation
+                $this->load->view('add_training');
+            }
+            else
+            {
 
-        // if(isset($name) and !empty($name)){
-        $data['datetime'] = $this->leader_model->search_dt($date,$time);
-        $this->load->view('add_attendance',$data);   
+                //pass validation
+                $data = array(
+                    'datetime' => ($this->input->post('datetime')),
+                    'ccaID' => ($this->input->post('ccaid'))
+                );
+
+                //insert the form data into database
+                $this->db->insert('training', $data);
+
+                //display success message
+                $this->session->set_flashdata('msg', '<div class="alert alert-success textcenter">New training session has been added!</div>');
+                redirect('add_training','refresh');
+            }
+        // }
+        // else
+        // {
+        //     redirect(base_url() . 'index.php');
+        // }
     }
+
+    // function search_training($ccaid)
+    // {
+    //     //load the Profile_model
+    //     $this->load->model('leader_model');
+
+    //     $datetime = $this->input->post('datetime');
+
+    //     // if(isset($name) and !empty($name)){
+    //     $data['training'] = $this->leader_model->get_training($ccaid);
+    //     $data['view'] = $this->leader_model->get_allattendance($ccaid);
+    //     $data['datetime'] = $this->leader_model->search_training($datetime);
+    //     $this->load->view('attendance',$data);   
+    // }
 
     function get_interest($ccaID)
     {

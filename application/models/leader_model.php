@@ -102,48 +102,6 @@ class leader_model extends CI_Model
     return $query->row();
   }
 
-  function get_date()
-  {
-    $this->db->distinct();
-    $this->db->select('date');
-    $this->db->from('attendance');
-    $query = $this->db->get();
-    $result = $query->result();
-
-    //array to store userID id & role
-    $date = array('Select Date');
-    for ($i = 0; $i < count($result); $i++)
-    {
-      array_push($date, $result[$i]->date);
-    }
-    return $date;
-  }
-
-  function get_date2()
-  {
-    $this->db->group_by('date');
-    $this->db->from('attendance');
-    $query = $this->db->get();
-    $result = $query->row();
-  }
-
-  function get_time()
-  {
-    $this->db->distinct();
-    $this->db->select('time');
-    $this->db->from('attendance');
-    $query = $this->db->get();
-    $result = $query->result();
-
-    //array to store userID id & role
-    $time = array('Select Time');
-    for ($i = 0; $i < count($result); $i++)
-    {
-      array_push($time, $result[$i]->time);
-    }
-    return $time;
-  }
-
   //not in use
   function search_dt($date,$time)
   {
@@ -161,6 +119,48 @@ class leader_model extends CI_Model
       return $query->result();
     }
   }
+
+  function get_datetime($ccaID)
+  {
+   $this->db->select('trainingID');
+   $this->db->select('datetime');
+   $this->db->where('ccaID', $ccaID);
+   $this->db->from('training');
+   $query = $this->db->get();
+   $result = $query->result();
+  //array to store training id & date
+   $trainingid = array('Select Date Time');
+   $datetime = array('Select Date Time');
+   for ($i = 0; $i < count($result); $i++)
+   {
+     array_push($trainingid, $result[$i]->trainingID);
+     array_push($datetime, $result[$i]->datetime);
+   }
+   return $training_result = array_combine($trainingid, $datetime);
+  }
+
+  function get_training($ccaID)
+  {
+   $this->db->select('*');
+   $this->db->where('ccaID', $ccaID);
+   $this->db->from('training');
+   $query = $this->db->get();
+   return $query->result();
+  }
+
+  //  function search_training($dateime)
+  // {
+  //   $this->db->select('*');
+  //   $this->db->from('training');
+  //   $this->db->like('datetime',$dateime);
+  //   $query = $this->db->get();
+
+  //   if ($query->num_rows() > 0){
+  //     return $query->result();
+  //   }else{
+  //     return $query->result();
+  //   }
+  //  }
 
   function get_interest_base($id)  
   {      

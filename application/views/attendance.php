@@ -29,7 +29,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
-            <li class="nav-item active">
+            <li class="nav-item">
               <?php if($this->session->userdata('role') == 'Admin') : ?>            
                 <a class="nav-link" href="<?php echo base_url('index.php/Profile/'); ?>">Accounts</a>
                 <?php elseif($this->session->userdata('role') != '') : ?>               
@@ -37,6 +37,16 @@
                 <?php else : ?>   
                 <?php endif; ?>
               </li>
+              <li class="nav-item">
+                <?php if($this->session->userdata('role') == 'Leader') : ?>            
+                  <a class="nav-link" href="<?php echo base_url('index.php/leader/view_record/'. $this->session->userdata('userID') ); ?>">Attendance</a>
+              <?php endif; ?>
+            </li>
+              <li class="nav-item active">
+                <?php if($this->session->userdata('role') == 'Leader') : ?>            
+                  <a class="nav-link" href="<?php echo base_url('index.php/leader/view_record/'. $this->session->userdata('userID') ); ?>">Attendance</a>
+              <?php endif; ?>
+            </li>
             <li class="nav-item">
               <a class="nav-link" href="<?php echo base_url('index.php/event'); ?>">Event</a>
             </li>
@@ -87,7 +97,7 @@
     <div class="container">
 
       <!-- Page Heading/Breadcrumbs -->
-      <h1 class="mt-4 mb-3">Attendance Records
+      <h1 class="mt-4 mb-3">Attendance records
       </h1>
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
@@ -101,40 +111,37 @@
 
      <!-- Login form -->
      <div class="row">
-        <div class="col-lg-12 mb-4">  
-          <div class="table-responsive">   
-            <?php echo $this->session->flashdata('msg'); ?> 
-            <!-- <h3 class="card-header bg-primary text-white">Accounts</h3> -->
-            <h3 class="card-header text-black">
-              <form class="form-inline" action="<?php echo base_url('index.php/Profile/search_user'); ?>" method="post">
-                <div class="form-group">
-                  <input type="text" class="form-control" name="search" id="search" placeholder="Name">
-                  <input id="search" name="searchbtn" type="submit" class="btn btn-secondary"
-                  value="Search" />
-                </div>
-                <div class="offset-sm-7 form-group">
-                  <a href="<?php echo base_url('index.php/leader/get_record/'. $view[0]->userID); ?>" class="btn btn-success ">Add record</a>
-                </div>
-              </form>
-            </h3>
+      <div class="col-lg-12 mb-4">  
+        <div class="table-responsive">   
+          <?php echo $this->session->flashdata('msg'); ?> 
+          <!-- <h3 class="card-header bg-primary text-white">Accounts</h3> -->
+          <!-- <h3 class="card-header text-black"> -->
+            <form class="offset-sm-7 form-inline mb-3">
+              <div class="form-group">
+                <a href="<?php echo base_url('index.php/leader/get_training/'. $view[0]->userID); ?>" class="btn btn-success offset-sm-7">Add Training</a>
+              </div>
+              <div class="offset-sm-1 form-inline"><a href="<?php echo base_url('index.php/leader/get_record/'. $view[0]->userID); ?>" class="btn btn-success offset-sm-7">Add Attendance</a></div>
+            </form> 
+          <!-- </h3>   -->              
+         </div>
+
+
             <table class="table table-striped table-hover">
              <thead>
                <tr>
                  <th>#</th>
-                 <th>Date</th>
-                 <th>Time</th>
+                 <th>Date Time</th>
                  <th></th>
-                 <th></th>
+                 <th></th>               
                </tr>
              </thead>
              <tbody>
-               <?php for ($i = 0; $i < count($view); ++$i) { ?>
+               <?php for ($i = 0; $i < count($training); ++$i) { ?>
                  <tr>
                    <td><?php echo ($i+1); ?></td>
-                   <td><?php echo$view[$i]->date; ?></td>
-                   <td><?php echo $view[$i]->time; ?></td>
-                   <td><a href="<?php echo base_url('index.php/leader/get_recordupdate/'.$view[$i]->ccaID); ?>" class="btn btn-primary">Edit</a></td>
-                   <td><a href="" class="btn btn-danger">Delete</a></td>
+                   <td><?php echo $training[$i]->datetime; ?></td>
+                   <td><a href="<?php echo base_url('index.php/Profile/get_user/'.$view[0]->userID); ?>" class="btn btn-primary">Edit</a></td>
+                   <td><a href="" class="btn btn-danger" onclick="">Delete</a></td>
                  </tr>
                <?php } ?>
              </tbody>
