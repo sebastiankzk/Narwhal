@@ -137,14 +137,10 @@
      </div>
    </br>
    <div class="row">
-<<<<<<< HEAD
+    
         <div class="col-auto">
-=======
-    <div class="col-auto mr-auto">
 
-    </div>
     <div class="col-auto">
->>>>>>> 95f557615c1be19724a5183a311b5791f3c7bdac
       Total CCA count: <b><?php echo $count ?></b>
     </div>
     <div class="col-lg-12">
